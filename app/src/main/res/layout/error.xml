@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sindatos"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/transparent_bg"
+    android:gravity="center"
+    android:visibility="gone"
+    android:onClick="onClick">
+
+    <ImageView
+        android:id="@+id/imgvError"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/sad"
+        android:onClick="onClick"/>
+
+    <TextView
+        android:id="@+id/txtvError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgvError"
+        android:padding="5dp"
+        android:text="@string/errorCarga"
+        android:textSize="15dp"
+        android:textColor="@color/blanco"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:onClick="onClick"/>
+
+    </RelativeLayout>
+
+
