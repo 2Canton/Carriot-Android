@@ -59,7 +59,7 @@ public class RutaAdapterListView extends ArrayAdapter<Ruta>
         switch(currentItem.getIdEmpresa())
         {
             case 0:
-                rutaImagen += "0";
+                rutaImagen += "2";
                 break;
 
             case 1:
