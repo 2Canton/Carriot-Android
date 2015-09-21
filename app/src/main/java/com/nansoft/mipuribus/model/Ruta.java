@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class Ruta 
 {
-	@SerializedName("idRuta")
-	private int IdRuta;
+	@SerializedName("id")
+	private String IdRuta;
 	
-	@SerializedName("nombreRuta")
+	@SerializedName("nombre")
 	private String NombreRuta;
 	
 	@SerializedName("costo")
 	private String Costo;
 
-    @SerializedName("idEmpresa")
+    @SerializedName("idempresa")
     private int IdEmpresa;
 
 
@@ -21,7 +21,7 @@ public class Ruta
     /**
 	 * @return the idRuta
 	 */
-	public int getIdRuta() 
+	public String getIdRuta()
 	{
 		return IdRuta;
 	}
@@ -29,7 +29,7 @@ public class Ruta
 	/**
 	 * @param idRuta the idRuta to set
 	 */
-	public void setIdRuta(int idRuta) 
+	public void setIdRuta(String idRuta)
 	{
 		IdRuta = idRuta;
 	}
