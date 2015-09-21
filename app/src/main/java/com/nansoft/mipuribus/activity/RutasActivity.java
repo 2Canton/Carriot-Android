@@ -431,8 +431,8 @@ public class RutasActivity extends Activity
 		protected void onPostExecute(Boolean result)
 		{
 			/*
-			if (result)
-				Toast.makeText(MainActivity.this, "Tarea finalizada!",Toast.LENGTH_SHORT).show();
+			if (result)ASD
+				Toast.makeText(MainActivity.this, "Tarea finalizada!",Toast.LENGTH_SHORT).show();ASDASD
 			*/
             lstView.setClickable(true);
 		}
