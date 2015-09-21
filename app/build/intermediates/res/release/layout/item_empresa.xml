@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/transparent_bg"
+    >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp"
+        android:padding="6dip" >
+
+        <ImageView
+            android:id="@+id/imgvLogoEmpresa"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true" />
+
+
+
+        <TextView
+            android:id="@+id/txtvTituloEmpresa"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/imgvLogoEmpresa"
+            android:textSize="16sp"
+            android:text="hello"
+            android:textColor="@color/blanco"/>
+
+
+        <TextView
+            android:id="@+id/txtvHorarioEmpresa"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtvTituloEmpresa"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:textColor="@color/blanco" />
+
+        <TextView
+            android:id="@+id/txtvDireccionEmpresa"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtvHorarioEmpresa"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:textSize="12sp"
+            android:textColor="@color/blanco" />
+
+        <LinearLayout
+            android:id="@+id/layTitulosContacto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgvLogoEmpresa"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Teléfono"
+                android:textColor="@color/blanco"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Email"
+                android:textColor="@color/blanco"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Localización"
+                android:textColor="@color/blanco"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Web"
+                android:textColor="@color/blanco"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layTitulosContacto"
+            android:weightSum="4">
+
+            <ImageView
+                android:id="@+id/imgvTelefonoEmpresa"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/phone"
+                android:textColor="@color/blanco"/>
+
+            <ImageView
+                android:id="@+id/imgvEmailEmpresa"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/message"
+                android:textColor="@color/blanco"/>
+
+            <ImageView
+                android:id="@+id/imgvLocalizacionEmpresa"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/map"
+                android:textColor="@color/blanco"/>
+
+            <ImageView
+                android:id="@+id/imgvWebSiteEmpresa"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/website"
+                android:textColor="@color/blanco"/>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout><!-- From: file:/C:/Users/Carlos/Documents/AndroidStudioProjects/BusPurisco/app/src/main/res/layout/item_empresa.xml -->

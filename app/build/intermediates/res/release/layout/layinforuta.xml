@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nansoft.mipuribus.ScrollingTable 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:background="@drawable/iglesia"
+    android:padding="7dp">
+    
+    <com.google.android.gms.ads.AdView
+		   	android:id="@+id/adViewAnuncio"
+		   	android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_marginTop="10dp"
+		    android:layout_marginBottom="10dp"
+		    ads:adSize="BANNER"
+		    ads:adUnitId="ca-app-pub-6317436249617539/2010068406"  />
+
+    <TableLayout
+        
+        android:id="@+id/HeaderTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow 
+            style="@style/HeaderRow" >
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Sitio de Salida"/>
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Hora" />
+            
+        </TableRow>
+        
+    </TableLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableLayout
+            android:id="@+id/BodyTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow 
+                style="@style/BodyRow" >
+
+                <TextView
+                    style="@style/BodyText"
+                    android:text="Sitio de Salida" 
+                    android:layout_weight="1"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    style="@style/BodyText"
+                    android:layout_weight="1"
+                    android:text="Hora" 
+                    android:layout_height="0dp"/>
+	
+        	</TableRow>
+        	
+        </TableLayout>
+        
+    </ScrollView>
+    
+    
+
+</com.nansoft.mipuribus.ScrollingTable><!-- From: file:/C:/Users/Carlos/Documents/AndroidStudioProjects/BusPurisco/app/src/main/res/layout/layinforuta.xml -->

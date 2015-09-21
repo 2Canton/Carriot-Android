@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mi Puribus</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="SitioSalida">Lugar de Salida</string>
+    <string name="Hora">Hora</string>
+    <string name="title_activity_activity_horarios">Mi Puribus</string>
+    <string name="error">Ha ocurrido un error al conectar con el servidor, verifica la conexión a internet e intentalo más tarde</string>
+    <string name="title_activity_rutas">Rutas</string>
+    <string name="errorCarga">Ha ocurrido un error al descargar los datos , pulsa acá para volver a intentar</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_sitios_interes">Sitios de interés</string>
+    <string name="title_activity_historia">Historia</string>
+    <string name="title_activity_test">test</string>
+    <string name="title_activity_negocios">Sitios de interés - Mi Puribus</string>
+    <string name="title_activity_locales">LocalesActivity</string>
+    <string name="title_activity_tipo_evento">Eventos - Mi Puribus</string>
+    <string name="title_activity_eventos">Eventos - Mi Puribus</string>
+    <string name="title_activity_tipo_empresa">Empresas - Mi Puribus</string>
+    <string name="title_activity_empresas">Empresas - Mi Puribus</string>
+    <string name="title_activity_noticia">Noticias - Mi Puribus</string>
+    <string name="title_activity_horario_basura">Horario Basura - Mi Puribus</string>
+    <string name="title_activity_horario_misa">HorarioMisaActivity</string>
+
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="blanco">#FFF</color>
+    <color name="fondo">#DFDFDF</color>
+    <color name="verdeclaro">#006389</color>
+    <color name="japaneseMaple">#821F29</color>
+    <color name="black">#000</color>
+    <color name="azure">#aad4ff</color>
+
+    <color name="orange">#FF9900</color>
+    <color name="green">#009900</color>
+    <color name="blue">#000099</color>
+
+    <color name="black_overlay">#66000000</color>
+</resources>

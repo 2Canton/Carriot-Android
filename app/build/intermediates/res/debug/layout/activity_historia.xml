@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    android:padding="5dp"
+    android:background="@drawable/iglesia"
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adViewAnuncioHistoria"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-6317436249617539/9439358402"
+            android:layout_marginBottom="10dp"/>
+
+
+        <ScrollView
+            android:layout_below="@id/adViewAnuncioHistoria"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/transparent_bg">
+
+            <TextView
+                android:id="@+id/txtvResenia"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ellipsize="marquee"
+                android:textSize="14dp"
+                android:textColor="@color/blanco"/>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</FrameLayout><!-- From: file:/C:/Users/Carlos/Documents/AndroidStudioProjects/BusPurisco/app/src/main/res/layout/activity_historia.xml -->

@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.nansoft.mipuribus.MainActivity" >
+
+    <item
+        android:id="@+id/actualizar"
+        android:orderInCategory="100"
+        android:title="@string/actualizar"/>
+
+</menu>
+<!-- From: file:/C:/Users/Carlos/Documents/AndroidStudioProjects/BusPurisco/app/src/main/res/menu/main.xml -->
