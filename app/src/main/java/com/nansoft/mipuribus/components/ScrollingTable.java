@@ -1,4 +1,4 @@
-package com.nansoft.mipuribus;
+package com.nansoft.mipuribus.components;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+
+import com.nansoft.mipuribus.R;
 
 public class ScrollingTable extends LinearLayout
 {
