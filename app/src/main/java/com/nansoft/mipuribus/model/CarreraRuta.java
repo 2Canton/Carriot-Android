@@ -2,25 +2,25 @@ package com.nansoft.mipuribus.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Carrera 
+public class CarreraRuta
 {
 		  
-    @SerializedName("idCarreraRuta")
-	private int IdCarrera;
+    @SerializedName("id")
+	private String IdCarrera;
 
-	@SerializedName("idRuta")
-	private int IdRuta;
+	@SerializedName("idruta")
+	private String IdRuta;
 
-	@SerializedName("idSitioSalida")
-	private int IdSitioSalida;
+	@SerializedName("idsitiosalida")
+	private String IdSitioSalida;
 	
-	@SerializedName("nombreSitioSalida")
+	@SerializedName("nombresitiosalida")
 	private String NombreSitioSalida;
 
-	@SerializedName("idHorario")
-	private int IdHorario;
+	@SerializedName("idhorario")
+	private String IdHorario;
 
-	@SerializedName("descHora")
+	@SerializedName("hora")
 	private String DescHora;
 	
 	@SerializedName("nota")
@@ -29,7 +29,7 @@ public class Carrera
 	/**
 	 * @return the idCarrera
 	 */
-	public int getIdCarrera() 
+	public String getIdCarrera()
 	{
 		return IdCarrera;
 	}
@@ -37,7 +37,7 @@ public class Carrera
 	/**
 	 * @param idCarrera the idCarrera to set
 	 */
-	public void setIdCarrera(int idCarrera) 
+	public void setIdCarrera(String idCarrera)
 	{
 		IdCarrera = idCarrera;
 	}
@@ -45,7 +45,7 @@ public class Carrera
 	/**
 	 * @return the idRuta
 	 */
-	public int getIdRuta() 
+	public String getIdRuta()
 	{
 		return IdRuta;
 	}
@@ -53,7 +53,7 @@ public class Carrera
 	/**
 	 * @param idRuta the idRuta to set
 	 */
-	public void setIdRuta(int idRuta) 
+	public void setIdRuta(String idRuta)
 	{
 		IdRuta = idRuta;
 	}
@@ -61,7 +61,7 @@ public class Carrera
 	/**
 	 * @return the idSitioSalida
 	 */
-	public int getIdSitioSalida() 
+	public String getIdSitioSalida()
 	{
 		return IdSitioSalida;
 	}
@@ -69,7 +69,7 @@ public class Carrera
 	/**
 	 * @param idSitioSalida the idSitioSalida to set
 	 */
-	public void setIdSitioSalida(int idSitioSalida) 
+	public void setIdSitioSalida(String idSitioSalida)
 	{
 		IdSitioSalida = idSitioSalida;
 	}
@@ -77,7 +77,7 @@ public class Carrera
 	/**
 	 * @return the idHorario
 	 */
-	public int getIdHorario() 
+	public String getIdHorario()
 	{
 		return IdHorario;
 	}
@@ -85,7 +85,7 @@ public class Carrera
 	/**
 	 * @param idHorario the idHorario to set
 	 */
-	public void setIdHorario(int idHorario) 
+	public void setIdHorario(String idHorario)
 	{
 		IdHorario = idHorario;
 	}
