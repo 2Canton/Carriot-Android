@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Horario 
 {
-	@SerializedName("idHorario")
-	private int IdHorario;
+	@SerializedName("id")
+	private String IdHorario;
 	
 	@SerializedName("dias")
 	private String Dias;
@@ -13,7 +13,7 @@ public class Horario
 	/**
 	 * @return the idHorario
 	 */
-	public int getIdHorario() 
+	public String getIdHorario()
 	{
 		return IdHorario;
 	}
@@ -21,7 +21,7 @@ public class Horario
 	/**
 	 * @param idHorario the idHorario to set
 	 */
-	public void setIdHorario(int idHorario) 
+	public void setIdHorario(String idHorario)
 	{
 		IdHorario = idHorario;
 	}
