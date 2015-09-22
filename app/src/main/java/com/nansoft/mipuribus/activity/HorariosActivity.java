@@ -1,20 +1,30 @@
 package com.nansoft.mipuribus.activity;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.microsoft.windowsazure.mobileservices.ApiJsonOperationCallback;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
+import com.nansoft.mipuribus.CollectionSerializer;
 import com.nansoft.mipuribus.HandlerDataBase;
+import com.nansoft.mipuribus.HttpRequest;
+import com.nansoft.mipuribus.Util;
 import com.nansoft.mipuribus.adapter.HorarioAdapterListView;
 import com.nansoft.mipuribus.NetworkUtil;
 import com.nansoft.mipuribus.R;
-import com.nansoft.mipuribus.model.Carrera;
+import com.nansoft.mipuribus.model.CarreraRuta;
 import com.nansoft.mipuribus.model.Horario;
 
 import android.app.Activity;
@@ -24,11 +34,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.nansoft.mipuribus.model.Parameter;
+import com.nansoft.mipuribus.model.Ruta;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class HorariosActivity extends Activity //implements ConnectivityObserver
 {
@@ -37,6 +57,9 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 	public static HandlerDataBase objHandlerDataBase ;
 	static Bundle bundle;
     public static SwipeRefreshLayout mSwipeRefreshLayout;
+
+	// layout de error
+	View includedLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -53,49 +76,55 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
         }
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
 
+		includedLayout = findViewById(R.id.sindatos);
+
         mAdapter = new HorarioAdapterListView(this, R.layout.item_ruta);
 		listViewMaterias = (ListView) findViewById(R.id.lstvLista);
 		
 		listViewMaterias.setAdapter(mAdapter);
-		listViewMaterias.setOnItemClickListener(new OnItemClickListener() 
-		{
+		listViewMaterias.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
-			{
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				Horario objHorario = (Horario)parent.getItemAtPosition(position);
-						
+				Horario objHorario = (Horario) parent.getItemAtPosition(position);
+
 				Intent intent = new Intent(getApplicationContext(), DescHoraActivity.class);
 				intent.putExtra("idHorario", objHorario.getIdHorario());
 				intent.putExtra("dias", objHorario.getDias());
 				intent.putExtra("idRuta", bundle.getInt("idRuta"));
 				intent.putExtra("nombreRuta", bundle.getString("nombreRuta"));
-						
+
 				startActivity(intent);
 
 
-				
 			}
-			
+
 		});
 		
 		mAdapter.clear();
 		objHandlerDataBase = new HandlerDataBase(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //VerificarConexion(getApplicationContext());
-                CargarHorarios();
-            }
+			@Override
+			public void onRefresh() {
 
-        });
-				
-		CargarHorarios();
-		
-	    
-		
+				cargarHorarios();
+			}
+
+		});
+		mSwipeRefreshLayout.post(new Runnable() {
+			@Override
+			public void run() {
+				mSwipeRefreshLayout.setRefreshing(true);
+			}
+		});
+
+
+
+		cargarHorarios();
+
+
 	}
 
 	@Override
@@ -120,53 +149,9 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 	
 	
 	
-	private void VerificarConexion(Context pContexto)
-	{
-		if(NetworkUtil.isOnline(pContexto))
-		{
-            mSwipeRefreshLayout.setRefreshing(true);
-			MiTareaAsincrona tarea1 = new MiTareaAsincrona();
-			tarea1.execute();
-			
-			 new CountDownTimer(20000,1000) {
-					
-					@Override
-					public void onTick(long arg0) {
-						// TODO Auto-generated method stub
-						}
-					
-					@Override
-					public void onFinish() {
-						
-						CargarHorarios();
-						
-					}
-				}.start();
+
 	
-		}
-		else
-		{
-            mSwipeRefreshLayout.setRefreshing(false);
 
-			CargarHorarios();
-			
-		}
-	}
-	
-	public void CargarHorarios()
-	{
-
-		HandlerDataBase objHandlerDataBase = new HandlerDataBase(this);
-		
-		// este metodo carga los horarios, devuelve true si lo hizo false en caso contrario
-		if(!objHandlerDataBase.CargarHorariosRuta(bundle.getInt("idRuta")))
-		{
-			setContentView(R.layout.layerror);
-			Toast.makeText(getApplicationContext(),  R.string.error, Toast.LENGTH_SHORT).show();
-		
-		}
-
-	}
 	
 	public void Recargar()
 	{
@@ -179,124 +164,123 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 	{
 		Recargar();
 	}
-	
-	
 
 
+	private void cargarHorarios()
+	{
+		includedLayout.setVisibility(View.GONE);
+		mSwipeRefreshLayout.setEnabled(false);
 
+		new AsyncTask<Void, Void, Boolean>() {
 
-	
-	private class MiTareaAsincrona extends AsyncTask<Void, Integer, Boolean> {
+			MobileServiceClient mClient;
+			List<Pair<String, String>> parameters;
 
-		HandlerDataBase objHandlerDataBase;
-		MobileServiceClient mClient;
-        Gson objJson = new Gson();
-        ListView lstView;
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-
-			HandlerDataBase.db.delete("Carrera", null, null);
-			mClient.invokeApi("Carrera", null, "GET", null, new ApiJsonOperationCallback()
+			@Override
+			protected void onPreExecute()
 			{
-				@Override
-				public void onCompleted(JsonElement data, Exception error,ServiceFilterResponse arg2)
-				{
-					try
-					{
-						// verificamos que no se haya producido un error al consultar la api
-						if (error == null) {
+				try {
 
-							// verificamos que lo se devolvió se un array json
-							if (data.isJsonArray())
-					        {
-					        	// obtenemos el array json y lo guardamos en un array json
-						        JsonArray array = data.getAsJsonArray();
-						        Carrera objCarrera;
+					mClient = new MobileServiceClient(
+							Util.UrlMobileServices,
+							Util.LlaveMobileServices,
+							getApplicationContext()
+					);
 
-						        // for each por cada elemento json en el array
-						        for(JsonElement element : array)
-						        {
-						        	objCarrera = new Carrera();
-						        	/*
-						        	objCarrera.setIdCarrera((((JsonObject) element).get("idCarreraRuta").getAsInt()));
-						        	objCarrera.setIdHorario((((JsonObject) element).get("idHorario").getAsInt()));
-						        	objCarrera.setIdRuta((((JsonObject) element).get("idRuta").getAsInt()));
-						        	objCarrera.setIdSitioSalida((((JsonObject) element).get("idSitioSalida").getAsInt()));
-						        	objCarrera.setDescHora((((JsonObject) element).get("descHora").getAsString()));
-						        	//objCarrera.setNombreSitioSalida((((JsonObject) element).get("nombreSitioSalida").getAsString()));
-						        	objCarrera.setNota((((JsonObject) element).get("nota").getAsString()));
-                                    */
-						        	objCarrera = objJson.fromJson(element,Carrera.class);
-						        	objHandlerDataBase.InsertarCarrera(objCarrera);
-						        }
+					mAdapter.clear();
 
-						        CargarHorarios();
-					        }
-			            }
-						else
-						{
 
-						}
 
-					}catch(Exception e)
-					{
 
-					}
+
+				} catch (MalformedURLException e) {
+
 				}
-			});
+				catch (Exception e)
+				{
 
-			//if (isCancelled())
-
-
-			return true;
-		}
-
-		@Override
-		protected void onProgressUpdate(Integer... values)
-		{
-			//int progreso = values[0].intValue();
-
-		}
-
-		@Override
-		protected void onPreExecute()
-		{
-
-			objHandlerDataBase = new HandlerDataBase(HorariosActivity.this);
-            lstView = (ListView) findViewById(R.id.lstvLista);
-            lstView.setClickable(false);
-			try
-			{
-				mClient = new MobileServiceClient( "https://mbsapibuspurisco.azure-mobile.net/", "qxutpCaKYuXSWyzfsTZKgUeZabvSgh48", HorariosActivity.this );
-			} catch (MalformedURLException e)
-			{
-				// TODO Auto-generated catch block
-				Toast.makeText(HorariosActivity.this,  R.string.error,
-						Toast.LENGTH_SHORT).show();
-                mSwipeRefreshLayout.setRefreshing(false);
-
+				}
 
 			}
 
-		}
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				try {
 
-		@Override
-		protected void onPostExecute(Boolean result)
-		{
-			/*
-			if (result)
-				Toast.makeText(MainActivity.this, "Tarea finalizada!",Toast.LENGTH_SHORT).show();
-			*/
-            lstView.setClickable(true);
-		}
+					// se obtiene la respuesta del contenido
 
-		@Override
-		protected void onCancelled()
-		{
-			/*
-			Toast.makeText(MainActivity.this, "Tarea cancelada!",
-					Toast.LENGTH_SHORT).show();*/
-		}
+					final String response = HttpRequest.get(Util.UrlHorarioRuta, true, "id", bundle.getString("idRuta")).body();
+
+					final Gson objJson = new Gson();
+
+					JsonParser jsonParser = new JsonParser();
+					final JsonArray jsonObject = (JsonArray) jsonParser.parse(response);
+
+					runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							Horario objHorario;
+							if (jsonObject.isJsonArray())
+							{
+								JsonArray jsonArray = jsonObject.getAsJsonArray();
+
+								for(JsonElement element : jsonArray)
+								{
+									objHorario = new Horario();
+
+									objHorario = objJson.fromJson(element,Horario.class);
+
+
+									mAdapter.add(objHorario);
+									mAdapter.notifyDataSetChanged();
+								}
+							}
+
+
+						}
+					});
+
+					return true;
+				} catch (final Exception exception) {
+					runOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							Toast.makeText(getApplicationContext(), "Ha ocurrido un error al cargar, intenta de nuevo", Toast.LENGTH_SHORT).show();
+
+						}
+					});
+
+				}
+				return false;
+			}
+
+			@Override
+			protected void onPostExecute(Boolean success)
+			{
+
+				mSwipeRefreshLayout.setRefreshing(false);
+
+
+				mSwipeRefreshLayout.setEnabled(true);
+
+				if (!success)
+				{
+					includedLayout.setVisibility(View.VISIBLE);
+				}
+				else
+				{
+					includedLayout.setVisibility(View.GONE);
+				}
+			}
+
+			@Override
+			protected void onCancelled()
+			{
+				super.onCancelled();
+			}
+		}.execute();
 	}
+
 }
