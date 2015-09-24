@@ -31,6 +31,7 @@
         android:onClick="onClick"/>
 
     <TextView
+        android:id="@+id/txtvPulsarCargar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtvError"
@@ -42,6 +43,21 @@
         android:textAlignment="center"
         android:gravity="center"
         android:onClick="onClick"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtvPulsarCargar"
+        android:padding="5dp"
+        android:text="@string/anunciese"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"
+        android:textColor="@color/blanco"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:onClick="onClick"/>
+
+
 
     </RelativeLayout>
 
