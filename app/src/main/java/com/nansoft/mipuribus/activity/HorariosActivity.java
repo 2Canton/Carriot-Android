@@ -1,24 +1,16 @@
 package com.nansoft.mipuribus.activity;
 
-import java.util.List;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.microsoft.windowsazure.mobileservices.table.query.Query;
-import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
-import com.nansoft.mipuribus.database.HandlerDataBase;
 import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.adapter.HorarioAdapterListView;
 import com.nansoft.mipuribus.R;
-import com.nansoft.mipuribus.model.CarreraRuta;
 import com.nansoft.mipuribus.model.Horario;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
