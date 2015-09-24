@@ -100,6 +100,7 @@ public class DescHoraActivity extends Activity
 		TableRow fila;
 		TextView txtvSitioSalida;
 		TextView txtvHora;
+		TextView txtvNota;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 		Date date = null;
@@ -114,6 +115,7 @@ public class DescHoraActivity extends Activity
 
 			txtvSitioSalida = new TextView(this);
 			txtvHora = new TextView(this);
+			txtvNota = new TextView(this);
 
 			txtvSitioSalida.setText(listCarreras.get(i).getNombreSitioSalida());
 			txtvSitioSalida.setTextAppearance(this,R.style.BodyText);
@@ -158,8 +160,17 @@ public class DescHoraActivity extends Activity
 			txtvHora.setTextColor(getResources().getColor(R.color.black));
 			txtvHora.setBackgroundResource(R.drawable.border);
 			// layoutTextView.span = 2;
+
+			txtvNota.setText(listCarreras.get(i).getNota());
+			txtvNota.setTextAppearance(this, R.style.BodyText);
+			txtvNota.setGravity(Gravity.CENTER);
+			txtvNota.setLayoutParams(layoutTextView);
+			txtvNota.setTextColor(getResources().getColor(R.color.black));
+			txtvNota.setBackgroundResource(R.drawable.border);
+
 			fila.addView(txtvSitioSalida);
 			fila.addView(txtvHora);
+			fila.addView(txtvNota);
 
 			if( i%2 == 0)
 			{
