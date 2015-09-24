@@ -21,7 +21,7 @@ import com.nansoft.mipuribus.model.Opcion;
 
 public class MenuActivity extends Activity {
 
-    AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,7 +31,7 @@ public class MenuActivity extends Activity {
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
         swipeRefreshLayout.setEnabled(false);
 
-        adView = (AdView) findViewById(R.id.adViewAnuncio);
+
 
         OpcionAdapterListView mAdapter = new OpcionAdapterListView(MenuActivity.this,R.layout.item_ruta);
         ListView listView =(ListView)findViewById(R.id.lstvLista);
@@ -137,24 +137,5 @@ public class MenuActivity extends Activity {
     }
 
 
-    @Override
-    protected void onResume()
-    {
 
-        super.onResume();
-
-        try
-        {
-
-            AdRequest adRequestBanner = new AdRequest.Builder().build();
-            adView.loadAd(adRequestBanner);
-
-
-
-        }
-        catch(Exception e)
-        {
-
-        }
-    }
 }
