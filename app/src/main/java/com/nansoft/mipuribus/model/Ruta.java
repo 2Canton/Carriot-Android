@@ -6,7 +6,10 @@ public class Ruta
 {
 	@SerializedName("id")
 	private String IdRuta;
-	
+
+	@SerializedName("__version")
+	private String version;
+
 	@SerializedName("nombre")
 	private String NombreRuta;
 	
@@ -14,7 +17,7 @@ public class Ruta
 	private String Costo;
 
     @SerializedName("idempresa")
-    private int IdEmpresa;
+    private String IdEmpresa;
 
 
 
@@ -69,7 +72,7 @@ public class Ruta
     /**
      * @return the idEmpresa
      */
-    public int getIdEmpresa()
+    public String getIdEmpresa()
     {
         return IdEmpresa;
     }
@@ -77,7 +80,7 @@ public class Ruta
     /**
      * @param idEmpresa the idEmpresa to set
      */
-    public void setIdEmpresa(int idEmpresa)
+    public void setIdEmpresa(String idEmpresa)
     {
         IdEmpresa = idEmpresa;
     }
