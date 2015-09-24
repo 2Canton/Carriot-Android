@@ -9,7 +9,7 @@ import java.util.List;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.nansoft.mipuribus.R;
-import com.nansoft.mipuribus.database.HandlerDataBase;
+import com.nansoft.mipuribus.database.HelperDatabase;
 import com.nansoft.mipuribus.model.CarreraRuta;
 
 import static com.wagnerandade.coollection.Coollection.*;
@@ -51,7 +51,7 @@ public class DescHoraActivity extends Activity
 
 		listCarreras = new ArrayList<CarreraRuta>();
 
-		HandlerDataBase objHandlerDatabase = new HandlerDataBase(this);
+		HelperDatabase objHandlerDatabase = new HelperDatabase(this);
 
 		ArrayList<CarreraRuta> ordered = objHandlerDatabase.CargarHorario(bundle.getString("idRuta"), bundle.getString("idHorario"));
 
