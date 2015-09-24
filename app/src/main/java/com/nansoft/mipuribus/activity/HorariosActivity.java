@@ -1,19 +1,16 @@
 package com.nansoft.mipuribus.activity;
 
-import java.net.MalformedURLException;
 import java.util.List;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
-import com.nansoft.mipuribus.helper.*;
+import com.microsoft.windowsazure.mobileservices.table.query.Query;
+import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
+import com.nansoft.mipuribus.database.HandlerDataBase;
 import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.adapter.HorarioAdapterListView;
 import com.nansoft.mipuribus.R;
+import com.nansoft.mipuribus.model.CarreraRuta;
 import com.nansoft.mipuribus.model.Horario;
 
 import android.app.Activity;
@@ -28,7 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class HorariosActivity extends Activity //implements ConnectivityObserver
+public class HorariosActivity extends Activity
 {
 	public static HorarioAdapterListView mAdapter;
 	public static ListView listViewMaterias;
@@ -37,6 +34,8 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 
 	// layout de error
 	View includedLayout;
+
+	HandlerDataBase objHandlerDatabase;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -78,7 +77,7 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 			}
 
 		});
-		
+		objHandlerDatabase = new HandlerDataBase(this);
 		mAdapter.clear();
         mSwipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -96,6 +95,9 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 			}
 		});
 
+		Util objUtil = new Util(getApplicationContext());
+		if(!objUtil.inicializarBaseDatos())
+			Toast.makeText(getApplicationContext(),"Ha ocurrido un error al inicializar la copia local",Toast.LENGTH_SHORT).show();
 
 
 		cargarHorarios();
@@ -144,119 +146,14 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 
 	private void cargarHorarios()
 	{
-		includedLayout.setVisibility(View.GONE);
-		mSwipeRefreshLayout.setEnabled(false);
+		objHandlerDatabase.CargarHorariosRuta(bundle.getString("idRuta"));
 
-		new AsyncTask<Void, Void, Boolean>() {
-
-			MobileServiceClient mClient;
-			List<Pair<String, String>> parameters;
-
+		mSwipeRefreshLayout.post(new Runnable() {
 			@Override
-			protected void onPreExecute()
-			{
-				try {
-
-					mClient = new MobileServiceClient(
-							Util.UrlMobileServices,
-							Util.LlaveMobileServices,
-							getApplicationContext()
-					);
-
-					mAdapter.clear();
-
-
-
-
-
-				} catch (MalformedURLException e) {
-
-				}
-				catch (Exception e)
-				{
-
-				}
-
-			}
-
-			@Override
-			protected Boolean doInBackground(Void... params) {
-				try {
-
-					// se obtiene la respuesta del contenido
-
-					final String response = HttpRequest.get(Util.UrlHorarioRuta, true, "id", bundle.getString("idRuta")).body();
-
-					final Gson objJson = new Gson();
-
-					JsonParser jsonParser = new JsonParser();
-					final JsonArray jsonObject = (JsonArray) jsonParser.parse(response);
-
-					runOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-							Horario objHorario;
-							if (jsonObject.isJsonArray())
-							{
-								JsonArray jsonArray = jsonObject.getAsJsonArray();
-
-								for(JsonElement element : jsonArray)
-								{
-									objHorario = new Horario();
-
-									objHorario = objJson.fromJson(element,Horario.class);
-
-
-									mAdapter.add(objHorario);
-									mAdapter.notifyDataSetChanged();
-								}
-							}
-
-
-						}
-					});
-
-					return true;
-				} catch (final Exception exception) {
-					runOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-							Toast.makeText(getApplicationContext(), "Ha ocurrido un error al cargar, intenta de nuevo", Toast.LENGTH_SHORT).show();
-
-						}
-					});
-
-				}
-				return false;
-			}
-
-			@Override
-			protected void onPostExecute(Boolean success)
-			{
-
+			public void run() {
 				mSwipeRefreshLayout.setRefreshing(false);
-
-
-				mSwipeRefreshLayout.setEnabled(true);
-
-				if (!success)
-				{
-					includedLayout.setVisibility(View.VISIBLE);
-				}
-				else
-				{
-					includedLayout.setVisibility(View.GONE);
-				}
 			}
-
-			@Override
-			protected void onCancelled()
-			{
-				super.onCancelled();
-			}
-		}.execute();
+		});
 	}
 
 }
