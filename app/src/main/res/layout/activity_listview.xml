@@ -10,17 +10,7 @@
     android:weightSum="3"
     android:background="@drawable/iglesia">
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adViewAnuncio"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6317436249617539/8335803606"
-        android:layout_marginBottom="10dp"/>
-
     <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_below="@id/adViewAnuncio"
         android:id="@+id/swpActualizar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
