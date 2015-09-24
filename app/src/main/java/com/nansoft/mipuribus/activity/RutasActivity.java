@@ -237,7 +237,7 @@ public class RutasActivity extends Activity
 		}
 		else
 		{
-			Toast.makeText(getApplicationContext(),"No hay conexión a internet, se trabajará con una copia local",Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(),getApplication().getResources().getString(R.string.errorConexion),Toast.LENGTH_SHORT).show();
 		}
 	}
 
