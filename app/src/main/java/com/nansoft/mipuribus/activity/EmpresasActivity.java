@@ -42,6 +42,7 @@ public class EmpresasActivity extends AppCompatActivity {
         bar.show();
         bar.setDisplayHomeAsUpEnabled(true);
 
+        setTitle(getString(R.string.app_name) + " - " + getIntent().getExtras().getString("nombre"));
         ID_TIPO_EMPRESA = getIntent().getExtras().getString("id");
 
         includedLayout = findViewById(R.id.sindatos);

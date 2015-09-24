@@ -20,6 +20,8 @@ public class HorarioMisaActivity extends AppCompatActivity
         ActionBar bar = getSupportActionBar();
         bar.show();
         bar.setDisplayHomeAsUpEnabled(true);
+
+        setTitle(getString(R.string.app_name) + " - Horario de misa");
     }
 
 

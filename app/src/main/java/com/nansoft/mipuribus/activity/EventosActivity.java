@@ -42,6 +42,8 @@ public class EventosActivity extends AppCompatActivity {
         bar.show();
         bar.setDisplayHomeAsUpEnabled(true);
 
+        setTitle(getString(R.string.app_name) + " - " + getIntent().getExtras().getString("nombre"));
+
         ID_TIPO_EVENTO = getIntent().getExtras().getString("id");
 
         includedLayout = findViewById(R.id.sindatos);

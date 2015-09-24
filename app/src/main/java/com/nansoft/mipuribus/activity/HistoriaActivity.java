@@ -29,6 +29,8 @@ public class HistoriaActivity extends AppCompatActivity {
         bar.show();
         bar.setDisplayHomeAsUpEnabled(true);
 
+        setTitle(getString(R.string.app_name) + " - Historia");
+
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TextView txtvResenia = (TextView) findViewById(R.id.txtvResenia);
 
