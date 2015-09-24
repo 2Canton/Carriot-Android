@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.nansoft.mipuribus.ScrollingTable 
+<com.nansoft.mipuribus.components.ScrollingTable
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -37,6 +37,11 @@
                 style="@style/HeaderText"
                 android:layout_weight="1"
                 android:text="Hora" />
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Nota" />
             
         </TableRow>
         
@@ -65,8 +70,15 @@
                     android:layout_weight="1"
                     android:text="Hora" 
                     android:layout_height="0dp"/>
-	
-        	</TableRow>
+
+                <TextView
+                    style="@style/BodyText"
+                    android:layout_weight="1"
+                    android:text="Nota"
+                    android:layout_height="0dp"/>
+
+
+            </TableRow>
         	
         </TableLayout>
         
@@ -74,4 +86,4 @@
     
     
 
-</com.nansoft.mipuribus.ScrollingTable>
+</com.nansoft.mipuribus.components.ScrollingTable>
