@@ -20,14 +20,12 @@ import java.util.Map;
  * Created by Carlos on 21/09/2015.
  */
 public class Util {
-    public static String UrlMobileServices = "https://puriscal.azure-mobile.net/";
+    private final String UrlMobileServices = "https://puriscal.azure-mobile.net/";
     public static String UrlHorarioRuta = "https://puriscal.azure-mobile.net/api/horarioruta";
-    public static String LlaveMobileServices = "CtavDeXtaLeUclXFhrPrjLJiUeeEek84";
+    private final String LlaveMobileServices = "CtavDeXtaLeUclXFhrPrjLJiUeeEek84";
 
-    public MobileServiceClient mClient;
+    public static MobileServiceClient mClient;
 
-    public static MobileServiceList<Ruta> resultRutas;
-    public static MobileServiceList<Horario> resultHorarios;
     private Context mContext;
 
 
