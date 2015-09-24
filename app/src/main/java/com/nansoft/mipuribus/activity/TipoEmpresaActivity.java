@@ -40,6 +40,8 @@ public class TipoEmpresaActivity extends AppCompatActivity {
         bar.show();
         bar.setDisplayHomeAsUpEnabled(true);
 
+        setTitle(getString(R.string.app_name) + " - Tipo de empresas");
+
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
         mAdapter = new TipoEmpresaAdapter(TipoEmpresaActivity.this,R.layout.item_ruta);
         ListView listView =(ListView)findViewById(R.id.lstvLista);
@@ -55,7 +57,7 @@ public class TipoEmpresaActivity extends AppCompatActivity {
                 TipoEmpresa objOpcion = (TipoEmpresa) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(),EmpresasActivity.class);
                 intent.putExtra("id",objOpcion.getId());
-
+                intent.putExtra("nombre",objOpcion.getNombre());
                 startActivity(intent);
             }
         });

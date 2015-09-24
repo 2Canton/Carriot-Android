@@ -40,6 +40,8 @@ public class TipoEventoActivity extends AppCompatActivity
         bar.show();
         bar.setDisplayHomeAsUpEnabled(true);
 
+        setTitle(getString(R.string.app_name) + " - Tipo de eventos");
+
         includedLayout = findViewById(R.id.sindatos);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
         mAdapter = new TipoEventoAdapter(TipoEventoActivity.this,R.layout.item_ruta);
@@ -54,7 +56,7 @@ public class TipoEventoActivity extends AppCompatActivity
                 TipoEvento objOpcion = (TipoEvento) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(),EventosActivity.class);
                 intent.putExtra("id", objOpcion.getId());
-
+                intent.putExtra("nombre",objOpcion.getNombre());
                 startActivity(intent);
             }
         });
