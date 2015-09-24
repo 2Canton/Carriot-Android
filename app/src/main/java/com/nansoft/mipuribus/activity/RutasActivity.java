@@ -51,7 +51,6 @@ public class RutasActivity extends Activity
 	// layout de error
 	View includedLayout;
 
-	private MobileServiceSyncTable<Ruta> rutaTable;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -107,6 +106,10 @@ public class RutasActivity extends Activity
 			}
 		});
 
+		Util objUtil = new Util(getApplicationContext());
+		if(!objUtil.inicializarBaseDatos())
+			Toast.makeText(getApplicationContext(),"Ha ocurrido un error al inicializar la copia local",Toast.LENGTH_SHORT).show();
+
 
 
 		cargarRutas();
@@ -155,95 +158,87 @@ public class RutasActivity extends Activity
 
 	private void cargarRutas()
 	{
-		includedLayout.setVisibility(View.GONE);
-		mSwipeRefreshLayout.setEnabled(false);
+		if (Util.isNetworkAvailable(getApplicationContext())) {
 
-		new AsyncTask<Void, Void, Boolean>() {
+			includedLayout.setVisibility(View.GONE);
+			mSwipeRefreshLayout.setEnabled(false);
 
-			MobileServiceClient mClient;
-			Query mPullQuery;
+			new AsyncTask<Void, Void, Boolean>() {
 
-			@Override
-			protected void onPreExecute()
-			{
-				try {
 
-					mClient = new MobileServiceClient(
-							Util.UrlMobileServices,
-							Util.LlaveMobileServices,
-							getApplicationContext()
-					);
+				MobileServiceSyncTable<Ruta> rutaTable;
+				Query mPullQuery;
 
-					// referencia a la tabla que se va usar
-					rutaTable = mClient.getSyncTable("Ruta", Ruta.class);
-					mPullQuery = mClient.getTable(Ruta.class).orderBy("nombre", QueryOrder.Ascending);
-					mAdapter.clear();
+				@Override
+				protected void onPreExecute() {
 
 
 
 
+						// referencia a la tabla que se va usar
+						rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
+						mPullQuery = Util.mClient.getTable(Ruta.class).orderBy("nombre", QueryOrder.Ascending);
+						mAdapter.clear();
 
 
 
-				} catch (MalformedURLException e) {
-
-				}
-				catch (Exception e)
-				{
 
 				}
 
-			}
+				@Override
+				protected Boolean doInBackground(Void... params) {
+					try {
+						//se cargan los últimos cambios
+						rutaTable.pull(mPullQuery).get();
 
-			@Override
-			protected Boolean doInBackground(Void... params) {
-				try {
+						final MobileServiceList<Ruta> result = rutaTable.read(mPullQuery).get();
 
-					final MobileServiceList<Ruta> result =
-					runOnUiThread(new Runnable() {
+						runOnUiThread(new Runnable() {
 
-						@Override
-						public void run() {
-							for (Ruta item : result) {
-								mAdapter.add(item);
-								mAdapter.notifyDataSetChanged();
+							@Override
+							public void run() {
+								for (Ruta item : result) {
+									mAdapter.add(item);
+									mAdapter.notifyDataSetChanged();
+								}
+
 							}
+						});
 
-						}
-					});
 
-					return true;
-				} catch (Exception exception) {
+						return true;
+					} catch (final Exception exception) {
+
+						return false;
+					}
 
 				}
-				return false;
-			}
 
-			@Override
-			protected void onPostExecute(Boolean success)
-			{
+				@Override
+				protected void onPostExecute(Boolean success) {
 
-				mSwipeRefreshLayout.setRefreshing(false);
+					mSwipeRefreshLayout.setRefreshing(false);
 
 
-				mSwipeRefreshLayout.setEnabled(true);
+					mSwipeRefreshLayout.setEnabled(true);
 
-				if (!success)
-				{
-					includedLayout.setVisibility(View.VISIBLE);
+					if (!success) {
+						includedLayout.setVisibility(View.VISIBLE);
+					} else {
+						includedLayout.setVisibility(View.GONE);
+					}
 				}
-				else
-				{
-					includedLayout.setVisibility(View.GONE);
-				}
-			}
 
-			@Override
-			protected void onCancelled()
-			{
-				super.onCancelled();
-			}
-		}.execute();
+				@Override
+				protected void onCancelled() {
+					super.onCancelled();
+				}
+			}.execute();
+		}
+		else
+		{
+			Toast.makeText(getApplicationContext(),"No hay conexión a internet, se trabajará con una copia local",Toast.LENGTH_SHORT).show();
+		}
 	}
 
 
