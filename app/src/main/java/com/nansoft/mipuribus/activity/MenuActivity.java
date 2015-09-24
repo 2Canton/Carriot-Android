@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,7 +21,7 @@ import com.nansoft.mipuribus.R;
 import com.nansoft.mipuribus.model.Opcion;
 
 
-public class MenuActivity extends Activity {
+public class MenuActivity extends AppCompatActivity {
 
 
     @Override
@@ -27,6 +29,11 @@ public class MenuActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
+
+        ActionBar bar = getSupportActionBar();
+        bar.show();
+
+
 
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
         swipeRefreshLayout.setEnabled(false);
@@ -88,7 +95,7 @@ public class MenuActivity extends Activity {
 
                     case 9:
                         try {
-                            String[] pPara = {"nansoftwareinnovation@gmail.com"};
+                            String[] pPara = {"info@mipuribus.com"};
                             Intent Correo = new Intent(Intent.ACTION_SEND);
                             Correo.setData(Uri.parse("mailto:"));
                             Correo.putExtra(Intent.EXTRA_EMAIL, pPara);
@@ -127,8 +134,8 @@ public class MenuActivity extends Activity {
         mAdapter.add(new Opcion(2,"Sitios de interés","phone"));
         mAdapter.add(new Opcion(3,"Eventos","event"));
         mAdapter.add(new Opcion(4,"Religión","church"));
-        mAdapter.add(new Opcion(5,"Recolección de basura","trash"));
-        mAdapter.add(new Opcion(6,"Noticias","news"));
+        //mAdapter.add(new Opcion(5,"Recolección de basura","trash"));
+        //mAdapter.add(new Opcion(6,"Noticias","news"));
         mAdapter.add(new Opcion(7,"Facebook","facebook"));
         mAdapter.add(new Opcion(8,"Sitio Web","website"));
         mAdapter.add(new Opcion(9,"Contacto","message"));

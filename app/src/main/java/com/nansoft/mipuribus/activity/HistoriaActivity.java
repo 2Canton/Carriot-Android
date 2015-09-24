@@ -1,8 +1,9 @@
 package com.nansoft.mipuribus.activity;
 
-import android.app.Activity;
+
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +14,7 @@ import com.google.android.gms.ads.AdView;
 import com.nansoft.mipuribus.R;
 
 
-public class HistoriaActivity extends Activity {
+public class HistoriaActivity extends AppCompatActivity {
 
     AdView adView;
     AdRequest adRequestBanner;
@@ -22,6 +23,12 @@ public class HistoriaActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historia);
+
+        // Set up action bar.
+        ActionBar bar = getSupportActionBar();
+        bar.show();
+        bar.setDisplayHomeAsUpEnabled(true);
+
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TextView txtvResenia = (TextView) findViewById(R.id.txtvResenia);
 
@@ -95,24 +102,26 @@ public class HistoriaActivity extends Activity {
 
         }
     }
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_historia, menu);
+        getMenuInflater().inflate(R.menu.menu_historia, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+        switch(item.getItemId())
+        {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    */
+
 }

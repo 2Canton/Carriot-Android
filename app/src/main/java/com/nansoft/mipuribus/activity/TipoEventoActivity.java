@@ -1,10 +1,11 @@
 package com.nansoft.mipuribus.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,16 +22,25 @@ import com.nansoft.mipuribus.model.TipoEvento;
 
 import java.net.MalformedURLException;
 
-public class TipoEventoActivity extends Activity
+public class TipoEventoActivity extends AppCompatActivity
 {
     SwipeRefreshLayout mSwipeRefreshLayout;
     TipoEventoAdapter mAdapter;
+
+    // layout de error
+    View includedLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
 
+        // Set up action bar.
+        ActionBar bar = getSupportActionBar();
+        bar.show();
+        bar.setDisplayHomeAsUpEnabled(true);
+
+        includedLayout = findViewById(R.id.sindatos);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
         mAdapter = new TipoEventoAdapter(TipoEventoActivity.this,R.layout.item_ruta);
         ListView listView =(ListView)findViewById(R.id.lstvLista);
@@ -70,7 +80,7 @@ public class TipoEventoActivity extends Activity
     private void cargarTipoEventos()
     {
         mSwipeRefreshLayout.setEnabled(false);
-
+        includedLayout.setVisibility(View.GONE);
         new AsyncTask<Void, Void, Boolean>() {
 
             MobileServiceClient mClient;
@@ -125,6 +135,13 @@ public class TipoEventoActivity extends Activity
 
 
                 mSwipeRefreshLayout.setEnabled(true);
+
+                if (!success) {
+                    includedLayout.setVisibility(View.VISIBLE);
+                } else {
+
+                    includedLayout.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -148,13 +165,28 @@ public class TipoEventoActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch(item.getItemId())
+        {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View vista)
+    {
+        Recargar();
+    }
+
+
+    public void Recargar()
+    {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }

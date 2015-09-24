@@ -1,7 +1,5 @@
 package com.nansoft.mipuribus.activity;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -17,13 +15,15 @@ import com.nansoft.mipuribus.model.Version;
 import com.nansoft.mipuribus.model.parada;
 import com.nansoft.mipuribus.model.Ruta;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -34,7 +34,7 @@ import android.widget.Toast;
 import com.microsoft.windowsazure.mobileservices.table.query.Query;
 import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
 
-public class RutasActivity extends Activity
+public class RutasActivity extends AppCompatActivity
 {	
 	public static RutaAdapterListView mAdapter;
 	
@@ -60,7 +60,15 @@ public class RutasActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
+
+
+		// Set up action bar.
+		ActionBar bar = getSupportActionBar();
+		bar.show();
+		bar.setDisplayHomeAsUpEnabled(true);
+
 		setTitle(getString(R.string.app_name) + " - Rutas");
+
 
 		// creamos un adaptador para el listview
 		mAdapter = new RutaAdapterListView(this, R.layout.item_ruta);
@@ -123,15 +131,7 @@ public class RutasActivity extends Activity
 	}
 	
 
-		
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) 
-	{
 
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
 
 	public void onClick(View vista)
 	{
@@ -171,12 +171,10 @@ public class RutasActivity extends Activity
 				savePreferences(OBJ_VERSION.getVersionRemota());
 
 				// verificamos si se debe actualizar
-				if (OBJ_VERSION.estadoActualizarBaseDatos())
-				{
+				if (OBJ_VERSION.estadoActualizarBaseDatos()) {
 
 					// si es así verificamos si hay internet
-					if (Util.isNetworkAvailable(getApplicationContext()))
-					{
+					if (Util.isNetworkAvailable(getApplicationContext())) {
 
 						includedLayout.setVisibility(View.GONE);
 						mSwipeRefreshLayout.setEnabled(false);
@@ -250,7 +248,6 @@ public class RutasActivity extends Activity
 										}
 
 									});
-
 
 
 									for (Horario horario : resultHorario) {
@@ -340,6 +337,30 @@ public class RutasActivity extends Activity
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("VERSION_BASEDATOS", pVersion);
 		editor.commit();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_rutas, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+
+
+		switch(item.getItemId())
+		{
+			case android.R.id.home:
+				super.onBackPressed();
+				break;
+		}
+
+		return super.onOptionsItemSelected(item);
 	}
 
 }
