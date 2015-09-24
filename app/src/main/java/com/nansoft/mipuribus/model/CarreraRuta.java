@@ -8,13 +8,15 @@ public class CarreraRuta
     @SerializedName("id")
 	private String IdCarrera;
 
+	@SerializedName("__version")
+	private String version;
+
 	@SerializedName("idruta")
 	private String IdRuta;
 
 	@SerializedName("idsitiosalida")
 	private String IdSitioSalida;
-	
-	@SerializedName("nombresitiosalida")
+
 	private String NombreSitioSalida;
 
 	@SerializedName("idhorario")
