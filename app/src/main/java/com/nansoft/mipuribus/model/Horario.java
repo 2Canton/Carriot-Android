@@ -6,6 +6,9 @@ public class Horario
 {
 	@SerializedName("id")
 	private String IdHorario;
+
+	@SerializedName("__version")
+	private String version;
 	
 	@SerializedName("dias")
 	private String Dias;
