@@ -1,4 +1,4 @@
-<com.nansoft.mipuribus.ScrollingTable
+<com.nansoft.mipuribus.components.ScrollingTable
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,6 +7,25 @@
     android:orientation="vertical"
     android:background="@drawable/iglesia"
     android:padding="7dp">
+
+    <TableLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            style="@style/HeaderRow"
+            android:background="@drawable/transparent_bg">
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Lunes a Viernes"/>
+
+
+        </TableRow>
+
+    </TableLayout>
 
     <TableLayout
 
@@ -112,4 +131,4 @@
 
     </ScrollView>
 
-</com.nansoft.mipuribus.ScrollingTable>
+</com.nansoft.mipuribus.components.ScrollingTable>
