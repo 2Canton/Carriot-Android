@@ -26,6 +26,9 @@ public class TipoEmpresaActivity extends Activity {
     SwipeRefreshLayout mSwipeRefreshLayout;
     TipoEmpresaAdapter mAdapter;
 
+    // layout de error
+    View includedLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,8 @@ public class TipoEmpresaActivity extends Activity {
         mAdapter = new TipoEmpresaAdapter(TipoEmpresaActivity.this,R.layout.item_ruta);
         ListView listView =(ListView)findViewById(R.id.lstvLista);
         listView.setAdapter(mAdapter);
+
+        includedLayout = findViewById(R.id.sindatos);
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
 
@@ -69,6 +74,8 @@ public class TipoEmpresaActivity extends Activity {
     private void cargarTipoEventos()
     {
         mSwipeRefreshLayout.setEnabled(false);
+
+        includedLayout.setVisibility(View.GONE);
 
         new AsyncTask<Void, Void, Boolean>() {
 
@@ -124,6 +131,13 @@ public class TipoEmpresaActivity extends Activity {
 
 
                 mSwipeRefreshLayout.setEnabled(true);
+
+                if (!success) {
+                    includedLayout.setVisibility(View.VISIBLE);
+                } else {
+
+                    includedLayout.setVisibility(View.GONE);
+                }
             }
 
             @Override
