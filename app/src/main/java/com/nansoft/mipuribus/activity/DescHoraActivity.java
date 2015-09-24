@@ -53,7 +53,7 @@ public class DescHoraActivity extends Activity
 
 		HandlerDataBase objHandlerDatabase = new HandlerDataBase(this);
 
-		ArrayList<CarreraRuta> ordered = objHandlerDatabase.CargarHorario(bundle.getInt("idRuta"), bundle.getInt("idHorario"));
+		ArrayList<CarreraRuta> ordered = objHandlerDatabase.CargarHorario(bundle.getString("idRuta"), bundle.getString("idHorario"));
 
 		if (ordered.isEmpty())
 		{
