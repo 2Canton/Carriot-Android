@@ -41,8 +41,7 @@ public class RutasActivity extends Activity
 	ListView listViewMaterias;
     public static SwipeRefreshLayout mSwipeRefreshLayout;
 
-    AdView adView;
-    AdRequest adRequestBanner;
+
 
 	// layout de error
 	View includedLayout;
@@ -102,7 +101,7 @@ public class RutasActivity extends Activity
 
 		objHandlerDataBase = new HelperDatabase(this);
 
-        adView = (AdView) findViewById(R.id.adViewAnuncio);
+
 
 		mSwipeRefreshLayout.post(new Runnable() {
 			@Override
@@ -123,23 +122,7 @@ public class RutasActivity extends Activity
 		sincronizarDatos();
 	}
 	
-	@Override
-	public void onResume()
-	{
-		super.onResume();
-        
 
-		try
-		{
-			adRequestBanner = new AdRequest.Builder().build();
-	        adView.loadAd(adRequestBanner);
-		}
-		catch(Exception e)
-		{
-			
-		}
-	
-	}
 		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
