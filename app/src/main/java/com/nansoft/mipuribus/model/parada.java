@@ -10,13 +10,7 @@ public class parada {
     @SerializedName("id")
     private String id;
 
-    @SerializedName("createdat")
-    private String createdat;
-
-    @SerializedName("updatedat")
-    private String updatedat;
-
-    @SerializedName("version")
+    @SerializedName("__version")
     private String version;
 
     @SerializedName("nombre")
@@ -28,10 +22,8 @@ public class parada {
     @SerializedName("longitud")
     private double longitud;
 
-    public parada(String id, String createdat, String updatedat, String version, String nombre, double latitud, double longitud) {
+    public parada(String id, String version, String nombre, double latitud, double longitud) {
         this.id = id;
-        this.createdat = createdat;
-        this.updatedat = updatedat;
         this.version = version;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -44,22 +36,6 @@ public class parada {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getCreatedat() {
-        return createdat;
-    }
-
-    public void setCreatedat(String createdat) {
-        this.createdat = createdat;
-    }
-
-    public String getUpdatedat() {
-        return updatedat;
-    }
-
-    public void setUpdatedat(String updatedat) {
-        this.updatedat = updatedat;
     }
 
     public String getVersion() {
