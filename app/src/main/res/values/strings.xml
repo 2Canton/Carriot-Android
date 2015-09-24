@@ -11,6 +11,8 @@
     <string name="errorCarga">Ha ocurrido un error al descargar los datos , pulsa acá para volver a intentar</string>
     <string name="errorConexion">Ha ocurrido un error al descargar los datos , se trabajará con una copia local</string>
     <string name="pulsarCargar">Pulsa acá para cargar de nuevo</string>
+    <string name="anunciese"> Anúnciese con nosotros, más información info@mipuribus.com</string>
+
     <string name="banner_ad_unit_id">ca-app-pub-6317436249617539/8335803606</string>
 
 
