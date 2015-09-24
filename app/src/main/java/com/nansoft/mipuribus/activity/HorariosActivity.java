@@ -2,6 +2,7 @@ package com.nansoft.mipuribus.activity;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.nansoft.mipuribus.database.HelperDatabase;
 import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.adapter.HorarioAdapterListView;
 import com.nansoft.mipuribus.R;
@@ -27,7 +28,7 @@ public class HorariosActivity extends Activity
 	// layout de error
 	View includedLayout;
 
-	HandlerDataBase objHandlerDatabase;
+	HelperDatabase objHandlerDatabase;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -69,7 +70,7 @@ public class HorariosActivity extends Activity
 			}
 
 		});
-		objHandlerDatabase = new HandlerDataBase(this);
+		objHandlerDatabase = new HelperDatabase(this);
 		mAdapter.clear();
         mSwipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
