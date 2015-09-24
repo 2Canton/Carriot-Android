@@ -254,7 +254,7 @@ public class HelperDatabase
     {
 
         // realizamos una consulta a la base de datos y guardamos el resultado en un objeto de tipo Cursor
-        Cursor c = db.rawQuery(" SELECT C.DescHora,S.NombreSitioSalida FROM Carrera C, SitioSalida S WHERE C.IdSitioSalida = S.IdSitioSalida AND C.IdRuta = " + pIdRuta + " AND C.IdHorario = " + pIdHorario, null);
+        Cursor c = db.rawQuery(" SELECT C.DescHora,S.NombreSitioSalida,C.Nota FROM Carrera C, SitioSalida S WHERE C.IdSitioSalida = S.IdSitioSalida AND C.IdRuta = " + pIdRuta + " AND C.IdHorario = " + pIdHorario, null);
         CarreraRuta objCarrera;
         ArrayList <CarreraRuta> listHorarios = new ArrayList<CarreraRuta>();
 
@@ -267,7 +267,7 @@ public class HelperDatabase
 
                 objCarrera.setDescHora(c.getString(0));
                 objCarrera.setNombreSitioSalida(c.getString(1));
-
+                objCarrera.setNota(c.getString(2));
 
                 listHorarios.add(objCarrera);
             }
