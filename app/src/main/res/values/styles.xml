@@ -6,9 +6,22 @@
     -->
 
     <!-- Application theme. -->
-    <style name="AppTheme"  >
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
+
+		<!-- Customize your theme here. -->
+		<item name="android:actionBarStyle">@style/MyActionBar</item>
+		<item name="actionBarStyle">@style/MyActionBar</item>
+	</style>
+
+	<!-- ActionBar styles -->
+	<style name="MyActionBar"
+		parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+		<item name="android:windowNoTitle">false</item>
+		<item name="windowActionBar">true</item>
+		<item name="android:windowFullscreen">false</item>
+	</style>
+
         
     <style name="HeaderRow">
 		<item name="android:background">@color/verdeclaro</item>
