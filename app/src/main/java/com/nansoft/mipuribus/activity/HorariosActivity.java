@@ -1,7 +1,6 @@
 package com.nansoft.mipuribus.activity;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.gms.ads.AdRequest;
@@ -9,30 +8,18 @@ import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.microsoft.windowsazure.mobileservices.ApiJsonOperationCallback;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
-import com.microsoft.windowsazure.mobileservices.MobileServiceList;
-import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
-import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
-import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
-import com.nansoft.mipuribus.CollectionSerializer;
-import com.nansoft.mipuribus.HandlerDataBase;
-import com.nansoft.mipuribus.HttpRequest;
-import com.nansoft.mipuribus.Util;
+import com.nansoft.mipuribus.helper.*;
+import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.adapter.HorarioAdapterListView;
-import com.nansoft.mipuribus.NetworkUtil;
 import com.nansoft.mipuribus.R;
-import com.nansoft.mipuribus.model.CarreraRuta;
 import com.nansoft.mipuribus.model.Horario;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Pair;
 import android.view.View;
@@ -41,20 +28,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.nansoft.mipuribus.model.Parameter;
-import com.nansoft.mipuribus.model.Ruta;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 public class HorariosActivity extends Activity //implements ConnectivityObserver
 {
 	public static HorarioAdapterListView mAdapter;
 	public static ListView listViewMaterias;
-	public static HandlerDataBase objHandlerDataBase ;
 	static Bundle bundle;
     public static SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -92,7 +69,7 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 				Intent intent = new Intent(getApplicationContext(), DescHoraActivity.class);
 				intent.putExtra("idHorario", objHorario.getIdHorario());
 				intent.putExtra("dias", objHorario.getDias());
-				intent.putExtra("idRuta", bundle.getInt("idRuta"));
+				intent.putExtra("idRuta", bundle.getString("idRuta"));
 				intent.putExtra("nombreRuta", bundle.getString("nombreRuta"));
 
 				startActivity(intent);
@@ -103,7 +80,6 @@ public class HorariosActivity extends Activity //implements ConnectivityObserver
 		});
 		
 		mAdapter.clear();
-		objHandlerDataBase = new HandlerDataBase(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override

@@ -4,40 +4,40 @@ import java.net.MalformedURLException;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.microsoft.windowsazure.mobileservices.ApiJsonOperationCallback;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
-import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
-import com.nansoft.mipuribus.HandlerDataBase;
-import com.nansoft.mipuribus.NetworkUtil;
+import com.microsoft.windowsazure.mobileservices.table.sync.synchandler.SimpleSyncHandler;
 import com.nansoft.mipuribus.R;
-import com.nansoft.mipuribus.Util;
+import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.adapter.RutaAdapterListView;
-import com.nansoft.mipuribus.model.CarreraRuta;
-import com.nansoft.mipuribus.model.Horario;
 import com.nansoft.mipuribus.model.Ruta;
-import com.nansoft.mipuribus.model.SitioSalida;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import android.widget.Toast;
 
-
+import com.microsoft.windowsazure.mobileservices.table.query.Query;
+import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncContext;
+import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.ColumnDataType;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.SQLiteLocalStore;
 public class RutasActivity extends Activity
 {	
 	public static RutaAdapterListView mAdapter;
@@ -50,6 +50,8 @@ public class RutasActivity extends Activity
 
 	// layout de error
 	View includedLayout;
+
+	private MobileServiceSyncTable<Ruta> rutaTable;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -95,7 +97,7 @@ public class RutasActivity extends Activity
 
 		});
 
-		cargarRutas();
+
         adView = (AdView) findViewById(R.id.adViewAnuncio);
 
 		mSwipeRefreshLayout.post(new Runnable() {
@@ -106,6 +108,8 @@ public class RutasActivity extends Activity
 		});
 
 
+
+		cargarRutas();
 	}
 	
 	@Override
@@ -141,7 +145,7 @@ public class RutasActivity extends Activity
 		finish();
 		startActivity(intent);
 	}
-	
+
 	public void onClick(View vista)
 	{
 		Recargar();
@@ -157,7 +161,7 @@ public class RutasActivity extends Activity
 		new AsyncTask<Void, Void, Boolean>() {
 
 			MobileServiceClient mClient;
-			MobileServiceTable<Ruta> rutaTable;
+			Query mPullQuery;
 
 			@Override
 			protected void onPreExecute()
@@ -170,9 +174,16 @@ public class RutasActivity extends Activity
 							getApplicationContext()
 					);
 
-					rutaTable = mClient.getTable("Ruta", Ruta.class);
-
+					// referencia a la tabla que se va usar
+					rutaTable = mClient.getSyncTable("Ruta", Ruta.class);
+					mPullQuery = mClient.getTable(Ruta.class).orderBy("nombre", QueryOrder.Ascending);
 					mAdapter.clear();
+
+
+
+
+
+
 
 				} catch (MalformedURLException e) {
 
@@ -188,13 +199,12 @@ public class RutasActivity extends Activity
 			protected Boolean doInBackground(Void... params) {
 				try {
 
-					final MobileServiceList<Ruta> result = rutaTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
+					final MobileServiceList<Ruta> result =
 					runOnUiThread(new Runnable() {
 
 						@Override
 						public void run() {
-							for (Ruta item : result)
-							{
+							for (Ruta item : result) {
 								mAdapter.add(item);
 								mAdapter.notifyDataSetChanged();
 							}
@@ -235,6 +245,7 @@ public class RutasActivity extends Activity
 			}
 		}.execute();
 	}
-	
-	   
+
+
+
 }

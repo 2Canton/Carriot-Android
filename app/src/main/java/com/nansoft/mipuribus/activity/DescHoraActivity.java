@@ -1,5 +1,6 @@
 package com.nansoft.mipuribus.activity;
 
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,16 +9,23 @@ import java.util.List;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.nansoft.mipuribus.HandlerDataBase;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceList;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.nansoft.mipuribus.R;
-import com.nansoft.mipuribus.model.Carrera;
+import com.nansoft.mipuribus.helper.Util;
+import com.nansoft.mipuribus.model.CarreraRuta;
+import com.nansoft.mipuribus.model.Ruta;
 
 import static com.wagnerandade.coollection.Coollection.*;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -32,7 +40,8 @@ public class DescHoraActivity extends Activity
     
     Resources rs;  
     
-    List<Carrera> listCarreras;
+    List<CarreraRuta> listCarreraRutas;
+	static ArrayList<CarreraRuta> ordered;
         
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -49,22 +58,14 @@ public class DescHoraActivity extends Activity
 		
 		layoutTextView = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT,1f);  
   
-		listCarreras = new ArrayList<Carrera>();
+		listCarreraRutas = new ArrayList<CarreraRuta>();
 		
-		HandlerDataBase objHandlerDatabase = new HandlerDataBase(this);
-		
-		ArrayList<Carrera> ordered = objHandlerDatabase.CargarHorario(bundle.getInt("idRuta"), bundle.getInt("idHorario"));
-		
-		if (ordered.isEmpty())
-		{
-			setContentView(R.layout.layerror);
-		}
-		else
-		{
-		
-			listCarreras = from(ordered).orderBy("getDescHora").all();
-			agregarFilasTabla();
-		}
+
+		//ArrayList<CarreraRuta> ordered = objHandlerDatabase.CargarHorario(bundle.getInt("idRuta"), bundle.getInt("idHorario"));
+		 ordered = new ArrayList<CarreraRuta>();
+		cargarDescHora(bundle.getString("idRuta"), bundle.getString("idHorario"));
+
+
 	}
 	
 	@Override
@@ -105,7 +106,7 @@ public class DescHoraActivity extends Activity
 	     Date date = null;
 	     String sufijo = "";
 	     int intHoraTemporal = 0;
-	     for(int i = 0,TamArray = listCarreras.size();i<TamArray;i++)
+	     for(int i = 0,TamArray = listCarreraRutas.size();i<TamArray;i++)
 	     {  
 	    	 	    	 
 	         fila = new TableRow(this);  
@@ -115,7 +116,7 @@ public class DescHoraActivity extends Activity
 	         txtvSitioSalida = new TextView(this);  
 	         txtvHora = new TextView(this);  
 
-	         txtvSitioSalida.setText(listCarreras.get(i).getNombreSitioSalida());
+	         txtvSitioSalida.setText(listCarreraRutas.get(i).getNombreSitioSalida());
 	         txtvSitioSalida.setTextAppearance(this,R.style.BodyText);  
 	         txtvSitioSalida.setGravity(Gravity.CENTER);
 	         txtvSitioSalida.setLayoutParams(layoutTextView); 
@@ -125,14 +126,14 @@ public class DescHoraActivity extends Activity
 	        
 			try
             {
-				date = sdf.parse(listCarreras.get(i).getDescHora().toString());
+				date = sdf.parse(listCarreraRutas.get(i).getDescHora().toString());
 			} 
 			catch (ParseException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
 			}
 			sufijo = " am";
-            intHoraTemporal = Integer.parseInt(listCarreras.get(i).getDescHora().toString()
+            intHoraTemporal = Integer.parseInt(listCarreraRutas.get(i).getDescHora().toString()
                      .substring(0, 2));
 
 
@@ -174,4 +175,85 @@ public class DescHoraActivity extends Activity
 	     }  
 	     
 	 }
+
+	private void cargarDescHora(final String pID_RUTA,final String pID_HORARIO)
+	{
+		//includedLayout.setVisibility(View.GONE);
+		//mSwipeRefreshLayout.setEnabled(false);
+
+		new AsyncTask<Void, Void, Boolean>() {
+
+			MobileServiceClient mClient;
+			MobileServiceTable<CarreraRuta> carreraRutaTable;
+
+			@Override
+			protected void onPreExecute()
+			{
+				try {
+
+					mClient = new MobileServiceClient(
+							Util.UrlMobileServices,
+							Util.LlaveMobileServices,
+							getApplicationContext()
+					);
+
+					carreraRutaTable = mClient.getTable("CarreraRuta", CarreraRuta.class);
+
+					//mAdapter.clear();
+
+				} catch (MalformedURLException e) {
+
+				}
+				catch (Exception e)
+				{
+
+				}
+
+			}
+
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				try {
+
+					final MobileServiceList<CarreraRuta> result = carreraRutaTable.where().field("idruta").eq(pID_RUTA).and().field("idhorario").eq(pID_HORARIO).execute().get();
+
+					ordered = result;
+					return true;
+				} catch (Exception exception) {
+
+				}
+				return false;
+			}
+
+			@Override
+			protected void onPostExecute(Boolean success)
+			{
+
+				//mSwipeRefreshLayout.setRefreshing(false);
+
+
+				//mSwipeRefreshLayout.setEnabled(true);
+
+				if (!success)
+				{
+					//includedLayout.setVisibility(View.VISIBLE);
+				}
+				else
+				{
+					//includedLayout.setVisibility(View.GONE);
+				}
+
+
+				listCarreraRutas = from(ordered).orderBy("getDescHora").all();
+				agregarFilasTabla();
+			}
+
+			@Override
+			protected void onCancelled()
+			{
+				super.onCancelled();
+			}
+		}.execute();
+	}
+
 }
