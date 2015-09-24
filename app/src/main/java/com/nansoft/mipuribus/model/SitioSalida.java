@@ -4,21 +4,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class SitioSalida 
 {
-	@SerializedName("idSitioSalida")
-	private int IdSitioSalida;
+	@SerializedName("id")
+	private String IdSitioSalida;
 	
-	@SerializedName("nombreSitioSalida")
+	@SerializedName("nombre")
 	private String NombreSitioSalida;
 
 	public SitioSalida()
 	{
-		IdSitioSalida = 0;
+		IdSitioSalida = "0";
 		NombreSitioSalida = "Sin Definir";
 	}
 	/**
 	 * @return the idSitioSalida
 	 */
-	public int getIdSitioSalida() 
+	public String getIdSitioSalida()
 	{
 		return IdSitioSalida;
 	}
@@ -26,7 +26,7 @@ public class SitioSalida
 	/**
 	 * @param idSitioSalida the idSitioSalida to set
 	 */
-	public void setIdSitioSalida(int idSitioSalida) 
+	public void setIdSitioSalida(String idSitioSalida)
 	{
 		IdSitioSalida = idSitioSalida;
 	}
