@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txtvTituloEvento"
             android:layout_toRightOf="@id/imgLogoEvento"
+            android:layout_marginTop="10dp"
             android:weightSum="2">
 
             <TextView
@@ -67,6 +68,8 @@
 
         </LinearLayout>
 
+
+
         <TextView
             android:id="@+id/txtvCostoEvento"
             android:layout_width="fill_parent"
@@ -76,13 +79,29 @@
             android:layout_marginTop="10dp"
             android:ellipsize="marquee"
             android:singleLine="true"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/blanco" />
+
+        <TextView
+            android:id="@+id/txtvInsDescripcionEvento"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtvCostoEvento"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="Descripción"
             android:textColor="@color/blanco" />
 
         <TextView
             android:id="@+id/txtvDescripcionEvento"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtvCostoEvento"
+            android:layout_below="@id/txtvInsDescripcionEvento"
             android:layout_marginLeft="110dp"
             android:layout_marginTop="10dp"
             android:ellipsize="marquee"
