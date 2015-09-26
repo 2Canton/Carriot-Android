@@ -73,6 +73,7 @@ public class DescHoraActivity extends AppCompatActivity
 			listCarreras = from(ordered).orderBy("getDescHora").all();
 			agregarFilasTabla();
 		}
+
 	}
 
 	@Override

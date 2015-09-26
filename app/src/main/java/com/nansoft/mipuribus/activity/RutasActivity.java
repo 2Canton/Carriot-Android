@@ -122,14 +122,14 @@ public class RutasActivity extends AppCompatActivity
 		if(!objUtil.inicializarBaseDatos())
 			Toast.makeText(getApplicationContext(),"Ha ocurrido un error al inicializar la copia local",Toast.LENGTH_SHORT).show();
 
-		SharedPreferences prefs = getSharedPreferences(nombrePref, MODE_PRIVATE);
+		prefs = getSharedPreferences(nombrePref, MODE_PRIVATE);
 
-		int VERSION_BASEDATOS_ACTUAL = prefs.getInt("VERSION_BASEDATOS",1);
-		OBJ_VERSION = new Version(VERSION_BASEDATOS_ACTUAL);
+
 
 		sincronizarDatos();
 	}
-	
+
+
 
 
 
@@ -152,6 +152,9 @@ public class RutasActivity extends AppCompatActivity
 
 	private void sincronizarDatos()
 	{
+		int VERSION_BASEDATOS_ACTUAL = prefs.getInt("VERSION_BASEDATOS",1);
+		OBJ_VERSION = new Version(VERSION_BASEDATOS_ACTUAL);
+
 		// verificamos la versión de base de datos
 		final ListenableFuture <Version> resultVersion = Util.mClient.invokeApi("version","GET",null,Version.class);
 
@@ -164,11 +167,11 @@ public class RutasActivity extends AppCompatActivity
 			@Override
 			public void onSuccess(Version result) {
 
+
 				// establecemos la versión remota en el objeto
 				OBJ_VERSION.setVersionRemota(result.getVersionRemota());
 
-				// guardamos en las preferencias de usuario la versión de base de datos que tenemos
-				savePreferences(OBJ_VERSION.getVersionRemota());
+
 
 				// verificamos si se debe actualizar
 				if (OBJ_VERSION.estadoActualizarBaseDatos()) {
@@ -281,6 +284,10 @@ public class RutasActivity extends AppCompatActivity
 
 
 								mSwipeRefreshLayout.setEnabled(true);
+
+								// guardamos en las preferencias de usuario la versión de base de datos que tenemos
+								savePreferences(OBJ_VERSION.getVersionRemota());
+
 
 								if (!success) {
 									includedLayout.setVisibility(View.VISIBLE);
