@@ -52,7 +52,7 @@ public class TipoEventoAdapter extends ArrayAdapter<TipoEvento>
 
             holder.imgLogoEmpresaa = (ImageView) row.findViewById(R.id.imgvLogoEmpresaRuta);
             holder.txtvTituloRuta = (TextView) row.findViewById(R.id.txtvTituloRuta);
-
+            holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
             row.setTag(holder);
 
             }
@@ -72,8 +72,8 @@ public class TipoEventoAdapter extends ArrayAdapter<TipoEvento>
 
             holder.txtvTituloRuta.setText(currentItem.getNombre());
 
-            //holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
-            //holder.txtvCostoRuta.setText("Precio " + currentItem.getCosto());
+
+            holder.txtvCostoRuta.setText("Cantidad " + currentItem.CantidadEventos);
 
             return row;
 
@@ -83,7 +83,7 @@ public class TipoEventoAdapter extends ArrayAdapter<TipoEvento>
     static class ViewHolder {
         protected ImageView imgLogoEmpresaa;
         protected TextView txtvTituloRuta;
-        //protected TextView txtvCostoRuta;
+        protected TextView txtvCostoRuta;
     }
 
 

@@ -1,12 +1,37 @@
-<com.nansoft.mipuribus.ScrollingTable
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:orientation="vertical"
-    android:background="@drawable/iglesia"
-    android:padding="7dp">
+
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/iglesia"
+        android:padding="7dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <!-- Tabla de lunes a viernes -->
+        <TableLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                style="@style/HeaderRow"
+                android:background="@drawable/transparent_bg">
+
+                <TextView
+                    style="@style/HeaderText"
+                    android:layout_weight="1"
+                    android:text="Lunes a Viernes"/>
+
+
+            </TableRow>
+
+        </TableLayout>
 
     <TableLayout
 
@@ -31,31 +56,13 @@
 
     </TableLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+
 
         <TableLayout
             android:id="@+id/BodyTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <TableRow
-                style="@style/BodyRow" >
-
-                <TextView
-                    style="@style/BodyText"
-                    android:text="Lugar"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"/>
-
-                <TextView
-                    style="@style/BodyText"
-                    android:layout_weight="1"
-                    android:text="Día"
-                    android:layout_height="0dp"/>
-
-            </TableRow>
 
             <TableRow
                 style="@style/BodyRow">
@@ -64,13 +71,13 @@
                     android:background="@color/azure"
                     style="@style/BodyText"
                     android:layout_weight="1"
-                    android:text="Santiago, Barrio las brisas"/>
+                    android:text="Capilla (Santiago)"/>
 
                 <TextView
                     android:background="@color/azure"
                     style="@style/BodyText"
                     android:layout_weight="1"
-                    android:text="8:00 am"/>
+                    android:text="07:00 am"/>
 
             </TableRow>
 
@@ -81,36 +88,257 @@
                     android:background="@color/blanco"
                     style="@style/BodyText"
                     android:layout_weight="1"
-                    android:text="Lunes a Viernes"/>
+                    android:text="Templo (Santiago)"/>
 
                 <TextView
                     android:background="@color/blanco"
                     style="@style/BodyText"
                     android:layout_weight="1"
-                    android:text="6:00 pm"/>
-
-            </TableRow>
-
-            <TableRow
-                style="@style/BodyRow">
-
-                <TextView
-                    android:background="@color/azure"
-                    style="@style/BodyText"
-                    android:layout_weight="1"
-                    android:text="Sábado"/>
-
-                <TextView
-                    android:background="@color/azure"
-                    style="@style/BodyText"
-                    android:layout_weight="1"
-                    android:text="8:00 am"/>
+                    android:text="06:00 pm"/>
 
             </TableRow>
 
         </TableLayout>
 
+        <!-- Tabla de sábado -->
+    <TableLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            style="@style/HeaderRow"
+            android:background="@drawable/transparent_bg">
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Sábado"/>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            style="@style/HeaderRow" >
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Lugar"/>
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Día" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+            <TableRow
+                style="@style/BodyRow">
+
+                <TextView
+                    android:background="@color/azure"
+                    style="@style/BodyText"
+                    android:layout_weight="1"
+                    android:text="Templo (Santiago)"/>
+
+                <TextView
+                    android:background="@color/azure"
+                    style="@style/BodyText"
+                    android:layout_weight="1"
+                    android:text="08:00 am"/>
+
+            </TableRow>
+
+            <TableRow
+                style="@style/BodyRow">
+
+                <TextView
+                    android:background="@color/blanco"
+                    style="@style/BodyText"
+                    android:layout_weight="1"
+                    android:text="Templo (Santiago)"/>
+
+                <TextView
+                    android:background="@color/blanco"
+                    style="@style/BodyText"
+                    android:layout_weight="1"
+                    android:text="06:30 pm"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+    <!-- Tabla de sábado -->
+    <TableLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            style="@style/HeaderRow"
+            android:background="@drawable/transparent_bg">
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Domingo"/>
+
+
+        </TableRow>
+
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            style="@style/HeaderRow" >
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Lugar"/>
+
+            <TextView
+                style="@style/HeaderText"
+                android:layout_weight="1"
+                android:text="Día" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            style="@style/BodyRow" >
+
+            <TextView
+                style="@style/BodyText"
+                android:text="Lugar"
+                android:layout_weight="1"
+                android:layout_height="0dp"/>
+
+            <TextView
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="Día"
+                android:layout_height="0dp"/>
+
+        </TableRow>
+
+        <TableRow
+            style="@style/BodyRow">
+
+            <TextView
+                android:background="@color/azure"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="Templo (Santiago)"/>
+
+            <TextView
+                android:background="@color/azure"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="06:30 am"/>
+
+        </TableRow>
+
+        <TableRow
+            style="@style/BodyRow">
+
+            <TextView
+                android:background="@color/blanco"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="Templo (Santiago)"/>
+
+            <TextView
+                android:background="@color/blanco"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="08:00 am"/>
+
+        </TableRow>
+
+        <TableRow
+            style="@style/BodyRow">
+
+            <TextView
+                android:background="@color/azure"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="Templo (Santiago)"/>
+
+            <TextView
+                android:background="@color/azure"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="10:00 am"/>
+
+        </TableRow>
+
+        <TableRow
+            style="@style/BodyRow">
+
+            <TextView
+                android:background="@color/blanco"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="Templo (Santiago)"/>
+
+            <TextView
+                android:background="@color/blanco"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="04:00 pm"/>
+
+        </TableRow>
+
+        <TableRow
+            style="@style/BodyRow">
+
+            <TextView
+                android:background="@color/azure"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="Templo (Santiago)"/>
+
+            <TextView
+                android:background="@color/azure"
+                style="@style/BodyText"
+                android:layout_weight="1"
+                android:text="06:30 pm"/>
+
+        </TableRow>
+
+
+
+
+
+    </TableLayout>
+    </LinearLayout>
+
     </ScrollView>
 
-</com.nansoft.mipuribus.ScrollingTable>
-<!-- From: file:/C:/Users/Carlos/Documents/AndroidStudioProjects/BusPurisco/app/src/main/res/layout/activity_horario_misa.xml -->
+<!-- From: file:/Users/itadmin/AndroidStudioProjects/Carriot/app/src/main/res/layout/activity_horario_misa.xml -->

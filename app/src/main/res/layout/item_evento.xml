@@ -35,20 +35,12 @@
             android:text="hello"
             android:textColor="@color/blanco"/>
 
-        <LinearLayout
-            android:id="@+id/layFechaHora"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtvTituloEvento"
-            android:layout_toRightOf="@id/imgLogoEvento"
-            android:layout_marginTop="10dp"
-            android:weightSum="2">
-
             <TextView
                 android:id="@+id/txtvFechaEvento"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_below="@id/txtvTituloEvento"
+                android:layout_toRightOf="@id/imgLogoEvento"
                 android:text="fecha"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -58,23 +50,18 @@
                 android:id="@+id/txtvHoraEvento"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_below="@id/txtvFechaEvento"
+                android:layout_toRightOf="@id/imgLogoEvento"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:text="hora"
                 android:textColor="@color/blanco"/>
 
-
-
-        </LinearLayout>
-
-
-
         <TextView
             android:id="@+id/txtvCostoEvento"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layFechaHora"
+            android:layout_below="@id/txtvHoraEvento"
             android:layout_marginLeft="110dp"
             android:layout_marginTop="10dp"
             android:ellipsize="marquee"

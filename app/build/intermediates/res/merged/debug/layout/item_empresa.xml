@@ -30,37 +30,65 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/imgvLogoEmpresa"
-            android:textSize="16sp"
+            android:textSize="18dp"
+            android:textStyle="bold"
             android:text="hello"
             android:textColor="@color/blanco"/>
 
-
         <TextView
-            android:id="@+id/txtvHorarioEmpresa"
+            android:id="@+id/txtvInsHorarioEmpresa"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtvTituloEmpresa"
             android:layout_marginLeft="110dp"
             android:layout_marginTop="10dp"
             android:ellipsize="marquee"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="Horario"
+
+            android:textColor="@color/blanco" />
+
+
+        <TextView
+            android:id="@+id/txtvHorarioEmpresa"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtvInsHorarioEmpresa"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
             android:textColor="@color/blanco" />
 
         <TextView
-            android:id="@+id/txtvDireccionEmpresa"
+            android:id="@+id/txtvInsDireccionEmpresa"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtvHorarioEmpresa"
             android:layout_marginLeft="110dp"
             android:layout_marginTop="10dp"
             android:ellipsize="marquee"
-            android:textSize="12sp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="Dirección"
+
+            android:textColor="@color/blanco" />
+
+        <TextView
+            android:id="@+id/txtvDireccionEmpresa"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtvInsDireccionEmpresa"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
             android:textColor="@color/blanco" />
 
         <LinearLayout
             android:id="@+id/layTitulosContacto"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imgvLogoEmpresa"
+            android:layout_below="@id/txtvDireccionEmpresa"
             android:weightSum="4">
 
             <TextView
@@ -68,6 +96,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Teléfono"
+                android:textSize="15dp"
+                android:textStyle="bold"
                 android:textColor="@color/blanco"
                 android:gravity="center"/>
 
@@ -76,6 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Email"
+                android:textSize="15dp"
+                android:textStyle="bold"
                 android:textColor="@color/blanco"
                 android:gravity="center"/>
 
@@ -84,6 +116,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Localización"
+                android:textSize="15dp"
+                android:textStyle="bold"
                 android:textColor="@color/blanco"
                 android:gravity="center"/>
 
@@ -92,6 +126,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Web"
+                android:textSize="15dp"
+                android:textStyle="bold"
                 android:textColor="@color/blanco"
                 android:gravity="center"/>
 
@@ -141,4 +177,4 @@
 
     </RelativeLayout>
 
-</FrameLayout><!-- From: file:/C:/Users/Carlos/Documents/AndroidStudioProjects/BusPurisco/app/src/main/res/layout/item_empresa.xml -->
+</FrameLayout><!-- From: file:/Users/itadmin/AndroidStudioProjects/Carriot/app/src/main/res/layout/item_empresa.xml -->

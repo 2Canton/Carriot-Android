@@ -17,6 +17,9 @@ public class TipoEvento {
     @SerializedName("urlimagen")
     private String urlimagen;
 
+    @SerializedName("cantidad_eventos")
+    public int CantidadEventos;
+
     public TipoEvento(String id, String nombre, String urlimagen) {
         this.id = id;
         this.nombre = nombre;
