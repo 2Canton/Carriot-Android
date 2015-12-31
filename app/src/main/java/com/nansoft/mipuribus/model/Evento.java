@@ -46,6 +46,9 @@ public class Evento {
     @SerializedName("latitud")
     private double latitud;
 
+    @SerializedName("visible")
+    private boolean visible;
+
 
     public Evento(String id, String createdat, String updatedat, String version, String nombre, String descripcion, String costo, String fecha, String hora, String urlimagen, String idtipoevento, double longitud, double latitud) {
         this.id = id;
