@@ -29,7 +29,7 @@ public class HelperDatabase
     {
         contexto = pContexto;
         //Abrimos la base de datos 'DBUsuarios' en modo escritura
-        usdbh = new DbSQLiteOpenHelper(contexto, "DBBusPurisco", null,3);
+        usdbh = new DbSQLiteOpenHelper(contexto, "DBBusPurisco", null,4);
 
         db = usdbh.getWritableDatabase();
 
@@ -118,7 +118,7 @@ public class HelperDatabase
 
             //db.beginTransaction();
             //Insertamos el registro en la base de datos
-            db.insert("Carrera", null, nuevoRegistro);
+            db.insert("CarreraRuta", null, nuevoRegistro);
             //db.setTransactionSuccessful();
             //db.endTransaction();
             return true;
@@ -157,7 +157,7 @@ public class HelperDatabase
         try
         {
             // realizamos una consulta a la base de datos y guardamos el resultado en un objeto de tipo Cursor
-            Cursor c = db.rawQuery(" SELECT * FROM Carrera", null);
+            Cursor c = db.rawQuery(" SELECT * FROM CarreraRuta", null);
 
 
             // Veririficamos si la consulta devolvió al menos un resultado
@@ -219,7 +219,7 @@ public class HelperDatabase
         try
         {
             // realizamos una consulta a la base de datos y guardamos el resultado en un objeto de tipo Cursor
-            Cursor c = db.rawQuery(" SELECT DISTINCT H.IdHorario,H.Dias FROM Horario H,Carrera C WHERE H.IdHorario = C.IdHorario AND C.IdRuta = " + pIdRuta, null);
+            Cursor c = db.rawQuery(" SELECT DISTINCT H.IdHorario,H.Dias FROM Horario H,CarreraRuta C WHERE H.IdHorario = C.IdHorario AND C.IdRuta = " + pIdRuta, null);
             Horario objHorario;
 
             // Veririficamos si la consulta devolvió al menos un resultado
@@ -254,7 +254,7 @@ public class HelperDatabase
     {
 
         // realizamos una consulta a la base de datos y guardamos el resultado en un objeto de tipo Cursor
-        Cursor c = db.rawQuery(" SELECT C.DescHora,S.NombreSitioSalida,C.Nota FROM Carrera C, SitioSalida S WHERE C.IdSitioSalida = S.IdSitioSalida AND C.IdRuta = " + pIdRuta + " AND C.IdHorario = " + pIdHorario, null);
+        Cursor c = db.rawQuery(" SELECT C.DescHora,S.NombreSitioSalida,C.Nota FROM CarreraRuta C, SitioSalida S WHERE C.IdSitioSalida = S.IdSitioSalida AND C.IdRuta = " + pIdRuta + " AND C.IdHorario = " + pIdHorario, null);
         CarreraRuta objCarrera;
         ArrayList <CarreraRuta> listHorarios = new ArrayList<CarreraRuta>();
 

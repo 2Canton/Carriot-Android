@@ -216,7 +216,7 @@ public class RutasActivity extends AppCompatActivity
 								HelperDatabase.db.delete("Ruta", null, null);
 								HelperDatabase.db.delete("Horario", null, null);
 								HelperDatabase.db.delete("CarreraRuta", null, null);
-								HelperDatabase.db.delete("Parada", null, null);
+								HelperDatabase.db.delete("SitioSalida", null, null);
 
 
 							}
@@ -285,15 +285,19 @@ public class RutasActivity extends AppCompatActivity
 
 								mSwipeRefreshLayout.setEnabled(true);
 
-								// guardamos en las preferencias de usuario la versión de base de datos que tenemos
-								savePreferences(OBJ_VERSION.getVersionRemota());
 
 
 								if (!success) {
 									includedLayout.setVisibility(View.VISIBLE);
+
+
 								} else {
 
 									includedLayout.setVisibility(View.GONE);
+
+									// guardamos en las preferencias de usuario la versión de base de datos que tenemos
+									savePreferences(OBJ_VERSION.getVersionRemota());
+
 								}
 							}
 
