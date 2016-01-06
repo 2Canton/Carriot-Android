@@ -67,8 +67,8 @@ public class HorariosActivity extends AppCompatActivity
 				Horario objHorario = (Horario) parent.getItemAtPosition(position);
 
 				Intent intent = new Intent(getApplicationContext(), DescHoraActivity.class);
-				intent.putExtra("idHorario", objHorario.getIdHorario());
-				intent.putExtra("dias", objHorario.getDias());
+				intent.putExtra("idHorario", objHorario.id);
+				intent.putExtra("dias", objHorario.dias);
 				intent.putExtra("idRuta", bundle.getString("idRuta"));
 				intent.putExtra("nombreRuta", bundle.getString("nombreRuta"));
 

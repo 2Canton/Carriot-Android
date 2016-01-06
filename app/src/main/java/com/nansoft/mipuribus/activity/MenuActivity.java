@@ -52,7 +52,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                 boolean isMail = false;
 
-                switch (objOpcion.getIdOpcion()) {
+                switch (objOpcion.idOpcion) {
                     case 0:
                         intent = new Intent(getApplicationContext(), HistoriaActivity.class);
                         break;

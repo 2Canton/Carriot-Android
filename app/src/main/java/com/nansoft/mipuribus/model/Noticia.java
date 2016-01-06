@@ -8,68 +8,22 @@ import com.google.gson.annotations.SerializedName;
 public class Noticia
 {
     @SerializedName("id")
-    private String id;
+    public String id;
 
     @SerializedName("nombre")
-    private String nombre;
+    public String nombre;
 
     @SerializedName("fecha")
-    private String fecha;
+    public String fecha;
 
     @SerializedName("descripcion")
-    private String descripcion;
+    public String descripcion;
 
     @SerializedName("urlimagen")
-    private String urlImagen;
+    public String urlImagen;
 
     @SerializedName("autor")
-    private String autor;
+    public String autor;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getUrlImagen() {
-        return urlImagen;
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
 }
