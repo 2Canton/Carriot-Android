@@ -6,12 +6,20 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
@@ -19,8 +27,11 @@ import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.nansoft.mipuribus.R;
 import com.nansoft.mipuribus.adapter.TipoEmpresaAdapter;
 import com.nansoft.mipuribus.model.TipoEmpresa;
+import com.nansoft.mipuribus.model.TipoEvento;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TipoEmpresaActivity extends AppCompatActivity {
 
@@ -84,76 +95,64 @@ public class TipoEmpresaActivity extends AppCompatActivity {
         mSwipeRefreshLayout.setEnabled(false);
 
         includedLayout.setVisibility(View.GONE);
+        MobileServiceClient mClient;
+        try {
 
-        new AsyncTask<Void, Void, Boolean>() {
+            mClient = new MobileServiceClient(
+                    "https://puriscal.azure-mobile.net/",
+                    "CtavDeXtaLeUclXFhrPrjLJiUeeEek84",
+                    getApplicationContext()
+            );
+            mAdapter.clear();
 
-            MobileServiceClient mClient;
-            MobileServiceTable<TipoEmpresa> mProyectoTable;
+            List<Pair<String, String>> parameters = new ArrayList<Pair<String, String>>();
 
-            @Override
-            protected void onPreExecute()
-            {
-                try {
+            ListenableFuture<JsonElement> lst = mClient.invokeApi("companies", "GET", parameters);
 
-                    mClient = new MobileServiceClient(
-                            "https://puriscal.azure-mobile.net/",
-                            "CtavDeXtaLeUclXFhrPrjLJiUeeEek84",
-                            getApplicationContext()
-                    );
-                    mAdapter.clear();
-                } catch (MalformedURLException e) {
+            Futures.addCallback(lst, new FutureCallback<JsonElement>() {
+                @Override
+                public void onFailure(Throwable exc) {
 
+                    estadoAdapter(false);
                 }
-                mProyectoTable = mClient.getTable("TipoEmpresa", TipoEmpresa.class);
-            }
 
-            @Override
-            protected Boolean doInBackground(Void... params) {
-                try {
+                @Override
+                public void onSuccess(JsonElement result) {
 
-                    final MobileServiceList<TipoEmpresa> result = mProyectoTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
-                    runOnUiThread(new Runnable() {
+                    // se verifica si el resultado es un array Json
+                    if (result.isJsonArray()) {
+                        // obtenemos el resultado como un JsonArray
+                        JsonArray jsonArray = result.getAsJsonArray();
+                        Gson objGson = new Gson();
 
-                        @Override
-                        public void run() {
-                            for (TipoEmpresa item : result)
-                            {
-                                mAdapter.add(item);
-                                mAdapter.notifyDataSetChanged();
-                            }
 
+                        // se deserializa el array
+                        final TipoEmpresa[] myTypes = objGson.fromJson(jsonArray, TipoEmpresa[].class);
+
+                        for (TipoEmpresa item : myTypes) {
+                            mAdapter.add(item);
+                            mAdapter.notifyDataSetChanged();
                         }
-                    });
-                    return true;
-                } catch (Exception exception) {
+
+                    }
+
+                    if (mAdapter.getCount() == 0) {
+                        estadoAdapter(false);
+                    } else {
+                        estadoAdapter(true);
+                    }
+
 
                 }
-                return false;
-            }
+            });
 
-            @Override
-            protected void onPostExecute(Boolean success)
-            {
+        } catch (MalformedURLException e) {
 
-                mSwipeRefreshLayout.setRefreshing(false);
+        }
+        catch (Exception e)
+        {
 
-
-                mSwipeRefreshLayout.setEnabled(true);
-
-                if (!success) {
-                    includedLayout.setVisibility(View.VISIBLE);
-                } else {
-
-                    includedLayout.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            protected void onCancelled()
-            {
-                super.onCancelled();
-            }
-        }.execute();
+        }
     }
 
 
@@ -192,5 +191,26 @@ public class TipoEmpresaActivity extends AppCompatActivity {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
+    }
+
+
+    private void estadoAdapter(boolean pEstadoError)
+    {
+        mSwipeRefreshLayout.setRefreshing(false);
+
+
+        mSwipeRefreshLayout.setEnabled(true);
+
+        if (!pEstadoError || mAdapter.isEmpty()) {
+            includedLayout.setVisibility(View.VISIBLE);
+
+            TextView txtvMensaje = (TextView) includedLayout.findViewById(R.id.txtvError);
+            txtvMensaje.setText("Vaya parece que aún no tenemos items en esta sección");
+
+        } else {
+
+            includedLayout.setVisibility(View.GONE);
+        }
+
     }
 }

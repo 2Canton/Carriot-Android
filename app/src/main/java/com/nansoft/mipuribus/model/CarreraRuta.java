@@ -28,4 +28,9 @@ public class CarreraRuta
 	@SerializedName("nota")
 	public String nota;
 
+	public String getDescHora()
+	{
+		return  descHora;
+	}
+
 }

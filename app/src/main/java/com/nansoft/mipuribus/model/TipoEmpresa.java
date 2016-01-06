@@ -20,8 +20,8 @@ public class TipoEmpresa {
     @SerializedName("descripcion")
     public String descripcion;
 
-    @SerializedName("cantidad_eventos")
-    public int CantidadEventos;
+    @SerializedName("cantidad_empresas")
+    public int CantidadEmpresas;
 
     public TipoEmpresa(String id, String nombre, String urlimagen, String descripcion) {
         this.id = id;

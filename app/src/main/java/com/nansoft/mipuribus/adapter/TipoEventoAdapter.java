@@ -15,36 +15,42 @@ import com.nansoft.mipuribus.R;
 
 import com.nansoft.mipuribus.model.TipoEvento;
 
+import java.util.ArrayList;
+
 /**
  * Created by Carlos on 17/08/2015.
  */
 public class TipoEventoAdapter extends ArrayAdapter<TipoEvento>
 {
 
-        int mLayoutResourceId;
-        ViewHolder holder;
-        Context mContext;
-        Resources res;
+    int mLayoutResourceId;
+    ViewHolder holder;
+    Context mContext;
+    Resources res;
 
-    public TipoEventoAdapter(Context context, int layoutResourceId) {
-            super(context, layoutResourceId);
-            mContext = context;
-            mLayoutResourceId = layoutResourceId;
+    public TipoEventoAdapter(Context context, int layoutResourceId)
+    {
+        super(context, layoutResourceId);
+        mContext = context;
+        mLayoutResourceId = layoutResourceId;
 
-            res = this.mContext.getResources();
-            }
+        res = this.mContext.getResources();
+
+
+    }
+
+
 
     // regresa la vista de cada elemento de la lista
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-            View row = convertView;
+        View row = convertView;
 
         final TipoEvento currentItem = getItem(position);
 
-
-            // verificamos si la fila que se va dibujar no existe
-            if (row == null) {
+        // verificamos si la fila que se va dibujar no existe
+        if (row == null) {
             // si es así la creamos
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
             row = inflater.inflate(mLayoutResourceId, parent, false);
@@ -52,38 +58,38 @@ public class TipoEventoAdapter extends ArrayAdapter<TipoEvento>
 
             holder.imgLogoEmpresaa = (ImageView) row.findViewById(R.id.imgvLogoEmpresaRuta);
             holder.txtvTituloRuta = (TextView) row.findViewById(R.id.txtvTituloRuta);
-            holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
+            holder.txtvSubtitle = (TextView) row.findViewById(R.id.txtvCostoRuta);
             row.setTag(holder);
 
-            }
-            // en caso contrario la recuperamos
-            ViewHolder holder = (ViewHolder) row.getTag();
+        }
+        // en caso contrario la recuperamos
+        ViewHolder holder = (ViewHolder) row.getTag();
 
 
 
-            Glide.with(mContext)
-                    .load(currentItem.urlImagen.trim())
-                    .asBitmap()
-                    .fitCenter()
-                    .placeholder(R.drawable.picture)
-                    .error(R.drawable.picture_removed)
-                    .into(holder.imgLogoEmpresaa);
+        Glide.with(mContext)
+                .load(currentItem.urlImagen.trim())
+                .asBitmap()
+                .fitCenter()
+                .placeholder(R.drawable.picture)
+                .error(R.drawable.picture_removed)
+                .into(holder.imgLogoEmpresaa);
 
 
-            holder.txtvTituloRuta.setText(currentItem.nombre);
+        holder.txtvTituloRuta.setText(currentItem.nombre);
 
 
-            holder.txtvCostoRuta.setText("Cantidad " + currentItem.CantidadEventos);
+        holder.txtvSubtitle.setText("Cantidad: " + currentItem.CantidadEventos);
 
-            return row;
+        return row;
 
-            }
+    }
 
     // guarda el estado de cada vista la primera vez que se dibuja
     static class ViewHolder {
         protected ImageView imgLogoEmpresaa;
         protected TextView txtvTituloRuta;
-        protected TextView txtvCostoRuta;
+        protected TextView txtvSubtitle;
     }
 
 

@@ -218,7 +218,7 @@ public class HelperDatabase
         try
         {
             // realizamos una consulta a la base de datos y guardamos el resultado en un objeto de tipo Cursor
-            Cursor c = db.rawQuery(" SELECT DISTINCT H.IdHorario,H.Dias FROM Horario H,CarreraRuta C WHERE H.IdHorario = C.IdHorario AND C.IdRuta = " + pIdRuta, null);
+            Cursor c = db.rawQuery(" SELECT DISTINCT H.IdHorario,H.Dias FROM Horario H,CarreraRuta C WHERE H.IdHorario = C.IdHorario AND C.IdRuta = " + pIdRuta + " ORDER BY H.IdHorario", null);
             Horario objHorario;
 
             // Veririficamos si la consulta devolvió al menos un resultado

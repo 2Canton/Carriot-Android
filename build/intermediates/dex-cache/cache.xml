@@ -2,95 +2,95 @@
 <items version="2" >
 
     <item
-        jar="/Users/itadmin/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/gson-2.3-f86e730335dfa3eb178a308baf001958b1651924.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="cce0823396aa693798f8882e64213b1772032b09">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/guava-18.0-d7c1c10a945f8a7825ce79cb58b8857191eac9e8.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-2ef71a3fbd371927b2c412349010acb4016fd961.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/classes-7ca153cab7e12e0076186c744d0c7548f7277d04.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/classes-c62a37f64b1561ddd866ec19966aaebe49b92059.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.8.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0124ce31248c0e8acfa2b28283c6d1a4d76e73d2">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/classes-15aa45b485608ec6e7c1d9eeb55d37dd0d74bdb3.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jar="C:\Users\Carlos\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-3768bd2e62154fb141b71c3c9dbfc3868398e3b7.jar" />
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-093a6813fef8b7df3eb4b1d3f4dc90bdf0e67506.jar" />
     </item>
     <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/classes-e75dc0ff07e404ca7bb5346faf6fc131985de6ce.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/.gradle/caches/modules-2/files-2.1/com.microsoft.azure/azure-mobile-services-android-sdk/2.0.2/856c0726767e0e5e960832781400716116bb8a54/azure-mobile-services-android-sdk-2.0.2.jar"
+        jar="C:\Users\Carlos\.gradle\caches\modules-2\files-2.1\com.microsoft.azure\azure-mobile-services-android-sdk\2.0.2\856c0726767e0e5e960832781400716116bb8a54\azure-mobile-services-android-sdk-2.0.2.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="856c0726767e0e5e960832781400716116bb8a54">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/azure-mobile-services-android-sdk-2.0.2-5fd22442389f7f74fc86669a8cc0b8d0f9c4fb57.jar" />
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\azure-mobile-services-android-sdk-2.0.2-6541fa3b76760a5ad205fac5cd184b2d8426d28e.jar" />
     </item>
     <item
-        jar="/Users/itadmin/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.0/a7537446a030da8eb0da4c71424d16c2589f6c4a/glide-3.6.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a7537446a030da8eb0da4c71424d16c2589f6c4a">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/glide-3.6.0-639194ca53cfba89281788ccc1edc5ef632505c1.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/libs/coollection-0.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f683c1d193a0101648d1927e74df455375fdd609">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/coollection-0.2.0-d3da341c05cf282c03a87e5e2b87f9404681e665.jar" />
-    </item>
-    <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/jars/classes.jar"
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.8.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="1ff30fa49c07a08c3035d7218a3efebf5680d522">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/classes-c8d5ee4160930068ca4d577bb304ba7fc8a0df23.jar" />
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\classes-ea6161e5dd7858ee4d1fd4b45b0ed6e7e73100f1.jar" />
     </item>
     <item
-        jar="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.8.0/jars/classes.jar"
+        jar="C:\Users\Carlos\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\18.0\cce0823396aa693798f8882e64213b1772032b09\guava-18.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="cce0823396aa693798f8882e64213b1772032b09">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\guava-18.0-941d05a8f49f2e3fcaa2d609964d1b5edd07420a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0124ce31248c0e8acfa2b28283c6d1a4d76e73d2">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\classes-997a2282439dd85b8e6d161a511c953d736b497f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.8.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="e23ea11124bb700eeddd4ab7aa848c615f493850">
-        <dex dex="/Users/itadmin/AndroidStudioProjects/Carriot/app/build/intermediates/pre-dexed/debug/classes-24db2dc350e55eebe201c1d522c0fe5974fa54f2.jar" />
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\classes-e2307c183f466290a30f483f996a5e5dd296802e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3\5fc52c41ef0239d1093a1eb7c3697036183677ce\gson-2.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\gson-2.3-32ef4a531bdd2e7321063cbbbe9ed46a2f1af680.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-51fa1873f5376139344e45e3476de76fdd8adc12.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\libs\coollection-0.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f683c1d193a0101648d1927e74df455375fdd609">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\coollection-0.2.0-a70036eb9270cfd9defcc55a5dd2c2f06916a948.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\classes-1ad9e61a9924af4bf39c5b1a8daff2f0aeeeab2f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.6.0\a7537446a030da8eb0da4c71424d16c2589f6c4a\glide-3.6.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a7537446a030da8eb0da4c71424d16c2589f6c4a">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\glide-3.6.0-ab83eaf59fad86f12fc007275b75d255e54ab78e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\classes-51c950f5198b8f7aa39043a274a66aea1424bb01.jar" />
+    </item>
+    <item
+        jar="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Users\Carlos\Documents\AndroidStudioProjects\Carriot\Android\app\build\intermediates\pre-dexed\debug\classes-bb930bdf644f904bad8036d25e426e8e3b5bb6fe.jar" />
     </item>
 
 </items>

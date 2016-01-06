@@ -48,7 +48,7 @@ public class TipoEmpresaAdapter extends ArrayAdapter<TipoEmpresa>
 
             holder.imgLogoEmpresaa = (ImageView) row.findViewById(R.id.imgvLogoEmpresaRuta);
             holder.txtvTituloRuta = (TextView) row.findViewById(R.id.txtvTituloRuta);
-
+            holder.txtvSubtitle = (TextView) row.findViewById(R.id.txtvCostoRuta);
             row.setTag(holder);
 
         }
@@ -66,8 +66,7 @@ public class TipoEmpresaAdapter extends ArrayAdapter<TipoEmpresa>
 
         holder.txtvTituloRuta.setText(currentItem.nombre);
 
-        //holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
-        //holder.txtvCostoRuta.setText("Precio " + currentItem.getCosto());
+        holder.txtvSubtitle.setText("Cantidad: " + currentItem.CantidadEmpresas);
 
         return row;
 
@@ -77,7 +76,7 @@ public class TipoEmpresaAdapter extends ArrayAdapter<TipoEmpresa>
     static class ViewHolder {
         protected ImageView imgLogoEmpresaa;
         protected TextView txtvTituloRuta;
-        //protected TextView txtvCostoRuta;
+        protected TextView txtvSubtitle;
     }
 
 
