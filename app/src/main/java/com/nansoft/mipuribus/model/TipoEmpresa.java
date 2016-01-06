@@ -9,53 +9,25 @@ import com.google.gson.annotations.SerializedName;
 public class TipoEmpresa {
 
     @SerializedName("id")
-    private String id;
+    public String id;
 
     @SerializedName("nombre")
-    private String nombre;
+    public String nombre;
 
     @SerializedName("urlimagen")
-    private String urlimagen;
+    public String urlImagen;
 
     @SerializedName("descripcion")
-    private String descripcion;
+    public String descripcion;
+
+    @SerializedName("cantidad_eventos")
+    public int CantidadEventos;
 
     public TipoEmpresa(String id, String nombre, String urlimagen, String descripcion) {
         this.id = id;
         this.nombre = nombre;
-        this.urlimagen = urlimagen;
+        this.urlImagen = urlimagen;
         this.descripcion = descripcion;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getUrlimagen() {
-        return urlimagen;
-    }
-
-    public void setUrlimagen(String urlimagen) {
-        this.urlimagen = urlimagen;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }

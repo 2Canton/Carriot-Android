@@ -12,10 +12,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.nansoft.mipuribus.activity.HorariosActivity;
 import com.nansoft.mipuribus.activity.RutasActivity;
-import com.nansoft.mipuribus.database.DbSQLiteOpenHelper;
 import com.nansoft.mipuribus.model.CarreraRuta;
 import com.nansoft.mipuribus.model.Horario;
-import com.nansoft.mipuribus.model.parada;
+import com.nansoft.mipuribus.model.Parada;
 import com.nansoft.mipuribus.model.Ruta;
 
 public class HelperDatabase
@@ -35,13 +34,13 @@ public class HelperDatabase
 
     }
 
-    public boolean InsertarSitioSalida(parada pobjSitioSalida)
+    public boolean InsertarSitioSalida(Parada pobjSitioSalida)
     {
         try
         {
             nuevoRegistro = new ContentValues();
-            nuevoRegistro.put("IdSitioSalida", pobjSitioSalida.getId());
-            nuevoRegistro.put("NombreSitioSalida", pobjSitioSalida.getNombre());
+            nuevoRegistro.put("IdSitioSalida", pobjSitioSalida.id);
+            nuevoRegistro.put("NombreSitioSalida", pobjSitioSalida.nombre);
 
             //db.beginTransaction();
             //Insertamos el registro en la base de datos
@@ -63,8 +62,8 @@ public class HelperDatabase
         try
         {
             nuevoRegistro = new ContentValues();
-            nuevoRegistro.put("IdHorario", pobjHorario.getIdHorario());
-            nuevoRegistro.put("Dias", pobjHorario.getDias());
+            nuevoRegistro.put("IdHorario", pobjHorario.id);
+            nuevoRegistro.put("Dias", pobjHorario.dias);
 
             //db.beginTransaction();
             //Insertamos el registro en la base de datos
@@ -85,10 +84,10 @@ public class HelperDatabase
         try
         {
             nuevoRegistro = new ContentValues();
-            nuevoRegistro.put("IdRuta", pobjRuta.getIdRuta());
-            nuevoRegistro.put("NombreRuta", pobjRuta.getNombreRuta());
-            nuevoRegistro.put("Costo", pobjRuta.getCosto());
-            nuevoRegistro.put("IdEmpresa", pobjRuta.getIdEmpresa());
+            nuevoRegistro.put("IdRuta", pobjRuta.id);
+            nuevoRegistro.put("NombreRuta", pobjRuta.nombre);
+            nuevoRegistro.put("Costo", pobjRuta.costo);
+            nuevoRegistro.put("IdEmpresa", pobjRuta.idEmpresa);
             //db.beginTransaction();
             //Insertamos el registro en la base de datos
             db.insert("Ruta", null, nuevoRegistro);
@@ -108,13 +107,13 @@ public class HelperDatabase
         try
         {
             nuevoRegistro = new ContentValues();
-            nuevoRegistro.put("IdCarreraRuta", pobjCarrera.getIdCarrera());
-            nuevoRegistro.put("IdHorario", pobjCarrera.getIdHorario());
-            nuevoRegistro.put("IdRuta", pobjCarrera.getIdRuta());
-            nuevoRegistro.put("IdSitioSalida", pobjCarrera.getIdSitioSalida());
+            nuevoRegistro.put("IdCarreraRuta", pobjCarrera.id);
+            nuevoRegistro.put("IdHorario", pobjCarrera.idHorario);
+            nuevoRegistro.put("IdRuta", pobjCarrera.idRuta);
+            nuevoRegistro.put("IdSitioSalida", pobjCarrera.idSitioSalida);
             //nuevoRegistro.put("NombreSitioSalida", pobjCarrera.getNombreSitioSalida());
-            nuevoRegistro.put("DescHora", pobjCarrera.getDescHora());
-            nuevoRegistro.put("Nota", pobjCarrera.getNota());
+            nuevoRegistro.put("DescHora", pobjCarrera.descHora);
+            nuevoRegistro.put("Nota", pobjCarrera.nota);
 
             //db.beginTransaction();
             //Insertamos el registro en la base de datos
@@ -193,10 +192,10 @@ public class HelperDatabase
                 {
                     objRuta = new Ruta();
 
-                    objRuta.setIdRuta(c.getString(0));
-                    objRuta.setNombreRuta(c.getString(1));
-                    objRuta.setCosto(c.getString(2));
-                    objRuta.setIdEmpresa(c.getString(3));
+                    objRuta.id = c.getString(0);
+                    objRuta.nombre = c.getString(1);
+                    objRuta.costo = c.getString(2);
+                    objRuta.idEmpresa = c.getString(3);
                     RutasActivity.mAdapter.add(objRuta);
                     RutasActivity.mAdapter.notifyDataSetChanged();
 
@@ -232,8 +231,8 @@ public class HelperDatabase
                 {
                     objHorario = new Horario();
 
-                    objHorario.setIdHorario(c.getString(0));
-                    objHorario.setDias(c.getString(1));
+                    objHorario.id = c.getString(0);
+                    objHorario.dias = c.getString(1);
 
                     HorariosActivity.mAdapter.add(objHorario);
 
@@ -265,9 +264,9 @@ public class HelperDatabase
             {
                 objCarrera = new CarreraRuta();
 
-                objCarrera.setDescHora(c.getString(0));
-                objCarrera.setNombreSitioSalida(c.getString(1));
-                objCarrera.setNota(c.getString(2));
+                objCarrera.descHora = c.getString(0);
+                objCarrera.nombreSitioSalida = c.getString(1);
+                objCarrera.nota = c.getString(2);
 
                 listHorarios.add(objCarrera);
             }

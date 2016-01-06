@@ -62,7 +62,7 @@ public class TipoEventoAdapter extends ArrayAdapter<TipoEvento>
 
 
             Glide.with(mContext)
-                    .load(currentItem.getUrlimagen().trim())
+                    .load(currentItem.urlImagen.trim())
                     .asBitmap()
                     .fitCenter()
                     .placeholder(R.drawable.picture)
@@ -70,7 +70,7 @@ public class TipoEventoAdapter extends ArrayAdapter<TipoEvento>
                     .into(holder.imgLogoEmpresaa);
 
 
-            holder.txtvTituloRuta.setText(currentItem.getNombre());
+            holder.txtvTituloRuta.setText(currentItem.nombre);
 
 
             holder.txtvCostoRuta.setText("Cantidad " + currentItem.CantidadEventos);

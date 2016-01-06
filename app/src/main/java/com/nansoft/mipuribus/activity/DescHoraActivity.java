@@ -126,7 +126,7 @@ public class DescHoraActivity extends AppCompatActivity
 			txtvHora = new TextView(this);
 			txtvNota = new TextView(this);
 
-			txtvSitioSalida.setText(listCarreras.get(i).getNombreSitioSalida());
+			txtvSitioSalida.setText(listCarreras.get(i).nombreSitioSalida);
 			txtvSitioSalida.setTextAppearance(this,R.style.BodyText);
 			txtvSitioSalida.setGravity(Gravity.CENTER);
 			txtvSitioSalida.setLayoutParams(layoutTextView);
@@ -136,14 +136,14 @@ public class DescHoraActivity extends AppCompatActivity
 
 			try
 			{
-				date = sdf.parse(listCarreras.get(i).getDescHora().toString());
+				date = sdf.parse(listCarreras.get(i).descHora);
 			}
 			catch (ParseException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
 			}
 			sufijo = " am";
-			intHoraTemporal = Integer.parseInt(listCarreras.get(i).getDescHora().toString()
+			intHoraTemporal = Integer.parseInt(listCarreras.get(i).descHora
 					.substring(0, 2));
 
 
@@ -170,7 +170,7 @@ public class DescHoraActivity extends AppCompatActivity
 			txtvHora.setBackgroundResource(R.drawable.border);
 			// layoutTextView.span = 2;
 
-			txtvNota.setText(listCarreras.get(i).getNota());
+			txtvNota.setText(listCarreras.get(i).nota);
 			txtvNota.setTextAppearance(this, R.style.BodyText);
 			txtvNota.setGravity(Gravity.CENTER);
 			txtvNota.setLayoutParams(layoutTextView);

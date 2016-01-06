@@ -66,8 +66,8 @@ public class TipoEventoActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TipoEvento objOpcion = (TipoEvento) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(),EventosActivity.class);
-                intent.putExtra("id", objOpcion.getId());
-                intent.putExtra("nombre",objOpcion.getNombre());
+                intent.putExtra("id", objOpcion.id);
+                intent.putExtra("nombre",objOpcion.nombre);
                 startActivity(intent);
             }
         });

@@ -60,18 +60,18 @@ public class EventoAdapter extends ArrayAdapter<Evento> {
         ViewHolder holder = (ViewHolder) row.getTag();
 
         Glide.with(mContext)
-                .load(currentItem.getUrlimagen().trim())
+                .load(currentItem.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
                 .error(R.drawable.picture_removed)
                 .into(holder.imgLogoEvento);
 
-        holder.txtvTituloEvento.setText(currentItem.getNombre());
-        holder.txtvFechaEvento.setText("Fecha: " + currentItem.getFecha());
-        holder.txtvHoraEvento.setText("Hora: " + currentItem.getHora());
-        holder.txtvCostoEvento.setText("Costo: " + currentItem.getCosto());
-        holder.txtvDescripcionEvento.setText(currentItem.getDescripcion());
+        holder.txtvTituloEvento.setText(currentItem.nombre);
+        holder.txtvFechaEvento.setText("Fecha: " + currentItem.fecha);
+        holder.txtvHoraEvento.setText("Hora: " + currentItem.hora);
+        holder.txtvCostoEvento.setText("Costo: " + currentItem.costo);
+        holder.txtvDescripcionEvento.setText(currentItem.descripcion);
 
         //holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
         //holder.txtvCostoRuta.setText("Precio " + currentItem.getCosto());

@@ -9,13 +9,13 @@ import com.google.gson.annotations.SerializedName;
 public class TipoEvento {
 
     @SerializedName("id")
-    private String id;
+    public String id;
 
     @SerializedName("nombre")
-    private String nombre;
+    public String nombre;
 
     @SerializedName("urlimagen")
-    private String urlimagen;
+    public String urlImagen;
 
     @SerializedName("cantidad_eventos")
     public int CantidadEventos;
@@ -23,32 +23,6 @@ public class TipoEvento {
     public TipoEvento(String id, String nombre, String urlimagen) {
         this.id = id;
         this.nombre = nombre;
-        this.urlimagen = urlimagen;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getUrlimagen() {
-        return urlimagen;
-    }
-
-    public void setUrlimagen(String urlimagen) {
-        this.urlimagen = urlimagen;
+        this.urlImagen = urlimagen;
     }
 }

@@ -6,7 +6,7 @@ package com.nansoft.mipuribus.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class categoria {
+public class Categoria {
 
     @SerializedName("id")
     private String id;
@@ -26,7 +26,7 @@ public class categoria {
     @SerializedName("descripcion")
     private String descripcion;
 
-    public categoria(String id, String createdat, String updatedat, String version, String nombre, String descripcion) {
+    public Categoria(String id, String createdat, String updatedat, String version, String nombre, String descripcion) {
         this.id = id;
         this.createdat = createdat;
         this.updatedat = updatedat;

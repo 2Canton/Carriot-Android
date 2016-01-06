@@ -5,24 +5,24 @@ package com.nansoft.mipuribus.model;
  */
 
 import com.google.gson.annotations.SerializedName;
-public class parada {
+public class Parada {
 
     @SerializedName("id")
-    private String id;
+    public String id;
 
     @SerializedName("__version")
-    private String version;
+    public String version;
 
     @SerializedName("nombre")
-    private String nombre;
+    public String nombre;
 
     @SerializedName("latitud")
-    private double latitud;
+    public double latitud;
 
     @SerializedName("longitud")
-    private double longitud;
+    public double longitud;
 
-    public parada(String id, String version, String nombre, double latitud, double longitud) {
+    public Parada(String id, String version, String nombre, double latitud, double longitud) {
         this.id = id;
         this.version = version;
         this.nombre = nombre;
@@ -30,43 +30,5 @@ public class parada {
         this.longitud = longitud;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
-
-    public double getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
-    }
 }

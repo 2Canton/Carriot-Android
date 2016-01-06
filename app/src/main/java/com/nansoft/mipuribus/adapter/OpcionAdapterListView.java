@@ -57,10 +57,10 @@ public class OpcionAdapterListView extends ArrayAdapter<Opcion> {
             // en caso contrario la recuperamos
         ViewHolder holder = (ViewHolder) row.getTag();
 
-        holder.imgLogoEmpresaa.setImageResource(res.getIdentifier(currentItem.getUrlImagen(),
+        holder.imgLogoEmpresaa.setImageResource(res.getIdentifier(currentItem.urlImagen,
                 "drawable", mContext.getPackageName()));
 
-        holder.txtvTituloRuta.setText(currentItem.getNombreOpcion());
+        holder.txtvTituloRuta.setText(currentItem.nombreOpcion);
 
         //holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
         //holder.txtvCostoRuta.setText("Precio " + currentItem.getCosto());

@@ -75,7 +75,7 @@ public class HorarioAdapterListView extends ArrayAdapter<Horario>
 
 		
 		holder.txtvTituloRuta = (TextView) row.findViewById(R.id.txtvTituloRuta);
-		holder.txtvTituloRuta.setText(currentItem.getDias());
+		holder.txtvTituloRuta.setText(currentItem.dias);
 		
 		holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
 		//holder.txtvCostoRuta.setText("Precio " + currentItem.getCosto());

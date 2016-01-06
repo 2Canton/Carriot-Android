@@ -66,7 +66,7 @@ public class EmpresaAdapter extends ArrayAdapter<Empresa>
         ViewHolder holder = (ViewHolder) row.getTag();
 
         Glide.with(mContext)
-                .load(currentItem.getUrlimagen().trim())
+                .load(currentItem.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
@@ -74,16 +74,16 @@ public class EmpresaAdapter extends ArrayAdapter<Empresa>
                 .into(holder.imgLogo);
 
 
-        holder.txtvNombre.setText(currentItem.getNombre());
-        holder.txtvHorario.setText(currentItem.getHorario());
-        holder.txtvDireccion.setText(currentItem.getDireccion());
+        holder.txtvNombre.setText(currentItem.nombre);
+        holder.txtvHorario.setText(currentItem.horario);
+        holder.txtvDireccion.setText(currentItem.direccion);
 
         holder.imgvTelefono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     Intent Llamada = new Intent(Intent.ACTION_CALL);
-                    Llamada.setData(Uri.parse("tel:" + currentItem.getTelefonoprincipal()));
+                    Llamada.setData(Uri.parse("tel:" + currentItem.telefonoPrincipal));
                     mContext.startActivity(Llamada);
                 } catch (Exception activityException) {
                     Toast.makeText(mContext,"Error verifique que tenga una aplicación que permita realizar llamadas",Toast.LENGTH_SHORT).show();
@@ -95,7 +95,7 @@ public class EmpresaAdapter extends ArrayAdapter<Empresa>
             @Override
             public void onClick(View v) {
                 try {
-                    String[] pPara = {currentItem.getEmail()};
+                    String[] pPara = {currentItem.email};
                     Intent Correo = new Intent(Intent.ACTION_SEND);
                     Correo.setData(Uri.parse("mailto:"));
                     Correo.putExtra(Intent.EXTRA_EMAIL, pPara);
@@ -118,7 +118,7 @@ public class EmpresaAdapter extends ArrayAdapter<Empresa>
             public void onClick(View v) {
                 try
                 {
-                    String url = "waze://?ll=" + currentItem.getLatitud() + "," + currentItem.getLongitud() + "&navigate=yes";
+                    String url = "waze://?ll=" + currentItem.latitud + "," + currentItem.longitud + "&navigate=yes";
                     Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
                     mContext.startActivity( intent );
                 }
@@ -134,7 +134,7 @@ public class EmpresaAdapter extends ArrayAdapter<Empresa>
         holder.imgvWebSite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(currentItem.getWeb()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(currentItem.web));
                 mContext.startActivity( intent );
             }
         });

@@ -54,11 +54,11 @@ public class CustomGridView extends ArrayAdapter<SitioInteres>
         }
 
         holder.imgLogoDepartamento = (ImageView) row.findViewById(R.id.imgvDepartamento);
-        holder.imgLogoDepartamento.setImageResource(res.getIdentifier(currentItem.getUrlImagen(),
+        holder.imgLogoDepartamento.setImageResource(res.getIdentifier(currentItem.urlImagen,
                 "drawable", mContext.getPackageName()));
 
         holder.txtvTituloDepartamento = (TextView) row.findViewById(R.id.txtvNombreDepartamento);
-        holder.txtvTituloDepartamento.setText(currentItem.getNombreSitioInteres());
+        holder.txtvTituloDepartamento.setText(currentItem.nombreSitioInteres);
 
         row.setTag(holder);
         return row;

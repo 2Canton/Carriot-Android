@@ -56,7 +56,7 @@ public class TipoEmpresaAdapter extends ArrayAdapter<TipoEmpresa>
         ViewHolder holder = (ViewHolder) row.getTag();
 
         Glide.with(mContext)
-                .load(currentItem.getUrlimagen().trim())
+                .load(currentItem.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
@@ -64,7 +64,7 @@ public class TipoEmpresaAdapter extends ArrayAdapter<TipoEmpresa>
                 .into(holder.imgLogoEmpresaa);
 
 
-        holder.txtvTituloRuta.setText(currentItem.getNombre());
+        holder.txtvTituloRuta.setText(currentItem.nombre);
 
         //holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
         //holder.txtvCostoRuta.setText("Precio " + currentItem.getCosto());

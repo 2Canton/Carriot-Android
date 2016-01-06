@@ -12,7 +12,7 @@ import com.nansoft.mipuribus.adapter.RutaAdapterListView;
 import com.nansoft.mipuribus.model.CarreraRuta;
 import com.nansoft.mipuribus.model.Horario;
 import com.nansoft.mipuribus.model.Version;
-import com.nansoft.mipuribus.model.parada;
+import com.nansoft.mipuribus.model.Parada;
 import com.nansoft.mipuribus.model.Ruta;
 
 import android.content.Intent;
@@ -88,8 +88,8 @@ public class RutasActivity extends AppCompatActivity
 				Ruta objRuta = (Ruta) parent.getItemAtPosition(position);
 
 				Intent intent = new Intent(getApplicationContext(), HorariosActivity.class);
-				intent.putExtra("idRuta", objRuta.getIdRuta());
-				intent.putExtra("nombreRuta", objRuta.getNombreRuta());
+				intent.putExtra("idRuta", objRuta.id);
+				intent.putExtra("nombreRuta", objRuta.nombre);
 
 				startActivity(intent);
 
@@ -187,7 +187,7 @@ public class RutasActivity extends AppCompatActivity
 							MobileServiceSyncTable<Ruta> rutaTable;
 							MobileServiceSyncTable<Horario> horarioTable;
 							MobileServiceSyncTable<CarreraRuta> carreraRutaTable;
-							MobileServiceSyncTable<parada> paradaTable;
+							MobileServiceSyncTable<Parada> paradaTable;
 
 							Query mPullQueryRuta;
 							Query mPullQueryHorario;
@@ -201,12 +201,12 @@ public class RutasActivity extends AppCompatActivity
 								rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
 								horarioTable = Util.mClient.getSyncTable("Horario", Horario.class);
 								carreraRutaTable = Util.mClient.getSyncTable("CarreraRuta", CarreraRuta.class);
-								paradaTable = Util.mClient.getSyncTable("Parada", parada.class);
+								paradaTable = Util.mClient.getSyncTable("Parada", Parada.class);
 
 								mPullQueryRuta = Util.mClient.getTable(Ruta.class).orderBy("nombre", QueryOrder.Ascending);
 								mPullQueryHorario = Util.mClient.getTable("Horario", Horario.class).top(10);
 								mPullQueryCarreraRuta = Util.mClient.getTable("CarreraRuta", CarreraRuta.class).top(1000);
-								mPullQueryParada = Util.mClient.getTable("Parada", parada.class).top(100);
+								mPullQueryParada = Util.mClient.getTable("Parada", Parada.class).top(100);
 
 								// se limpia el adapter mientras carga
 								mAdapter.clear();
@@ -234,7 +234,7 @@ public class RutasActivity extends AppCompatActivity
 									final MobileServiceList<Ruta> resultRuta = rutaTable.read(mPullQueryRuta).get();
 									final MobileServiceList<Horario> resultHorario = horarioTable.read(mPullQueryHorario).get();
 									final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.read(mPullQueryCarreraRuta).get();
-									final MobileServiceList<parada> resultParada = paradaTable.read(mPullQueryParada).get();
+									final MobileServiceList<Parada> resultParada = paradaTable.read(mPullQueryParada).get();
 
 
 									runOnUiThread(new Runnable() {
@@ -261,8 +261,8 @@ public class RutasActivity extends AppCompatActivity
 										objHandlerDataBase.InsertarCarrera(carreraRuta);
 									}
 
-									for (parada parada : resultParada) {
-										objHandlerDataBase.InsertarSitioSalida(parada);
+									for (Parada Parada : resultParada) {
+										objHandlerDataBase.InsertarSitioSalida(Parada);
 									}
 
 									// se cargan los registros de la base de datos local en el adapter

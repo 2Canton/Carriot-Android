@@ -58,17 +58,17 @@ public class NoticiaAdapter extends ArrayAdapter<Noticia> {
         ViewHolder holder = (ViewHolder) row.getTag();
 
         Glide.with(mContext)
-                .load(currentItem.getUrlImagen().trim())
+                .load(currentItem.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
                 .error(R.drawable.picture_removed)
                 .into(holder.imgLogo);
 
-        holder.txtvTitulo.setText(currentItem.getNombre());
-        holder.txtvFecha.setText(currentItem.getFecha());
-        holder.txtvDescripcion.setText(currentItem.getDescripcion());
-        holder.txtvAutor.setText("Autor: " + currentItem.getAutor());
+        holder.txtvTitulo.setText(currentItem.nombre);
+        holder.txtvFecha.setText(currentItem.fecha);
+        holder.txtvDescripcion.setText(currentItem.descripcion);
+        holder.txtvAutor.setText("Autor: " + currentItem.autor);
 
 
         return row;

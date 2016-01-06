@@ -5,84 +5,19 @@ import com.google.gson.annotations.SerializedName;
 public class Ruta 
 {
 	@SerializedName("id")
-	private String IdRuta;
+	public String id;
 
 	@SerializedName("__version")
-	private String version;
+	public String version;
 
 	@SerializedName("nombre")
-	private String NombreRuta;
+	public String nombre;
 	
 	@SerializedName("costo")
-	private String Costo;
+	public String costo;
 
     @SerializedName("idempresa")
-    private String IdEmpresa;
+	public String idEmpresa;
 
-
-
-    /**
-	 * @return the idRuta
-	 */
-	public String getIdRuta()
-	{
-		return IdRuta;
-	}
-
-	/**
-	 * @param idRuta the idRuta to set
-	 */
-	public void setIdRuta(String idRuta)
-	{
-		IdRuta = idRuta;
-	}
-
-	/**
-	 * @return the nombreRuta
-	 */
-	public String getNombreRuta() 
-	{
-		return NombreRuta;
-	}
-
-	/**
-	 * @param nombreRuta the nombreRuta to set
-	 */
-	public void setNombreRuta(String nombreRuta) 
-	{
-		NombreRuta = nombreRuta;
-	}
-
-	/**
-	 * @return the costo
-	 */
-	public String getCosto() 
-	{
-		return Costo;
-	}
-
-	/**
-	 * @param costo the costo to set
-	 */
-	public void setCosto(String costo) 
-	{
-		Costo = costo;
-	}
-
-    /**
-     * @return the idEmpresa
-     */
-    public String getIdEmpresa()
-    {
-        return IdEmpresa;
-    }
-
-    /**
-     * @param idEmpresa the idEmpresa to set
-     */
-    public void setIdEmpresa(String idEmpresa)
-    {
-        IdEmpresa = idEmpresa;
-    }
 	
 }

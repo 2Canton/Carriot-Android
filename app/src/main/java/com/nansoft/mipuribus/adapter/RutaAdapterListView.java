@@ -56,7 +56,7 @@ public class RutaAdapterListView extends ArrayAdapter<Ruta>
 		}
 
         rutaImagen = "bus";
-        switch(currentItem.getIdEmpresa())
+        switch(currentItem.idEmpresa)
         {
             case "0":
                 rutaImagen += "2";
@@ -95,10 +95,10 @@ public class RutaAdapterListView extends ArrayAdapter<Ruta>
                 "drawable", mContext.getPackageName()));
 		
 		holder.txtvTituloRuta = (TextView) row.findViewById(R.id.txtvTituloRuta);
-		holder.txtvTituloRuta.setText(currentItem.getNombreRuta());
+		holder.txtvTituloRuta.setText(currentItem.nombre);
 		
 		holder.txtvCostoRuta = (TextView) row.findViewById(R.id.txtvCostoRuta);
-		holder.txtvCostoRuta.setText("Precio " + currentItem.getCosto());
+		holder.txtvCostoRuta.setText("Precio " + currentItem.costo);
 		
 		
 		row.setTag(holder);

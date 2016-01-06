@@ -5,9 +5,9 @@ package com.nansoft.mipuribus.model;
  */
 public class Opcion
 {
-    private int idOpcion;
-    private String nombreOpcion;
-    private String urlImagen;
+    public int idOpcion;
+    public String nombreOpcion;
+    public String urlImagen;
 
     public Opcion(int idOpcion, String nombreOpcion, String urlImagen) {
         this.idOpcion = idOpcion;
@@ -15,27 +15,5 @@ public class Opcion
         this.urlImagen = urlImagen;
     }
 
-    public String getUrlImagen() {
-        return urlImagen;
-    }
 
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
-
-    public int getIdOpcion() {
-        return idOpcion;
-    }
-
-    public void setIdOpcion(int idOpcion) {
-        this.idOpcion = idOpcion;
-    }
-
-    public String getNombreOpcion() {
-        return nombreOpcion;
-    }
-
-    public void setNombreOpcion(String nombreOpcion) {
-        this.nombreOpcion = nombreOpcion;
-    }
 }

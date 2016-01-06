@@ -62,7 +62,7 @@ public class SitiosInteresActivity extends Activity
                 }
                 else
                 {
-                    Llamar(adapter.getItem(position).getNumeroTelefono());
+                    Llamar(adapter.getItem(position).numeroTelefono);
                 }
             }
         });
