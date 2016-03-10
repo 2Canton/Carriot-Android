@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.nansoft.mipuribus.R;
 import com.nansoft.mipuribus.database.HelperDatabase;
@@ -147,9 +148,6 @@ public class RutasActivity extends AppCompatActivity
 	}
 
 
-
-
-
 	private void sincronizarDatos()
 	{
 		int VERSION_BASEDATOS_ACTUAL = prefs.getInt("VERSION_BASEDATOS",1);
@@ -171,53 +169,36 @@ public class RutasActivity extends AppCompatActivity
 				// establecemos la versión remota en el objeto
 				OBJ_VERSION.setVersionRemota(result.getVersionRemota());
 
-
-
 				// verificamos si se debe actualizar
 				if (OBJ_VERSION.estadoActualizarBaseDatos()) {
 
-					// si es así verificamos si hay internet
-					if (Util.isNetworkAvailable(getApplicationContext())) {
-
-						includedLayout.setVisibility(View.GONE);
+						//includedLayout.setVisibility(View.GONE);
 						mSwipeRefreshLayout.setEnabled(false);
 
 						new AsyncTask<Void, Void, Boolean>() {
 
-							MobileServiceSyncTable<Ruta> rutaTable;
-							MobileServiceSyncTable<Horario> horarioTable;
-							MobileServiceSyncTable<CarreraRuta> carreraRutaTable;
-							MobileServiceSyncTable<Parada> paradaTable;
-
-							Query mPullQueryRuta;
-							Query mPullQueryHorario;
-							Query mPullQueryCarreraRuta;
-							Query mPullQueryParada;
-
+							MobileServiceTable<Ruta> rutaTable;
+							MobileServiceTable<Horario> horarioTable;
+							MobileServiceTable<CarreraRuta> carreraRutaTable;
+							MobileServiceTable<Parada> paradaTable;
 
 							@Override
 							protected void onPreExecute() {
-								// referencia a las tablas que se va usar
-								rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
-								horarioTable = Util.mClient.getSyncTable("Horario", Horario.class);
-								carreraRutaTable = Util.mClient.getSyncTable("CarreraRuta", CarreraRuta.class);
-								paradaTable = Util.mClient.getSyncTable("Parada", Parada.class);
 
-								mPullQueryRuta = Util.mClient.getTable(Ruta.class).orderBy("nombre", QueryOrder.Ascending);
-								mPullQueryHorario = Util.mClient.getTable("Horario", Horario.class).top(10);
-								mPullQueryCarreraRuta = Util.mClient.getTable("CarreraRuta", CarreraRuta.class).top(1000);
-								mPullQueryParada = Util.mClient.getTable("Parada", Parada.class).top(100);
+								// referencia a las tablas que se va usar
+								rutaTable = Util.mClient.getTable("Ruta",Ruta.class);
+								horarioTable = Util.mClient.getTable("Horario", Horario.class);
+								carreraRutaTable = Util.mClient.getTable("CarreraRuta", CarreraRuta.class);
+								paradaTable = Util.mClient.getTable("Parada", Parada.class);
 
 								// se limpia el adapter mientras carga
 								mAdapter.clear();
-
 
 								// se elimina base de datos
 								HelperDatabase.db.delete("Ruta", null, null);
 								HelperDatabase.db.delete("Horario", null, null);
 								HelperDatabase.db.delete("CarreraRuta", null, null);
 								HelperDatabase.db.delete("SitioSalida", null, null);
-
 
 							}
 
@@ -226,15 +207,11 @@ public class RutasActivity extends AppCompatActivity
 								try {
 
 									//se cargan los últimos cambios
-									rutaTable.pull(mPullQueryRuta).get();
-									horarioTable.pull(mPullQueryHorario).get();
-									carreraRutaTable.pull(mPullQueryCarreraRuta).get();
-									paradaTable.pull(mPullQueryParada).get();
 
-									final MobileServiceList<Ruta> resultRuta = rutaTable.read(mPullQueryRuta).get();
-									final MobileServiceList<Horario> resultHorario = horarioTable.read(mPullQueryHorario).get();
-									final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.read(mPullQueryCarreraRuta).get();
-									final MobileServiceList<Parada> resultParada = paradaTable.read(mPullQueryParada).get();
+									final MobileServiceList<Ruta> resultRuta = rutaTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
+									final MobileServiceList<Horario> resultHorario = horarioTable.execute().get();
+									final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.execute().get();
+									final MobileServiceList<Parada> resultParada = paradaTable.execute().get();
 
 
 									runOnUiThread(new Runnable() {
@@ -312,7 +289,7 @@ public class RutasActivity extends AppCompatActivity
 							objHandlerDataBase.CargarAdapter();
 						} else {
 
-							setContentView(R.layout.error);
+							includedLayout.setVisibility(View.VISIBLE);
 
 
 						}
@@ -321,20 +298,6 @@ public class RutasActivity extends AppCompatActivity
 
 						mSwipeRefreshLayout.setEnabled(true);
 					}
-				} else {
-					if (objHandlerDataBase.VerificarDatosRuta()) {
-						objHandlerDataBase.CargarAdapter();
-					} else {
-
-						setContentView(R.layout.error);
-
-
-					}
-					mSwipeRefreshLayout.setRefreshing(false);
-
-
-					mSwipeRefreshLayout.setEnabled(true);
-				}
 
 			}
 		});
