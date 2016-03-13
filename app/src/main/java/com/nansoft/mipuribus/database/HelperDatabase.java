@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.nansoft.mipuribus.activity.HorariosActivity;
 import com.nansoft.mipuribus.activity.RutasActivity;
@@ -217,6 +218,7 @@ public class HelperDatabase
     {
         try
         {
+
             // realizamos una consulta a la base de datos y guardamos el resultado en un objeto de tipo Cursor
             Cursor c = db.rawQuery(" SELECT DISTINCT H.IdHorario,H.Dias FROM Horario H,CarreraRuta C WHERE H.IdHorario = C.IdHorario AND C.IdRuta = " + pIdRuta + " ORDER BY H.IdHorario", null);
             Horario objHorario;
@@ -244,7 +246,7 @@ public class HelperDatabase
         }
         catch(Exception e)
         {
-
+            Toast.makeText(contexto,e.toString(),Toast.LENGTH_LONG).show();
         }
         return false;
     }

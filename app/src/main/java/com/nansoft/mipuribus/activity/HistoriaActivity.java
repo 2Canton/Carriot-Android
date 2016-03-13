@@ -14,7 +14,7 @@ import com.google.android.gms.ads.AdView;
 import com.nansoft.mipuribus.R;
 
 
-public class HistoriaActivity extends AppCompatActivity {
+public class HistoriaActivity extends BaseActivity {
 
     AdView adView;
     AdRequest adRequestBanner;
@@ -114,16 +114,6 @@ public class HistoriaActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId())
-        {
-            case android.R.id.home:
-                super.onBackPressed();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

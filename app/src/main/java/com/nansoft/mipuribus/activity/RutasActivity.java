@@ -38,14 +38,12 @@ import android.widget.Toast;
 import com.microsoft.windowsazure.mobileservices.table.query.Query;
 import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
 
-public class RutasActivity extends AppCompatActivity
+public class RutasActivity extends BaseActivity
 {	
 	public static RutaAdapterListView mAdapter;
 	
 	ListView listViewMaterias;
     public static SwipeRefreshLayout mSwipeRefreshLayout;
-
-
 
 	// layout de error
 	View includedLayout;
@@ -59,7 +57,14 @@ public class RutasActivity extends AppCompatActivity
 	Version OBJ_VERSION;
 
 	MobileServiceSyncTable<Ruta> rutaTable;
-	Query mPullQuery;
+	MobileServiceSyncTable<Horario> horarioTable;
+	MobileServiceSyncTable<CarreraRuta> carreraRutaTable;
+	MobileServiceSyncTable<Parada> paradaTable;
+
+	Query mPullQueryRuta;
+	Query mPullQueryHorario;
+	Query mPullQueryCarreraRuta;
+	Query mPullQueryParada;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -108,7 +113,7 @@ public class RutasActivity extends AppCompatActivity
 			@Override
 			public void onRefresh() {
 
-				sincronizarDatos();
+				syncAsync();
 			}
 
 		});
@@ -130,8 +135,23 @@ public class RutasActivity extends AppCompatActivity
 
 		prefs = getSharedPreferences(nombrePref, MODE_PRIVATE);
 
+		// se obtiene la referencia a las tablas
 		rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
-		mPullQuery = Util.mClient.getTable(Ruta.class).where().orderBy("nombre",QueryOrder.Ascending);
+		horarioTable = Util.mClient.getSyncTable("Horario",Horario.class);
+		carreraRutaTable = Util.mClient.getSyncTable("CarreraRuta", CarreraRuta.class);
+		paradaTable = Util.mClient.getSyncTable("Parada",Parada.class);
+
+		// query de las tablas
+		mPullQueryRuta = Util.mClient.getTable(Ruta.class).orderBy("nombre", QueryOrder.Ascending);
+		mPullQueryHorario = Util.mClient.getTable(Horario.class).orderBy("id", QueryOrder.Ascending);
+		mPullQueryCarreraRuta = Util.mClient.getTable(CarreraRuta.class).orderBy("idruta", QueryOrder.Ascending);
+		mPullQueryParada = Util.mClient.getTable(Parada.class).orderBy("nombre", QueryOrder.Ascending);
+
+		// se limpia la base de datos
+		HelperDatabase.db.delete("Ruta", null, null);
+		HelperDatabase.db.delete("Horario", null, null);
+		HelperDatabase.db.delete("CarreraRuta", null, null);
+		HelperDatabase.db.delete("SitioSalida", null, null);
 
 		syncAsync();
 
@@ -148,15 +168,35 @@ public class RutasActivity extends AppCompatActivity
 
 	public void syncAsync(){
 		if (isNetworkAvailable()) {
-			new AsyncTask<Void, Void, Void>() {
+			new AsyncTask<Void, Void, Boolean>() {
 
 				@Override
-				protected Void doInBackground(Void... params) {
+				protected Boolean doInBackground(Void... params) {
 					try {
 						Util.mClient.getSyncContext().push().get();
-						rutaTable.pull(mPullQuery).get();
 
-						final MobileServiceList<Ruta> resultRuta = rutaTable.read(mPullQuery).get();
+						rutaTable.pull(mPullQueryRuta).get();
+						horarioTable.pull(mPullQueryHorario).get();
+						carreraRutaTable.pull(mPullQueryCarreraRuta).get();
+						paradaTable.pull(mPullQueryParada).get();
+
+						final MobileServiceList<Ruta> resultRuta = rutaTable.read(mPullQueryRuta).get();
+						final MobileServiceList<Horario> resultHorario = horarioTable.read(mPullQueryHorario).get();
+						final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.read(mPullQueryCarreraRuta).get();
+						final MobileServiceList<Parada> resultParada = paradaTable.read(mPullQueryParada).get();
+
+
+						for (Horario horario : resultHorario) {
+							objHandlerDataBase.InsertarHorario(horario);
+						}
+
+						for (CarreraRuta carreraRuta : resultCarreraRuta) {
+							objHandlerDataBase.InsertarCarrera(carreraRuta);
+						}
+
+						for (Parada Parada : resultParada) {
+							objHandlerDataBase.InsertarSitioSalida(Parada);
+						}
 
 						runOnUiThread(new Runnable() {
 
@@ -165,6 +205,7 @@ public class RutasActivity extends AppCompatActivity
 
 								// se agregan los registros en la base de datos
 								for (Ruta ruta : resultRuta) {
+									objHandlerDataBase.InsertarRuta(ruta);
 									mAdapter.add(ruta);
 									mAdapter.notifyDataSetChanged();
 								}
@@ -172,17 +213,26 @@ public class RutasActivity extends AppCompatActivity
 
 						});
 
-					} catch (Exception exception) {
+						return true;
+					} catch (final Exception exception) {
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
 
-								Toast.makeText(RutasActivity.this, "Error al sincronizar!", Toast.LENGTH_LONG).show();
+								Toast.makeText(RutasActivity.this, "Error al sincronizar! " + exception.toString(), Toast.LENGTH_LONG).show();
 							}
 						});
+						return false;
 					}
-					return null;
 				}
+
+				@Override
+				protected void onPostExecute(Boolean success) {
+
+					verificarEstado(success);
+
+				}
+
 			}.execute();
 		} else {
 			Toast.makeText(this, "You are not online, re-sync later!" +
@@ -206,151 +256,7 @@ public class RutasActivity extends AppCompatActivity
 	}
 
 
-	private void sincronizarDatos()
-	{
-		int VERSION_BASEDATOS_ACTUAL = prefs.getInt("VERSION_BASEDATOS", 1);
-		OBJ_VERSION = new Version(VERSION_BASEDATOS_ACTUAL);
 
-		// verificamos la versión de base de datos
-		final ListenableFuture <Version> resultVersion = Util.mClient.invokeApi("version","GET",null,Version.class);
-
-		// agregamos un callback
-		Futures.addCallback(resultVersion, new FutureCallback<Version>() {
-			@Override
-			public void onFailure(Throwable exc) {
-			}
-
-			@Override
-			public void onSuccess(Version result) {
-
-
-				// establecemos la versión remota en el objeto
-				OBJ_VERSION.setVersionRemota(result.getVersionRemota());
-
-				// verificamos si se debe actualizar
-				//if (OBJ_VERSION.estadoActualizarBaseDatos()) {
-				if (true) {
-
-					//includedLayout.setVisibility(View.GONE);
-					mSwipeRefreshLayout.setEnabled(false);
-
-					new AsyncTask<Void, Void, Boolean>() {
-
-						MobileServiceSyncTable<Ruta> rutaTable;
-						MobileServiceTable<Horario> horarioTable;
-						MobileServiceTable<CarreraRuta> carreraRutaTable;
-						MobileServiceTable<Parada> paradaTable;
-
-						@Override
-						protected void onPreExecute() {
-
-							// referencia a las tablas que se va usar
-							rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
-							horarioTable = Util.mClient.getTable("Horario", Horario.class);
-							carreraRutaTable = Util.mClient.getTable("CarreraRuta", CarreraRuta.class);
-							paradaTable = Util.mClient.getTable("Parada", Parada.class);
-
-							// se limpia el adapter mientras carga
-							mAdapter.clear();
-
-							// se elimina base de datos
-							HelperDatabase.db.delete("Ruta", null, null);
-							HelperDatabase.db.delete("Horario", null, null);
-							HelperDatabase.db.delete("CarreraRuta", null, null);
-							HelperDatabase.db.delete("SitioSalida", null, null);
-
-						}
-
-						@Override
-						protected Boolean doInBackground(Void... params) {
-							try {
-
-								//se cargan los últimos cambios
-
-								//final MobileServiceList<Ruta> resultRuta = rutaTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
-								/*
-								final MobileServiceList<Horario> resultHorario = horarioTable.execute().get();
-								final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.execute().get();
-								final MobileServiceList<Parada> resultParada = paradaTable.execute().get();
-
-
-								runOnUiThread(new Runnable() {
-
-									@Override
-									public void run() {
-
-										// se agregan los registros en la base de datos
-										for (Ruta ruta : resultRuta) {
-											objHandlerDataBase.InsertarRuta(ruta);
-											mAdapter.add(ruta);
-											mAdapter.notifyDataSetChanged();
-										}
-									}
-
-								});
-
-								/*
-								for (Horario horario : resultHorario) {
-									objHandlerDataBase.InsertarHorario(horario);
-								}
-
-								for (CarreraRuta carreraRuta : resultCarreraRuta) {
-									objHandlerDataBase.InsertarCarrera(carreraRuta);
-								}
-
-								for (Parada Parada : resultParada) {
-									objHandlerDataBase.InsertarSitioSalida(Parada);
-								}
-								*/
-
-								// se cargan los registros de la base de datos local en el adapter
-								//objHandlerDataBase.CargarAdapter();
-
-
-								return true;
-							} catch (final Exception exception) {
-
-								return false;
-							}
-
-						}
-
-						@Override
-						protected void onPostExecute(Boolean success) {
-
-							verificarEstado(success);
-
-
-							if (success) {
-
-								// guardamos en las preferencias de usuario la versión de base de datos que tenemos
-								savePreferences(OBJ_VERSION.getVersionRemota());
-
-							}
-						}
-
-						@Override
-						protected void onCancelled() {
-							super.onCancelled();
-						}
-					}.execute();
-
-				} else {
-
-					boolean status = objHandlerDataBase.VerificarDatosRuta();
-
-					if (status) {
-						objHandlerDataBase.CargarAdapter();
-					}
-
-					verificarEstado(status);
-				}
-
-			}
-		});
-
-
-	}
 
 	private void verificarEstado(boolean status)
 	{
@@ -369,14 +275,6 @@ public class RutasActivity extends AppCompatActivity
 
 	}
 
-	private void savePreferences(int pVersion)
-	{
-		prefs = getSharedPreferences(nombrePref, MODE_PRIVATE);
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("VERSION_BASEDATOS", pVersion);
-		editor.commit();
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -384,21 +282,6 @@ public class RutasActivity extends AppCompatActivity
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 
-
-		switch(item.getItemId())
-		{
-			case android.R.id.home:
-				super.onBackPressed();
-				break;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
 
 }
