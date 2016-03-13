@@ -37,10 +37,7 @@ public class EmpresasActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
 
-        // Set up action bar.
-        ActionBar bar = getSupportActionBar();
-        bar.show();
-        bar.setDisplayHomeAsUpEnabled(true);
+        enableHomeActionBar();
 
         setTitle(getString(R.string.app_name) + " - " + getIntent().getExtras().getString("nombre"));
         ID_TIPO_EMPRESA = getIntent().getExtras().getString("id");

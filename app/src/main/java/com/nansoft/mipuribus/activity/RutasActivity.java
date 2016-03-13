@@ -1,10 +1,6 @@
 package com.nansoft.mipuribus.activity;
 
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
-import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.nansoft.mipuribus.R;
 import com.nansoft.mipuribus.database.HelperDatabase;
@@ -12,22 +8,18 @@ import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.adapter.RutaAdapterListView;
 import com.nansoft.mipuribus.model.CarreraRuta;
 import com.nansoft.mipuribus.model.Horario;
-import com.nansoft.mipuribus.model.Version;
 import com.nansoft.mipuribus.model.Parada;
 import com.nansoft.mipuribus.model.Ruta;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -43,18 +35,13 @@ public class RutasActivity extends BaseActivity
 	public static RutaAdapterListView mAdapter;
 	
 	ListView listViewMaterias;
-    public static SwipeRefreshLayout mSwipeRefreshLayout;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
 	// layout de error
 	View includedLayout;
 
 	HelperDatabase objHandlerDataBase;
 
-	private static final int VERSION_BASEDATOS = 1;
-	private SharedPreferences prefs;
-	private String nombrePref = "Preferencias";
-
-	Version OBJ_VERSION;
 
 	MobileServiceSyncTable<Ruta> rutaTable;
 	MobileServiceSyncTable<Horario> horarioTable;
@@ -72,11 +59,9 @@ public class RutasActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
 
+		enableHomeActionBar();
 
-		// Set up action bar.
-		ActionBar bar = getSupportActionBar();
-		bar.show();
-		bar.setDisplayHomeAsUpEnabled(true);
+
 
 		setTitle(getString(R.string.app_name) + " - Rutas");
 
@@ -133,7 +118,7 @@ public class RutasActivity extends BaseActivity
 		if(!objUtil.inicializarBaseDatos())
 			Toast.makeText(getApplicationContext(),"Ha ocurrido un error al inicializar la copia local",Toast.LENGTH_SHORT).show();
 
-		prefs = getSharedPreferences(nombrePref, MODE_PRIVATE);
+
 
 		// se obtiene la referencia a las tablas
 		rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);

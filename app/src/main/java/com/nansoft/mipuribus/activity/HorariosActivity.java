@@ -39,10 +39,7 @@ public class HorariosActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
 
-		// Set up action bar.
-		ActionBar bar = getSupportActionBar();
-		bar.show();
-		bar.setDisplayHomeAsUpEnabled(true);
+		enableHomeActionBar();
 
         try {
             bundle = getIntent().getExtras();

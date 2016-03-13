@@ -46,10 +46,7 @@ public class TipoEventoActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
 
-        // Set up action bar.
-        ActionBar bar = getSupportActionBar();
-        bar.show();
-        bar.setDisplayHomeAsUpEnabled(true);
+        enableHomeActionBar();
 
         setTitle(getString(R.string.app_name) + " - Tipo de eventos");
 
@@ -165,8 +162,7 @@ public class TipoEventoActivity extends BaseActivity
     }
 
 
-    private void estadoAdapter(boolean pEstadoError)
-    {
+    private void estadoAdapter(boolean pEstadoError) {
         mSwipeRefreshLayout.setRefreshing(false);
 
 

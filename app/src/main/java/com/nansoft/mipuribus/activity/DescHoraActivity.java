@@ -43,10 +43,7 @@ public class DescHoraActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layinforuta);
 
-		// Set up action bar.
-		ActionBar bar = getSupportActionBar();
-		bar.show();
-		bar.setDisplayHomeAsUpEnabled(true);
+		enableHomeActionBar();
 
 		Bundle bundle = getIntent().getExtras();
 		setTitle(bundle.getString("nombreRuta") + " - " + bundle.getString("dias"));

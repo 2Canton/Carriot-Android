@@ -16,10 +16,7 @@ public class HorarioMisaActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario_misa);
 
-        // Set up action bar.
-        ActionBar bar = getSupportActionBar();
-        bar.show();
-        bar.setDisplayHomeAsUpEnabled(true);
+        enableHomeActionBar();
 
         setTitle(getString(R.string.app_name) + " - Horario de misa");
     }

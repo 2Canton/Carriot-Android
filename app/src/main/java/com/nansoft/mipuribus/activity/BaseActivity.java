@@ -1,6 +1,7 @@
 package com.nansoft.mipuribus.activity;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,5 +41,13 @@ public class BaseActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+
+    public void enableHomeActionBar()
+    {
+        // Set up action bar.
+        ActionBar bar = getSupportActionBar();
+        bar.show();
+        bar.setDisplayHomeAsUpEnabled(true);
+    }
 
 }
