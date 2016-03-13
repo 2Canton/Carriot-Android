@@ -16,8 +16,11 @@ import com.nansoft.mipuribus.model.Version;
 import com.nansoft.mipuribus.model.Parada;
 import com.nansoft.mipuribus.model.Ruta;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -55,6 +58,8 @@ public class RutasActivity extends AppCompatActivity
 
 	Version OBJ_VERSION;
 
+	MobileServiceSyncTable<Ruta> rutaTable;
+	Query mPullQuery;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -125,12 +130,65 @@ public class RutasActivity extends AppCompatActivity
 
 		prefs = getSharedPreferences(nombrePref, MODE_PRIVATE);
 
+		rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
+		mPullQuery = Util.mClient.getTable(Ruta.class).where().orderBy("nombre",QueryOrder.Ascending);
 
+		syncAsync();
 
-		sincronizarDatos();
+		//sincronizarDatos();
+	}
+
+	public boolean isNetworkAvailable() {
+		ConnectivityManager connectivityManager
+				= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 
 
+	public void syncAsync(){
+		if (isNetworkAvailable()) {
+			new AsyncTask<Void, Void, Void>() {
+
+				@Override
+				protected Void doInBackground(Void... params) {
+					try {
+						Util.mClient.getSyncContext().push().get();
+						rutaTable.pull(mPullQuery).get();
+
+						final MobileServiceList<Ruta> resultRuta = rutaTable.read(mPullQuery).get();
+
+						runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+
+								// se agregan los registros en la base de datos
+								for (Ruta ruta : resultRuta) {
+									mAdapter.add(ruta);
+									mAdapter.notifyDataSetChanged();
+								}
+							}
+
+						});
+
+					} catch (Exception exception) {
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+
+								Toast.makeText(RutasActivity.this, "Error al sincronizar!", Toast.LENGTH_LONG).show();
+							}
+						});
+					}
+					return null;
+				}
+			}.execute();
+		} else {
+			Toast.makeText(this, "You are not online, re-sync later!" +
+					"", Toast.LENGTH_LONG).show();
+		}
+	}
 
 
 
@@ -150,7 +208,7 @@ public class RutasActivity extends AppCompatActivity
 
 	private void sincronizarDatos()
 	{
-		int VERSION_BASEDATOS_ACTUAL = prefs.getInt("VERSION_BASEDATOS",1);
+		int VERSION_BASEDATOS_ACTUAL = prefs.getInt("VERSION_BASEDATOS", 1);
 		OBJ_VERSION = new Version(VERSION_BASEDATOS_ACTUAL);
 
 		// verificamos la versión de base de datos
@@ -170,138 +228,144 @@ public class RutasActivity extends AppCompatActivity
 				OBJ_VERSION.setVersionRemota(result.getVersionRemota());
 
 				// verificamos si se debe actualizar
-				if (OBJ_VERSION.estadoActualizarBaseDatos()) {
+				//if (OBJ_VERSION.estadoActualizarBaseDatos()) {
+				if (true) {
 
-						//includedLayout.setVisibility(View.GONE);
-						mSwipeRefreshLayout.setEnabled(false);
+					//includedLayout.setVisibility(View.GONE);
+					mSwipeRefreshLayout.setEnabled(false);
 
-						new AsyncTask<Void, Void, Boolean>() {
+					new AsyncTask<Void, Void, Boolean>() {
 
-							MobileServiceTable<Ruta> rutaTable;
-							MobileServiceTable<Horario> horarioTable;
-							MobileServiceTable<CarreraRuta> carreraRutaTable;
-							MobileServiceTable<Parada> paradaTable;
+						MobileServiceSyncTable<Ruta> rutaTable;
+						MobileServiceTable<Horario> horarioTable;
+						MobileServiceTable<CarreraRuta> carreraRutaTable;
+						MobileServiceTable<Parada> paradaTable;
 
-							@Override
-							protected void onPreExecute() {
+						@Override
+						protected void onPreExecute() {
 
-								// referencia a las tablas que se va usar
-								rutaTable = Util.mClient.getTable("Ruta",Ruta.class);
-								horarioTable = Util.mClient.getTable("Horario", Horario.class);
-								carreraRutaTable = Util.mClient.getTable("CarreraRuta", CarreraRuta.class);
-								paradaTable = Util.mClient.getTable("Parada", Parada.class);
+							// referencia a las tablas que se va usar
+							rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
+							horarioTable = Util.mClient.getTable("Horario", Horario.class);
+							carreraRutaTable = Util.mClient.getTable("CarreraRuta", CarreraRuta.class);
+							paradaTable = Util.mClient.getTable("Parada", Parada.class);
 
-								// se limpia el adapter mientras carga
-								mAdapter.clear();
+							// se limpia el adapter mientras carga
+							mAdapter.clear();
 
-								// se elimina base de datos
-								HelperDatabase.db.delete("Ruta", null, null);
-								HelperDatabase.db.delete("Horario", null, null);
-								HelperDatabase.db.delete("CarreraRuta", null, null);
-								HelperDatabase.db.delete("SitioSalida", null, null);
-
-							}
-
-							@Override
-							protected Boolean doInBackground(Void... params) {
-								try {
-
-									//se cargan los últimos cambios
-
-									final MobileServiceList<Ruta> resultRuta = rutaTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
-									final MobileServiceList<Horario> resultHorario = horarioTable.execute().get();
-									final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.execute().get();
-									final MobileServiceList<Parada> resultParada = paradaTable.execute().get();
-
-
-									runOnUiThread(new Runnable() {
-
-										@Override
-										public void run() {
-
-											// se agregan los registros en la base de datos
-											for (Ruta ruta : resultRuta) {
-												objHandlerDataBase.InsertarRuta(ruta);
-												mAdapter.add(ruta);
-												mAdapter.notifyDataSetChanged();
-											}
-										}
-
-									});
-
-
-									for (Horario horario : resultHorario) {
-										objHandlerDataBase.InsertarHorario(horario);
-									}
-
-									for (CarreraRuta carreraRuta : resultCarreraRuta) {
-										objHandlerDataBase.InsertarCarrera(carreraRuta);
-									}
-
-									for (Parada Parada : resultParada) {
-										objHandlerDataBase.InsertarSitioSalida(Parada);
-									}
-
-									// se cargan los registros de la base de datos local en el adapter
-									//objHandlerDataBase.CargarAdapter();
-
-
-									return true;
-								} catch (final Exception exception) {
-
-									return false;
-								}
-
-							}
-
-							@Override
-							protected void onPostExecute(Boolean success) {
-
-								mSwipeRefreshLayout.setRefreshing(false);
-
-
-								mSwipeRefreshLayout.setEnabled(true);
-
-
-
-								if (!success) {
-									includedLayout.setVisibility(View.VISIBLE);
-
-
-								} else {
-
-									includedLayout.setVisibility(View.GONE);
-
-									// guardamos en las preferencias de usuario la versión de base de datos que tenemos
-									savePreferences(OBJ_VERSION.getVersionRemota());
-
-								}
-							}
-
-							@Override
-							protected void onCancelled() {
-								super.onCancelled();
-							}
-						}.execute();
-					} else {
-
-						if (objHandlerDataBase.VerificarDatosRuta()) {
-							objHandlerDataBase.CargarAdapter();
-						} else {
-
-							includedLayout.setVisibility(View.VISIBLE);
-
+							// se elimina base de datos
+							HelperDatabase.db.delete("Ruta", null, null);
+							HelperDatabase.db.delete("Horario", null, null);
+							HelperDatabase.db.delete("CarreraRuta", null, null);
+							HelperDatabase.db.delete("SitioSalida", null, null);
 
 						}
-						mSwipeRefreshLayout.setRefreshing(false);
+
+						@Override
+						protected Boolean doInBackground(Void... params) {
+							try {
+
+								//se cargan los últimos cambios
+
+								//final MobileServiceList<Ruta> resultRuta = rutaTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
+								/*
+								final MobileServiceList<Horario> resultHorario = horarioTable.execute().get();
+								final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.execute().get();
+								final MobileServiceList<Parada> resultParada = paradaTable.execute().get();
 
 
-						mSwipeRefreshLayout.setEnabled(true);
+								runOnUiThread(new Runnable() {
+
+									@Override
+									public void run() {
+
+										// se agregan los registros en la base de datos
+										for (Ruta ruta : resultRuta) {
+											objHandlerDataBase.InsertarRuta(ruta);
+											mAdapter.add(ruta);
+											mAdapter.notifyDataSetChanged();
+										}
+									}
+
+								});
+
+								/*
+								for (Horario horario : resultHorario) {
+									objHandlerDataBase.InsertarHorario(horario);
+								}
+
+								for (CarreraRuta carreraRuta : resultCarreraRuta) {
+									objHandlerDataBase.InsertarCarrera(carreraRuta);
+								}
+
+								for (Parada Parada : resultParada) {
+									objHandlerDataBase.InsertarSitioSalida(Parada);
+								}
+								*/
+
+								// se cargan los registros de la base de datos local en el adapter
+								//objHandlerDataBase.CargarAdapter();
+
+
+								return true;
+							} catch (final Exception exception) {
+
+								return false;
+							}
+
+						}
+
+						@Override
+						protected void onPostExecute(Boolean success) {
+
+							verificarEstado(success);
+
+
+							if (success) {
+
+								// guardamos en las preferencias de usuario la versión de base de datos que tenemos
+								savePreferences(OBJ_VERSION.getVersionRemota());
+
+							}
+						}
+
+						@Override
+						protected void onCancelled() {
+							super.onCancelled();
+						}
+					}.execute();
+
+				} else {
+
+					boolean status = objHandlerDataBase.VerificarDatosRuta();
+
+					if (status) {
+						objHandlerDataBase.CargarAdapter();
 					}
+
+					verificarEstado(status);
+				}
 
 			}
 		});
 
+
+	}
+
+	private void verificarEstado(boolean status)
+	{
+		if (status)
+		{
+			includedLayout.setVisibility(View.GONE);
+		}
+		else
+		{
+			includedLayout.setVisibility(View.VISIBLE);
+		}
+
+		mSwipeRefreshLayout.setRefreshing(false);
+
+		mSwipeRefreshLayout.setEnabled(true);
 
 	}
 
