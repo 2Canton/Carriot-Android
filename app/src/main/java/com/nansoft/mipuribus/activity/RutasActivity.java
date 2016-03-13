@@ -240,24 +240,6 @@ public class RutasActivity extends BaseActivity
 		}
 	}
 
-
-
-	public void onClick(View vista)
-	{
-		Recargar();
-	}
-
-
-	public void Recargar()
-	{
-		Intent intent = getIntent();
-		finish();
-		startActivity(intent);
-	}
-
-
-
-
 	private void verificarEstado(boolean status)
 	{
 		if (status)

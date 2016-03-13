@@ -1,7 +1,9 @@
 package com.nansoft.mipuribus.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * Created by itadmin on 3/13/16.
@@ -24,4 +26,19 @@ public class BaseActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onClick(View vista)
+    {
+        Recargar();
+    }
+
+
+    public void Recargar()
+    {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+
 }

@@ -157,19 +157,6 @@ public class EmpresasActivity extends BaseActivity {
         }.execute();
     }
 
-    public void onClick(View vista)
-    {
-        Recargar();
-    }
-
-
-    public void Recargar()
-    {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -166,19 +166,6 @@ public class EventosActivity extends BaseActivity {
     }
 
 
-    public void onClick(View vista)
-    {
-        Recargar();
-    }
-
-
-    public void Recargar()
-    {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
     private void estadoAdapter(boolean pEstadoError)
     {
         mSwipeRefreshLayout.setRefreshing(false);

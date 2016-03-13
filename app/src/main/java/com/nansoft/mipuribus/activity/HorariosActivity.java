@@ -133,20 +133,6 @@ public class HorariosActivity extends BaseActivity
 		return true;
 	}
 
-	
-	public void Recargar()
-	{
-		Intent intent = new Intent(getApplicationContext(), RutasActivity.class);
-		finish();
-		startActivity(intent);
-	}
-	
-	public void onClick(View vista)
-	{
-		Recargar();
-	}
-
-
 	private void cargarHorarios()
 	{
 		objHandlerDatabase.CargarHorariosRuta(bundle.getString("idRuta"));
