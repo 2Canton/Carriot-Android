@@ -35,11 +35,7 @@ import java.util.List;
 
 public class TipoEmpresaActivity extends BaseActivity {
 
-    SwipeRefreshLayout mSwipeRefreshLayout;
     TipoEmpresaAdapter mAdapter;
-
-    // layout de error
-    View includedLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +44,7 @@ public class TipoEmpresaActivity extends BaseActivity {
 
         enableHomeActionBar();
 
-        setTitle(getString(R.string.app_name) + " - Tipo de empresas");
+        setTitle("Tipo de empresas");
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
         mAdapter = new TipoEmpresaAdapter(TipoEmpresaActivity.this,R.layout.item_ruta);

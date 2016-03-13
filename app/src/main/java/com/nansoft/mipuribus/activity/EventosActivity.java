@@ -34,12 +34,8 @@ import java.util.List;
 
 public class EventosActivity extends BaseActivity {
 
-    SwipeRefreshLayout mSwipeRefreshLayout;
     EventoAdapter mAdapter;
     String ID_TIPO_EVENTO;
-
-    // layout de error
-    View includedLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +44,7 @@ public class EventosActivity extends BaseActivity {
 
         enableHomeActionBar();
 
-        setTitle(getString(R.string.app_name) + " - " + getIntent().getExtras().getString("nombre"));
+        setTitle(getIntent().getExtras().getString("nombre"));
 
         ID_TIPO_EVENTO = getIntent().getExtras().getString("id");
 

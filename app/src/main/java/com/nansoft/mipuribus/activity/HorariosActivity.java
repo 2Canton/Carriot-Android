@@ -26,10 +26,6 @@ public class HorariosActivity extends BaseActivity
 	public static HorarioAdapterListView mAdapter;
 	public static ListView listViewMaterias;
 	static Bundle bundle;
-    public static SwipeRefreshLayout mSwipeRefreshLayout;
-
-	// layout de error
-	View includedLayout;
 
 	HelperDatabase objHandlerDatabase;
 	

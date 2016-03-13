@@ -35,13 +35,8 @@ public class RutasActivity extends BaseActivity
 	public static RutaAdapterListView mAdapter;
 	
 	ListView listViewMaterias;
-    SwipeRefreshLayout mSwipeRefreshLayout;
-
-	// layout de error
-	View includedLayout;
 
 	HelperDatabase objHandlerDataBase;
-
 
 	MobileServiceSyncTable<Ruta> rutaTable;
 	MobileServiceSyncTable<Horario> horarioTable;
@@ -63,7 +58,7 @@ public class RutasActivity extends BaseActivity
 
 
 
-		setTitle(getString(R.string.app_name) + " - Rutas");
+		setTitle("Rutas");
 
 
 		// creamos un adaptador para el listview

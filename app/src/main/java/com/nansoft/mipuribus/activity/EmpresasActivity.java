@@ -25,12 +25,9 @@ import java.net.MalformedURLException;
 
 public class EmpresasActivity extends BaseActivity {
 
-    SwipeRefreshLayout mSwipeRefreshLayout;
+
     EmpresaAdapter mAdapter;
     String ID_TIPO_EMPRESA = "";
-
-    // layout de error
-    View includedLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +36,7 @@ public class EmpresasActivity extends BaseActivity {
 
         enableHomeActionBar();
 
-        setTitle(getString(R.string.app_name) + " - " + getIntent().getExtras().getString("nombre"));
+        setTitle(getIntent().getExtras().getString("nombre"));
         ID_TIPO_EMPRESA = getIntent().getExtras().getString("id");
 
         includedLayout = findViewById(R.id.sindatos);

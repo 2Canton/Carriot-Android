@@ -1,6 +1,7 @@
 package com.nansoft.mipuribus.activity;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -11,6 +12,10 @@ import android.view.View;
  */
 public class BaseActivity extends AppCompatActivity
 {
+    // layout de error
+    public View includedLayout;
+    public SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

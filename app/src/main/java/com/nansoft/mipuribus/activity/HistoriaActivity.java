@@ -26,7 +26,7 @@ public class HistoriaActivity extends BaseActivity {
 
         enableHomeActionBar();
 
-        setTitle(getString(R.string.app_name) + " - Historia");
+        setTitle("Historia");
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TextView txtvResenia = (TextView) findViewById(R.id.txtvResenia);

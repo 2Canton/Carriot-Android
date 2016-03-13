@@ -18,7 +18,7 @@ public class HorarioMisaActivity extends BaseActivity
 
         enableHomeActionBar();
 
-        setTitle(getString(R.string.app_name) + " - Horario de misa");
+        setTitle("Horario de misa");
     }
 
 

@@ -35,11 +35,7 @@ import java.util.List;
 
 public class TipoEventoActivity extends BaseActivity
 {
-    SwipeRefreshLayout mSwipeRefreshLayout;
     TipoEventoAdapter mAdapter;
-
-    // layout de error
-    View includedLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +44,7 @@ public class TipoEventoActivity extends BaseActivity
 
         enableHomeActionBar();
 
-        setTitle(getString(R.string.app_name) + " - Tipo de eventos");
+        setTitle("Tipo de eventos");
 
         includedLayout = findViewById(R.id.sindatos);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
