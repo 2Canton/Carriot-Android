@@ -103,6 +103,7 @@ public class MenuActivity extends AppCompatActivity {
 
                 try {
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
                 } catch (Exception activityException) {
 
                     Toast.makeText(getApplicationContext(), "Error verifique que tenga un navegador instalado", Toast.LENGTH_SHORT).show();

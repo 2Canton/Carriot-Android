@@ -66,7 +66,7 @@ public class HorariosActivity extends BaseActivity
 				intent.putExtra("nombreRuta", bundle.getString("nombreRuta"));
 
 				startActivity(intent);
-
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
 			}
 

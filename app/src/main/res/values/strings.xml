@@ -37,4 +37,6 @@
     <string name="insReset">Restablecer</string>
     <string name="insEnviar">Enviar</string>
 
+    <string name="insReports">*Los reportes son anónimos</string>
+
 </resources>

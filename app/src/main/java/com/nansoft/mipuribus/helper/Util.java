@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.Query;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncContext;
@@ -17,6 +18,7 @@ import com.microsoft.windowsazure.mobileservices.table.sync.localstore.ColumnDat
 import com.microsoft.windowsazure.mobileservices.table.sync.localstore.SQLiteLocalStore;
 import com.microsoft.windowsazure.mobileservices.table.sync.synchandler.SimpleSyncHandler;
 import com.nansoft.mipuribus.model.Horario;
+import com.nansoft.mipuribus.model.Reporte;
 import com.nansoft.mipuribus.model.Ruta;
 
 import java.util.HashMap;
@@ -118,6 +120,33 @@ public class Util {
 
     }
 
+    public boolean addReport(final Reporte report)
+    {
+        try {
+            // Insert the new item
+            return new AsyncTask<Void, Void, Boolean>() {
 
+                @Override
+                protected Boolean doInBackground(Void... params) {
+                    try {
+                        MobileServiceTable<Reporte> tableReport = mClient.getTable("Reporte", Reporte.class);
+
+                        tableReport.insert(report);
+
+                        return true;
+                    } catch (Exception exception) {
+                        return false;
+                    }
+                }
+
+
+            }.execute().get();
+        }
+        catch (Exception e)
+        {
+
+        }
+        return false;
+    }
 
 }

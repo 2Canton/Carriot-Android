@@ -80,6 +80,7 @@ public class RutasActivity extends BaseActivity
 				intent.putExtra("nombreRuta", objRuta.nombre);
 
 				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
 			}
 		});

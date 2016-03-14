@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.nansoft.mipuribus.R;
+
 /**
  * Created by itadmin on 3/13/16.
  */
@@ -27,6 +29,7 @@ public class BaseActivity extends AppCompatActivity
         {
             case android.R.id.home:
                 super.onBackPressed();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                 break;
         }
 

@@ -66,6 +66,7 @@ public class TipoEmpresaActivity extends BaseActivity {
                 intent.putExtra("id",objOpcion.id);
                 intent.putExtra("nombre",objOpcion.nombre);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
             }
         });
 

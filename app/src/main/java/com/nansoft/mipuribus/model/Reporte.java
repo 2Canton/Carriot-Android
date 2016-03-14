@@ -21,4 +21,12 @@ public class Reporte
 
     @SerializedName("idtiporeporte")
     public String idtiporeporte;
+
+    public Reporte(String pDescripcion,String pIdTipoReporte)
+    {
+        descripcion = pDescripcion;
+        idtiporeporte = pIdTipoReporte;
+    }
+
+
 }

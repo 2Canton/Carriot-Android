@@ -333,6 +333,7 @@
     <string name="insDesReport">Descripción</string>
     <string name="insEnviar">Enviar</string>
     <string name="insReport">Seleccione el tipo</string>
+    <string name="insReports">*Los reportes son anónimos</string>
     <string name="insReset">Restablecer</string>
     <string name="pulsarCargar">Pulsa acá para cargar de nuevo</string>
     <!-- From: file:/Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
