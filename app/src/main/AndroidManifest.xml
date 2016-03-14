@@ -97,6 +97,11 @@
             android:name=".activity.HorarioMisaActivity"
             android:label="@string/app_name"></activity>
         <activity android:name=".activity.ContactoActivity"></activity>
+
+        <meta-data
+            android:name="com.microsoft.applicationinsights.instrumentationKey"
+            android:value="cd561eb3-629a-422f-8993-b91412f9c601" />
+
     </application>
 
 </manifest>

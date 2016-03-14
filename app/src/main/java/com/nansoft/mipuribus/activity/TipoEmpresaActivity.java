@@ -20,6 +20,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.microsoft.applicationinsights.library.ApplicationInsights;
+import com.microsoft.applicationinsights.library.TelemetryClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
@@ -47,6 +49,9 @@ public class TipoEmpresaActivity extends BaseActivity {
 
         enableHomeActionBar();
 
+        ApplicationInsights.setup(this.getApplicationContext(), this.getApplication());
+        ApplicationInsights.start();
+
         setTitle("Tipo de empresas");
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
@@ -65,6 +70,10 @@ public class TipoEmpresaActivity extends BaseActivity {
                 Intent intent = new Intent(getApplicationContext(),EmpresasActivity.class);
                 intent.putExtra("id",objOpcion.id);
                 intent.putExtra("nombre",objOpcion.nombre);
+
+                TelemetryClient client = TelemetryClient.getInstance();
+                client.trackPageView("Empresas de " + objOpcion.nombre);
+
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
             }

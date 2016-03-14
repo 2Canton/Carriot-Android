@@ -2,6 +2,8 @@ package com.nansoft.mipuribus.activity;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.microsoft.applicationinsights.library.ApplicationInsights;
+import com.microsoft.applicationinsights.library.TelemetryClient;
 import com.nansoft.mipuribus.database.HelperDatabase;
 import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.adapter.HorarioAdapterListView;
@@ -37,6 +39,10 @@ public class HorariosActivity extends BaseActivity
 
 		enableHomeActionBar();
 
+		// aplication insights
+		ApplicationInsights.setup(this.getApplicationContext(), this.getApplication());
+		ApplicationInsights.start();
+
         try {
             bundle = getIntent().getExtras();
             setTitle(bundle.getString("nombreRuta"));
@@ -64,6 +70,9 @@ public class HorariosActivity extends BaseActivity
 				intent.putExtra("dias", objHorario.dias);
 				intent.putExtra("idRuta", bundle.getString("idRuta"));
 				intent.putExtra("nombreRuta", bundle.getString("nombreRuta"));
+
+				TelemetryClient client = TelemetryClient.getInstance();
+				client.trackPageView("Ruta: " + bundle.getString("nombreRuta") + " Horario: " + objHorario.dias);
 
 				startActivity(intent);
 				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

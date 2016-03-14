@@ -97,9 +97,18 @@
             android:name="com.nansoft.mipuribus.activity.HorarioMisaActivity"
             android:label="@string/app_name" />
         <activity android:name="com.nansoft.mipuribus.activity.ContactoActivity" />
+
+        <meta-data
+            android:name="com.microsoft.applicationinsights.instrumentationKey"
+            android:value="cd561eb3-629a-422f-8993-b91412f9c601" />
+
         <activity
             android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"
             android:theme="@style/Theme.IAPTheme" />
+
+        <meta-data
+            android:name="com.microsoft.applicationinsights.library.sdkVersion"
+            android:value="1.0-beta.9" />
     </application>
 
 </manifest>

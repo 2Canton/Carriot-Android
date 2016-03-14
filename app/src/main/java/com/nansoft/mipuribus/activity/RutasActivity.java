@@ -1,5 +1,7 @@
 package com.nansoft.mipuribus.activity;
 
+import com.microsoft.applicationinsights.library.ApplicationInsights;
+import com.microsoft.applicationinsights.library.TelemetryClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.nansoft.mipuribus.R;
@@ -56,6 +58,10 @@ public class RutasActivity extends BaseActivity
 
 		enableHomeActionBar();
 
+		// aplication insights
+		ApplicationInsights.setup(this.getApplicationContext(), this.getApplication());
+		ApplicationInsights.start();
+
 		setTitle("Rutas");
 
 		// creamos un adaptador para el listview
@@ -78,6 +84,9 @@ public class RutasActivity extends BaseActivity
 				Intent intent = new Intent(getApplicationContext(), HorariosActivity.class);
 				intent.putExtra("idRuta", objRuta.id);
 				intent.putExtra("nombreRuta", objRuta.nombre);
+
+				TelemetryClient client = TelemetryClient.getInstance();
+				client.trackPageView("Ruta: " + objRuta.nombre);
 
 				startActivity(intent);
 				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

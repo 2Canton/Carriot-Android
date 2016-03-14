@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:2:1-102:12
+ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:2:1-107:12
 	xmlns:android
 		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:2:11-69
 	package
@@ -26,6 +26,8 @@ MERGED from [com.android.support:support-v4:22.2.1] /Users/itadmin/AndroidStudio
 MERGED from [com.google.android.gms:play-services-appindexing:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.8.0/AndroidManifest.xml:18:5-42
 MERGED from [com.google.android.gms:play-services-base:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.0/AndroidManifest.xml:18:5-42
 MERGED from [com.android.support:support-v4:22.2.1] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.microsoft.azure:applicationinsights-android:1.0-beta.9] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.microsoft.azure/applicationinsights-android/1.0-beta.9/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.microsoft.telemetry-client-for-android:AndroidCll:2.0.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.github.microsoft.telemetry-client-for-android/AndroidCll/2.0.0/AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
 		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:9:9-38
 		INJECTED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml
@@ -38,12 +40,14 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:11:5-67
 MERGED from [com.google.android.gms:play-services-ads:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:20:5-66
 MERGED from [com.google.android.gms:play-services-analytics:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.8.0/AndroidManifest.xml:21:5-67
+MERGED from [com.microsoft.azure:applicationinsights-android:1.0-beta.9] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.microsoft.azure/applicationinsights-android/1.0-beta.9/AndroidManifest.xml:11:5-67
 	android:name
 		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:11:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:12:5-79
 MERGED from [com.google.android.gms:play-services-ads:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:21:5-78
 MERGED from [com.google.android.gms:play-services-analytics:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.8.0/AndroidManifest.xml:22:5-79
+MERGED from [com.microsoft.azure:applicationinsights-android:1.0-beta.9] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.microsoft.azure/applicationinsights-android/1.0-beta.9/AndroidManifest.xml:12:5-79
 	android:name
 		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:12:22-76
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
@@ -73,7 +77,7 @@ ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/A
 	android:name
 		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:23:9-50
 application
-ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:26:5-100:19
+ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:26:5-105:19
 MERGED from [com.android.support:appcompat-v7:22.2.1] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:22.2.1] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-ads:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:24:5-32:19
@@ -85,6 +89,7 @@ MERGED from [com.android.support:support-v4:22.2.1] /Users/itadmin/AndroidStudio
 MERGED from [com.google.android.gms:play-services-appindexing:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.8.0/AndroidManifest.xml:19:5-20
 MERGED from [com.google.android.gms:play-services-base:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.0/AndroidManifest.xml:20:5-24:19
 MERGED from [com.android.support:support-v4:22.2.1] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.microsoft.azure:applicationinsights-android:1.0-beta.9] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.microsoft.azure/applicationinsights-android/1.0-beta.9/AndroidManifest.xml:14:5-18:19
 	android:label
 		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:29:9-41
 	android:allowBackup
@@ -225,9 +230,21 @@ activity#com.nansoft.mipuribus.activity.ContactoActivity
 ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:99:9-72
 	android:name
 		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:99:19-60
+meta-data#com.microsoft.applicationinsights.instrumentationKey
+ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:101:9-103:68
+	android:name
+		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:102:13-80
+	android:value
+		ADDED from /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/AndroidManifest.xml:103:13-65
 activity#com.google.android.gms.ads.purchase.InAppPurchaseActivity
 ADDED from [com.google.android.gms:play-services-ads:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:30:9-31:52
 	android:theme
 		ADDED from [com.google.android.gms:play-services-ads:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:31:13-50
 	android:name
 		ADDED from [com.google.android.gms:play-services-ads:7.8.0] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.8.0/AndroidManifest.xml:30:19-91
+meta-data#com.microsoft.applicationinsights.library.sdkVersion
+ADDED from [com.microsoft.azure:applicationinsights-android:1.0-beta.9] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.microsoft.azure/applicationinsights-android/1.0-beta.9/AndroidManifest.xml:15:9-17:42
+	android:name
+		ADDED from [com.microsoft.azure:applicationinsights-android:1.0-beta.9] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.microsoft.azure/applicationinsights-android/1.0-beta.9/AndroidManifest.xml:16:13-80
+	android:value
+		ADDED from [com.microsoft.azure:applicationinsights-android:1.0-beta.9] /Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.microsoft.azure/applicationinsights-android/1.0-beta.9/AndroidManifest.xml:17:13-39
