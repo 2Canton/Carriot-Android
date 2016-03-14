@@ -26,6 +26,7 @@ import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.nansoft.mipuribus.R;
 import com.nansoft.mipuribus.adapter.TipoEmpresaAdapter;
+import com.nansoft.mipuribus.helper.Util;
 import com.nansoft.mipuribus.model.TipoEmpresa;
 import com.nansoft.mipuribus.model.TipoEvento;
 
@@ -36,6 +37,8 @@ import java.util.List;
 public class TipoEmpresaActivity extends BaseActivity {
 
     TipoEmpresaAdapter mAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,19 +91,13 @@ public class TipoEmpresaActivity extends BaseActivity {
         mSwipeRefreshLayout.setEnabled(false);
 
         includedLayout.setVisibility(View.GONE);
-        MobileServiceClient mClient;
         try {
 
-            mClient = new MobileServiceClient(
-                    "https://puriscal.azure-mobile.net/",
-                    "CtavDeXtaLeUclXFhrPrjLJiUeeEek84",
-                    getApplicationContext()
-            );
             mAdapter.clear();
 
             List<Pair<String, String>> parameters = new ArrayList<Pair<String, String>>();
 
-            ListenableFuture<JsonElement> lst = mClient.invokeApi("companies", "GET", parameters);
+            ListenableFuture<JsonElement> lst = Util.mClient.invokeApi("companies", "GET", parameters);
 
             Futures.addCallback(lst, new FutureCallback<JsonElement>() {
                 @Override
@@ -117,7 +114,6 @@ public class TipoEmpresaActivity extends BaseActivity {
                         // obtenemos el resultado como un JsonArray
                         JsonArray jsonArray = result.getAsJsonArray();
                         Gson objGson = new Gson();
-
 
                         // se deserializa el array
                         final TipoEmpresa[] myTypes = objGson.fromJson(jsonArray, TipoEmpresa[].class);
@@ -138,8 +134,6 @@ public class TipoEmpresaActivity extends BaseActivity {
 
                 }
             });
-
-        } catch (MalformedURLException e) {
 
         }
         catch (Exception e)

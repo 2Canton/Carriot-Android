@@ -56,10 +56,7 @@ public class RutasActivity extends BaseActivity
 
 		enableHomeActionBar();
 
-
-
 		setTitle("Rutas");
-
 
 		// creamos un adaptador para el listview
 		mAdapter = new RutaAdapterListView(this, R.layout.item_ruta);
@@ -100,8 +97,6 @@ public class RutasActivity extends BaseActivity
 
 		objHandlerDataBase = new HelperDatabase(this);
 
-
-
 		mSwipeRefreshLayout.post(new Runnable() {
 			@Override
 			public void run() {
@@ -112,7 +107,6 @@ public class RutasActivity extends BaseActivity
 		Util objUtil = new Util(getApplicationContext());
 		if(!objUtil.inicializarBaseDatos())
 			Toast.makeText(getApplicationContext(),"Ha ocurrido un error al inicializar la copia local",Toast.LENGTH_SHORT).show();
-
 
 
 		// se obtiene la referencia a las tablas
