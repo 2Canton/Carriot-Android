@@ -55,6 +55,10 @@
 		<item name="android:layout_height">wrap_content</item>
 	</style>
 
+	<style name="spnrCustom" parent="@android:style/Widget.Spinner">
+		<item name="android:textColor">@android:color/white</item>
+	</style>
+
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>

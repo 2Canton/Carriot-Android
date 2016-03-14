@@ -32,5 +32,9 @@
     <string name="title_activity_horario_basura">Horario Basura - Mi Puribus</string>
     <string name="title_activity_horario_misa">HorarioMisaActivity</string>
 
+    <string name="insReport">Seleccione el tipo</string>
+    <string name="insDesReport">Descripción</string>
+    <string name="insReset">Restablecer</string>
+    <string name="insEnviar">Enviar</string>
 
 </resources>

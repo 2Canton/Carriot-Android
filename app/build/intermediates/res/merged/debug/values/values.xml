@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- From: file:/Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/res/values/arrays.xml -->
+    <eat-comment/>
+    <string-array name="tipo_reportes">
+        <item>Horario autobus</item>
+        <item>Empresa</item>
+        <item>Evento</item>
+        <item>Mejora</item>
+        <item>Otro</item>
+    </string-array>
     <!-- From: file:/Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
@@ -321,6 +330,10 @@
     <string name="errorCarga">Ha ocurrido un error al descargar los datos , pulsa acá para volver a intentar</string>
     <string name="errorConexion">Ha ocurrido un error al descargar los datos , se trabajará con una copia local</string>
     <string name="hello_world">Hello world!</string>
+    <string name="insDesReport">Descripción</string>
+    <string name="insEnviar">Enviar</string>
+    <string name="insReport">Seleccione el tipo</string>
+    <string name="insReset">Restablecer</string>
     <string name="pulsarCargar">Pulsa acá para cargar de nuevo</string>
     <!-- From: file:/Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
     <eat-comment/>
@@ -1665,4 +1678,9 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation"/>
+    <!-- From: file:/Users/itadmin/AndroidStudioProjects/Zanahoria-Android/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="spnrCustom" parent="@android:style/Widget.Spinner">
+		<item name="android:textColor">@android:color/white</item>
+	</style>
 </resources>

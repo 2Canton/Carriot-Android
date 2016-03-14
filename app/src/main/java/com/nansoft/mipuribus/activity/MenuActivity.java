@@ -38,8 +38,6 @@ public class MenuActivity extends AppCompatActivity {
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swpActualizar);
         swipeRefreshLayout.setEnabled(false);
 
-
-
         OpcionAdapterListView mAdapter = new OpcionAdapterListView(MenuActivity.this,R.layout.item_ruta);
         ListView listView =(ListView)findViewById(R.id.lstvLista);
         listView.setAdapter(mAdapter);
@@ -94,22 +92,7 @@ public class MenuActivity extends AppCompatActivity {
                         break;
 
                     case 9:
-                        try {
-                            String[] pPara = {"info@mipuribus.com"};
-                            Intent Correo = new Intent(Intent.ACTION_SEND);
-                            Correo.setData(Uri.parse("mailto:"));
-                            Correo.putExtra(Intent.EXTRA_EMAIL, pPara);
-                            Correo.putExtra(Intent.EXTRA_CC, "");
-                            Correo.putExtra(Intent.EXTRA_SUBJECT, "Consulta");
-                            Correo.putExtra(Intent.EXTRA_TEXT, "");
-                            Correo.setType("message/rfc822");
-                            isMail = true;
-                            startActivity(Intent.createChooser(Correo, "Email "));
-                        } catch (ActivityNotFoundException activityException) {
-
-                            Toast.makeText(getApplicationContext(), "Error verifique que tenga una aplicación de correo", Toast.LENGTH_SHORT).show();
-
-                        }
+                        intent = new Intent(getApplicationContext(),ContactoActivity.class);
                         break;
 
                     default:
@@ -117,15 +100,15 @@ public class MenuActivity extends AppCompatActivity {
 
                 }
 
-                if (!isMail) {
-                    try {
-                        startActivity(intent);
-                    } catch (Exception activityException) {
 
-                        Toast.makeText(getApplicationContext(), "Error verifique que tenga un navegador instalado", Toast.LENGTH_SHORT).show();
+                try {
+                    startActivity(intent);
+                } catch (Exception activityException) {
 
-                    }
+                    Toast.makeText(getApplicationContext(), "Error verifique que tenga un navegador instalado", Toast.LENGTH_SHORT).show();
+
                 }
+
             }
         });
 

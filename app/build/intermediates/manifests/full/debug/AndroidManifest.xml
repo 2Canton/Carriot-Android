@@ -31,18 +31,15 @@
         <activity
             android:name="com.nansoft.mipuribus.activity.RutasActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.nansoft.mipuribus.activity.DescHoraActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.nansoft.mipuribus.activity.HorariosActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
 
         <!-- Include the AdActivity configChanges and theme. -->
         <activity
@@ -69,46 +66,37 @@
         <activity
             android:name="com.nansoft.mipuribus.activity.MenuActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.nansoft.mipuribus.activity.SitiosInteresActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.nansoft.mipuribus.activity.HistoriaActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.nansoft.mipuribus.activity.TipoEventoActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.nansoft.mipuribus.activity.EventosActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.nansoft.mipuribus.activity.TipoEmpresaActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.nansoft.mipuribus.activity.EmpresasActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.nansoft.mipuribus.activity.NoticiaActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.nansoft.mipuribus.activity.HorarioBasuraActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.nansoft.mipuribus.activity.HorarioMisaActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
+        <activity android:name="com.nansoft.mipuribus.activity.ContactoActivity" />
         <activity
             android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"
             android:theme="@style/Theme.IAPTheme" />
