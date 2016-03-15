@@ -174,6 +174,45 @@ public class HelperDatabase
         return false;
     }
 
+    public void CargarAdapter()
+    {
+        try
+        {
+            // realizamos una consulta a la base de datos y guardamos el resultado en un objeto de tipo Cursor
+            Cursor c = db.rawQuery(" SELECT * FROM Ruta ORDER BY NombreRuta", null);
+            Ruta objRuta;
+
+            // Veririficamos si la consulta devolvio al menos un resultado
+            if (c.moveToFirst())
+            {
+
+                RutasActivity.mAdapter.clear();
+
+                do
+                {
+                    objRuta = new Ruta();
+
+                    objRuta.id = c.getString(0);
+                    objRuta.nombre = c.getString(1);
+                    objRuta.costo = c.getString(2);
+                    objRuta.idEmpresa = c.getString(3);
+                    RutasActivity.mAdapter.add(objRuta);
+                    RutasActivity.mAdapter.notifyDataSetChanged();
+
+                }
+                while(c.moveToNext());
+                //MainActivity.swipeLayout.onRefreshComplete();
+
+            }
+
+        }
+        catch(Exception e)
+        {
+            //RutasActivity objRutasActivity = new RutasActivity();
+            //objMainActivity.VerificarEstadoAdapter();
+        }
+    }
+
     public boolean CargarHorariosRuta(String pIdRuta)
     {
         try

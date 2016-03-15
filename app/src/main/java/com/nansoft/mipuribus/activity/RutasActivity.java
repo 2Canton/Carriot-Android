@@ -219,13 +219,29 @@ public class RutasActivity extends BaseActivity
 
 			}.execute();
 		} else {
-			Toast.makeText(this, "You are not online, re-sync later!" +
-					"", Toast.LENGTH_LONG).show();
+			// conexión offline
+
+			// se verifica si hay datos
+			if (objHandlerDataBase.VerificarDatosRuta())
+			{
+				objHandlerDataBase.CargarAdapter();
+			}
+			else
+			{
+				verificarEstado(false);
+			}
+
+
+
 		}
 	}
 
 	private void verificarEstado(boolean status)
 	{
+		mSwipeRefreshLayout.setEnabled(true);
+		mSwipeRefreshLayout.setRefreshing(false);
+
+
 		if (status)
 		{
 			includedLayout.setVisibility(View.GONE);
@@ -235,9 +251,7 @@ public class RutasActivity extends BaseActivity
 			includedLayout.setVisibility(View.VISIBLE);
 		}
 
-		mSwipeRefreshLayout.setRefreshing(false);
 
-		mSwipeRefreshLayout.setEnabled(true);
 
 	}
 

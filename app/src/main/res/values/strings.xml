@@ -8,7 +8,7 @@
     <string name="title_activity_activity_horarios">Mi Puribus</string>
     <string name="error">Ha ocurrido un error al conectar con el servidor, verifica la conexión a internet e intentalo más tarde</string>
     <string name="title_activity_rutas">Rutas</string>
-    <string name="errorCarga">Ha ocurrido un error al descargar los datos , pulsa acá para volver a intentar</string>
+    <string name="errorCarga">Ha ocurrido un error al descargar los datos</string>
     <string name="errorConexion">Ha ocurrido un error al descargar los datos , se trabajará con una copia local</string>
     <string name="pulsarCargar">Pulsa acá para cargar de nuevo</string>
     <string name="anunciese"> Anúnciese con nosotros, más información info@mipuribus.com</string>
