@@ -105,7 +105,7 @@ public class MenuActivity extends AppCompatActivity {
 
                     case 8:
                         nombreVista = "Web";
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.mipuribus.com"));
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://2canton.azurewebsites.net/"));
                         break;
 
                     case 9:

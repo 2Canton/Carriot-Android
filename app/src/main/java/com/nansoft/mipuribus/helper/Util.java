@@ -123,24 +123,33 @@ public class Util {
     public boolean addReport(final Reporte report)
     {
         try {
-            // Insert the new item
-            return new AsyncTask<Void, Void, Boolean>() {
 
-                @Override
-                protected Boolean doInBackground(Void... params) {
-                    try {
-                        MobileServiceTable<Reporte> tableReport = mClient.getTable("Reporte", Reporte.class);
+            // se verificar
+            if (isNetworkAvailable(mContext))
+            {
+                // Insert the new item
+                return new AsyncTask<Void, Void, Boolean>() {
 
-                        tableReport.insert(report);
+                    @Override
+                    protected Boolean doInBackground(Void... params) {
+                        try {
+                            MobileServiceTable<Reporte> tableReport = mClient.getTable("Reporte", Reporte.class);
 
-                        return true;
-                    } catch (Exception exception) {
-                        return false;
+                            tableReport.insert(report);
+
+                            return true;
+                        } catch (Exception exception) {
+                            return false;
+                        }
                     }
-                }
 
 
-            }.execute().get();
+                }.execute().get();
+            }
+            else
+            {
+                return false;
+            }
         }
         catch (Exception e)
         {
