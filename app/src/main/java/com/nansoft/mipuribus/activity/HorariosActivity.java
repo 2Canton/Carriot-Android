@@ -108,25 +108,6 @@ public class HorariosActivity extends BaseActivity
 
 	}
 
-	@Override
-	public void onResume()
-	{
-		super.onResume();
-		
-		try
-		{
-			AdView adView = (AdView) findViewById(R.id.adViewAnuncio);
-	        AdRequest adRequestBanner = new AdRequest.Builder().build();
-	        adView.loadAd(adRequestBanner);
-	        
-	       
-		}
-		catch(Exception e)
-		{
-			
-		}
-		
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

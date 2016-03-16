@@ -121,9 +121,9 @@ public class RutasActivity extends BaseActivity
 
 		// se obtiene la referencia a las tablas
 		rutaTable = Util.mClient.getSyncTable("Ruta", Ruta.class);
-		horarioTable = Util.mClient.getSyncTable("Horario",Horario.class);
+		horarioTable = Util.mClient.getSyncTable("Horario", Horario.class);
 		carreraRutaTable = Util.mClient.getSyncTable("CarreraRuta", CarreraRuta.class);
-		paradaTable = Util.mClient.getSyncTable("Parada",Parada.class);
+		paradaTable = Util.mClient.getSyncTable("Parada", Parada.class);
 
 		// query de las tablas
 		mPullQueryRuta = Util.mClient.getTable(Ruta.class).orderBy("nombre", QueryOrder.Ascending);
@@ -131,11 +131,7 @@ public class RutasActivity extends BaseActivity
 		mPullQueryCarreraRuta = Util.mClient.getTable(CarreraRuta.class).orderBy("idruta", QueryOrder.Ascending);
 		mPullQueryParada = Util.mClient.getTable(Parada.class).orderBy("nombre", QueryOrder.Ascending);
 
-		// se limpia la base de datos
-		HelperDatabase.db.delete("Ruta", null, null);
-		HelperDatabase.db.delete("Horario", null, null);
-		HelperDatabase.db.delete("CarreraRuta", null, null);
-		HelperDatabase.db.delete("SitioSalida", null, null);
+
 
 		syncAsync();
 
@@ -169,6 +165,11 @@ public class RutasActivity extends BaseActivity
 						final MobileServiceList<CarreraRuta> resultCarreraRuta = carreraRutaTable.read(mPullQueryCarreraRuta).get();
 						final MobileServiceList<Parada> resultParada = paradaTable.read(mPullQueryParada).get();
 
+						// una vez que se obtienen los datos se limpia la base de datos
+						HelperDatabase.db.delete("Ruta", null, null);
+						HelperDatabase.db.delete("Horario", null, null);
+						HelperDatabase.db.delete("CarreraRuta", null, null);
+						HelperDatabase.db.delete("SitioSalida", null, null);
 
 						for (Horario horario : resultHorario) {
 							objHandlerDataBase.InsertarHorario(horario);
@@ -225,6 +226,7 @@ public class RutasActivity extends BaseActivity
 			if (objHandlerDataBase.VerificarDatosRuta())
 			{
 				objHandlerDataBase.CargarAdapter();
+				verificarEstado(true);
 			}
 			else
 			{
@@ -239,7 +241,13 @@ public class RutasActivity extends BaseActivity
 	private void verificarEstado(boolean status)
 	{
 		mSwipeRefreshLayout.setEnabled(true);
-		mSwipeRefreshLayout.setRefreshing(false);
+
+		mSwipeRefreshLayout.post(new Runnable() {
+			@Override
+			public void run() {
+				mSwipeRefreshLayout.setRefreshing(false);
+			}
+		});
 
 
 		if (status)
